@@ -1,0 +1,4 @@
+services:
+#    kl_restauration.example:
+#        class: KL\RestaurationBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

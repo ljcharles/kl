@@ -1,0 +1,70 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Contact - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron" id="form-contact">
+    <h3 class="presentation-titre">Nous contacter</h3>
+    {{ form_start(form) }}
+
+    <div class="form-group row">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">
+          <i class="fa fa-inbox"></i>
+        </div>
+        {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      {{ form_errors(form.subject) }}
+    </div>
+
+    <div class="form-group row">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">
+          <i class="fa fa-user"></i>
+        </div>
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      {{ form_errors(form.name) }}
+    </div>
+
+    <div class="form-group row">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">
+          <i class="fa fa-envelope"></i>
+        </div>
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-group row">
+      {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+      {{ form_errors(form.message) }}
+    </div>
+
+    {# Render CSRF token etc .#}
+    <div style="display:none">
+      {{ form_rest(form) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      Envoyer <i class="fa fa-send-o"></i>
+    </button>
+
+    {{ form_end(form) }}
+  </div>
+
+  {% for message in app.flashes('danger') %}
+    <div class="alert alert-danger">
+      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
+    </div>
+  {% endfor %}
+
+  {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
+    </div>
+  {% endfor %}
+
+{% endblock %}

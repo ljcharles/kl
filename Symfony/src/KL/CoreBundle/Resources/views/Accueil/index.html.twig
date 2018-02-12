@@ -1,0 +1,133 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+
+{% block title %}
+
+  Accueil - {{ parent() }}
+
+{% endblock %}
+
+
+{% block body %}
+
+<!-- banner -->
+  <div id = "banner" class="jumbotron">
+      <div class="banner-content row">
+        <div class="left">
+          <ul class="banner-list">
+            <li>
+              {% image '@KLRestaurationBundle/Resources/public/img/burger.svg' %}
+              <img id="banner-1" src="{{ asset_url }}" alt="burger">
+              {% endimage %}
+              <a href="#">
+                Faire un Hamburger
+              </a>
+            </li>
+            <li>
+              {% image '@KLRestaurationBundle/Resources/public/img/pizza.png' %}
+              <img id="banner-2" src="{{ asset_url }}" alt="pizza">
+              {% endimage %}
+              <a href="#">
+                Faire une Pizza
+              </a>
+            </li>
+            <li>
+              {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+              <img id="banner-3" src="{{ asset_url }}" alt="cake">
+              {% endimage %}
+              <a href="#">
+                Faire une tarte
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="center">
+          <!-- test -->
+          {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+          <img id="banner-logo" src="{{ asset_url }}" alt="K&L">
+          {% endimage %}
+          <a href="#about">
+            <span id ="chevron" class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div class="right">
+          <ul class="banner-social">
+            <li>
+              <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-youtube-square" aria-hidden="true"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="clear"></div>
+
+  {% for message in app.flashes('notice') %}
+    <div class="alert alert-info">
+      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
+    </div>
+  {% endfor %}
+
+  <div id = "about" class="container">
+    <div class="jumbotron">
+      <h1 id = "presentation-titre">Notre restaurant en Guadeloupe, depuis 4 ans</h1>
+      <p> <span class = "presentation-titre">K & L</span> est une véritable institution
+        célébrée par tous ceux qui aiment la cuisine authentique.
+        Depuis 2014, notre équipe poursuit l’histoire avec une régularité
+        exemplaire pour le plus grand plaisir de ses clients.
+      </p>
+      <p>
+        En cuisine, nous ne laissons rien au hasard avec des produits frais de saison.
+      </p>
+    </div>
+  </div>
+
+  <div class="row cartes">
+    <div class="card col-lg-4">
+      <a href="">
+        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2" alt="Card image">
+      </a>
+      <h2 class = "presentation-titre">Nos Hamburgers</h2>
+    </div>
+    <div class="card col-lg-4">
+      <a href="">
+        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt="Card image">
+      </a>
+      <h2 class = "presentation-titre">Nos pizzas</h2>
+    </div>
+    <div class="card col-lg-4">
+      <a href="">
+        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1476887334197-56adbf254e1a" alt="Card image">
+      </a>
+      <h2 class = "presentation-titre">Nos tartes</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="map" class="jumbotron" style="width:90%;height:250px;margin-left:5%"></div>
+  </div>
+
+
+  <script>
+    function myMap() {
+      var mapCanvas = document.getElementById("map");
+      var mapOptions = {
+        // Personnaliser vos coordonnées ici latitudepuis longitude
+        center: new google.maps.LatLng(16.1547308, -61.9560547),
+        zoom: 10,
+        disableDefaultUI: true
+      }
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+    }
+  </script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=myMap"></script> -->
+
+{% endblock %}

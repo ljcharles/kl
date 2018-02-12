@@ -1,0 +1,11 @@
+kl_core:
+    resource: "@KLCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+kl_restauration:
+    resource: "@KLRestaurationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

@@ -1,0 +1,33 @@
+kl_restauration_homepage:
+    path:     /
+    defaults: { _controller: KLRestaurationBundle:Default:index }
+
+kl_restauration_produit_homepage:
+    path:     /produit
+    defaults: { _controller: KLRestaurationBundle:Produit:index }
+
+kl_restauration_produit_view:
+    path:     /produit/view/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:view
+        id: 1
+    requirements:
+        id: \d+
+
+kl_restauration_produit_add:
+    path:     /produit/add
+    defaults: { _controller: KLRestaurationBundle:Produit:add }
+
+kl_restauration_produit_edit:
+    path:     /produit/edit/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:edit
+    requirements:
+        id: \d+
+
+kl_restauration_produit_delete:
+    path:     /produit/delete/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:delete
+    requirements:
+        id: \d+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr-GP">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}K&L Restauration{% endblock %}</title>
+
+  {% image '@KLRestaurationBundle/Resources/public/img/fav.ico' %}
+    <link rel="icon" type="image/x-icon" href="{{ asset_url }}">
+  {% endimage %}
+
+  {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    {% stylesheets '@KLRestaurationBundle/Resources/public/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+  {% endblock %}
+</head>
+
+<body>
+  <main>
+    <nav class="navbar navbar-default container">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="{{ path('kl_core_homepage') }}">
+           {% image '@KLRestaurationBundle/Resources/public/img/Logo.png' %}
+             <img id="LogoKL" src="{{ asset_url }}" alt="K&L">
+           {% endimage %}
+         </a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           <li class="active">
+             <a href="{{ path('kl_core_homepage') }}">
+               Accueil
+             </a>
+           </li>
+           <li><a href="{{ path('kl_core_homepage') }}#about">À propos</a></li>
+           <li><a href="{{ path('kl_core_contact') }}">Contact</a></li>
+           <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+             <ul class="dropdown-menu">
+               <li><a href="{{ path('kl_restauration_produit_homepage') }}">Produits</a></li>
+               <li><a href="#">Une autre action</a></li>
+               <li>
+                 <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Taper le nom d'un produit">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                  </form>
+               </li>
+             </ul>
+           </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+           <li class="active">
+             <a href="#">
+               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+               Me connecter
+             </a>
+           </li>
+           <li><a href="#">M'inscrire </a></li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+  <div class="container">
+    <div class="row">
+      <div id="content" class="col-md-12">
+        {% block body %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+
+  <footer>
+    {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
+      <img id="footer-logo" src="{{ asset_url }}" alt="K&L">
+    {% endimage %}
+    <br>
+    <small><kbd>Karen & Lo&iuml;c © 2014 - {{ 'now'|date('Y') }}</kbd></small>
+  </footer>
+
+  {% block javascripts %}
+    {% javascripts '@KLRestaurationBundle/Resources/public/js/jquery.min.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts '@KLRestaurationBundle/Resources/public/js/*' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+  {% endblock %}
+</main>
+
+</body>
+</html>
