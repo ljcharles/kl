@@ -63,7 +63,7 @@ class AccueilController extends Controller
         ->setTo(array(
             $myappContactMail => $myappContactMail
         ))
-        ->setBody($data["message"]." <br> Contact Mail :".$data["email"]);
+        ->setBody($data["message"]." <br> Contact Mail :".$data["email"], 'text/html');
 
         return $mailer->send($message);
     }

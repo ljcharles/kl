@@ -4,6 +4,15 @@
 
 {% block body %}
 
+  {% image '@KLRestaurationBundle/Resources/public/img/burger.svg' %}
+  <img id="contact-burger" src="{{ asset_url }}" alt="burger">
+  {% endimage %}
+
+  {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+  <img id="contact-cake" src="{{ asset_url }}" alt="cake">
+  {% endimage %}
+
+
   <div class="container jumbotron" id="form-contact">
     <h3 class="presentation-titre">Nous contacter</h3>
     {{ form_start(form) }}
@@ -53,18 +62,20 @@
     </button>
 
     {{ form_end(form) }}
+
+    {% for message in app.flashes('danger') %}
+      <div class="contact-alert alert alert-danger">
+        <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
+      </div>
+    {% endfor %}
+
+    {% for message in app.flashes('success') %}
+      <div class="contact-alert alert alert-success">
+        <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
+      </div>
+    {% endfor %}
   </div>
 
-  {% for message in app.flashes('danger') %}
-    <div class="alert alert-danger">
-      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
-    </div>
-  {% endfor %}
 
-  {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
-    </div>
-  {% endfor %}
 
 {% endblock %}
