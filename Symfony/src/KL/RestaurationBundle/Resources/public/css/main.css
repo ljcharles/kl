@@ -25,12 +25,72 @@ h1,h2,h3,h4,h5,h6{
     color:#333
 }
 
-.product .list-group-item:hover{
+.product .list-group-item:hover,.product-star{
 	color: #E7964B;
+}
+
+.product-text{
+	font-size: .9em;
+	color: DarkSlateGray;
+	font-weight: lighter;
+	text-align: center;
+}
+
+.container-img-product > a > img{
+	height: 206px;
+	width: 100%;
+	transition: all 0.3s;
+}
+
+.container-img-product{
+  overflow: hidden;
+}
+
+.container-img-product > a > img:hover{
+  transform: scale(1.1);
+}
+
+.col-lg-trente{
+	width: 30%
+}
+
+.product-title,
+.product-title:hover,
+.product-title:focus,
+.product-title:active
+.product-title:visited{
+	color: #6D6D6E;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.product-price{
+	color: #E7964B;
+	font-weight: bold;
+	text-align: center;
+}
+
+.card-footer, .card-body{
+	text-align: center;
+}
+
+.btn-add-panier,
+.btn-add-panier:hover,
+.btn-add-panier:focus,
+.btn-add-panier:active
+.btn-add-panier:visited{
+	border-radius: 50px;
+	color:#E7964B;
+	border-color:#E7964B;
+	background:transparent;
 }
 
 .contact-alert{
 	margin-top: 10px;
+}
+
+.btn-send{
+	border-radius: 40px;
 }
 
 #contact-burger{
@@ -120,7 +180,7 @@ h1,h2,h3,h4,h5,h6{
 .thumbnail{
   margin-right: 10px;
   border-top: solid 2px;
-  border-top-color: #1abc9c
+  border-top-color: #E7964B;
 }
 
 nav{
