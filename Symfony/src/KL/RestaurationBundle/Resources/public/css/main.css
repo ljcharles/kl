@@ -29,10 +29,19 @@ h1,h2,h3,h4,h5,h6{
 	width: 500px;
 	margin-top: -70px;
 	text-align: center;
+	z-index: 3;
 	animation: translationOnZ 1.7s;
   transition: all .2s ease-out;
 }
 
+
+.show-password {
+	position: absolute;
+	cursor: pointer;
+	margin-left: -15%;
+	margin-top: 2%;
+	z-index: 5;
+}
 
 .connect-form{
 	text-align: center;
@@ -116,6 +125,17 @@ h1,h2,h3,h4,h5,h6{
 	background:transparent;
 }
 
+.btn-404,
+.btn-404:hover,
+.btn-404:focus,
+.btn-404:active,
+.btn-404:visited{
+	border-radius: 50px;
+	color:white;
+	border-color:white;
+	background:transparent;
+}
+
 .connect-form .btn-send{
 	border-radius: 50px;
 	color:#A9A9A9;
@@ -173,6 +193,7 @@ h1,h2,h3,h4,h5,h6{
 	text-align: center;
 	font-family: 'Open sans';
 	transition: all .2s ease-out;
+	z-index: 4;
 	animation: translationHaut 1.7s;
 	border: solid .01px #E7964B;
 }
@@ -319,6 +340,7 @@ nav{
 }
 
 .right{
+	z-index: 3;
 	animation: translationGauche 1.7s;
   transition: all .2s ease-out;
   margin-top: 100px;
@@ -337,6 +359,7 @@ nav{
 }
 
 .center{
+  z-index: 3;
 	animation: translationOnZ 1.7s;
   transition: all .2s ease-out;
 }
@@ -355,11 +378,40 @@ nav{
   margin-left: -25px
 }
 
+.not-found{
+	text-align: center;
+	min-height: 300px;
+	overflow: hidden;
+	background:linear-gradient(-225deg,rgba(30,30,30,.85) 45%,rgba(30,30,30,.85) 8%),
+	url('https://images.unsplash.com/photo-1476887334197-56adbf254e1a');
+	background-position: center;
+	background-size: cover;
+	color: white;
+}
+
+#cake-404{
+	width: 100px;
+	transform: rotate(230deg);
+	z-index: 4;
+	animation: rotateCake 1.7s;
+}
+
+@keyframes rotateCake {
+  from {
+    transform: translateX(-200px) rotate(0deg);
+		opacity: 0;
+  }
+
+  to {
+    transform: translateX(0) rotate(230deg);
+		opacity: 1;
+  }
+}
+
 #chevron{
   color: white;
   text-decoration: none;
-  transform: rotate(90deg);
-  font-size: 1.5em;
+  font-size: 2.5em;
   text-align: center;
   z-index: 4;
   top: 520px;
@@ -472,7 +524,7 @@ footer{
 		width: 90%;
 	}
 
-	#chevron{
+	#chevron,.show-password {
 		/* position: absolute; */
 		display: none;
 	}

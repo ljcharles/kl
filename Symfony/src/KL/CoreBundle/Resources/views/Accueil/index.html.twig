@@ -48,7 +48,7 @@
           <img id="banner-logo" src="{{ asset_url }}" alt="K&L">
           {% endimage %}
           <a href="#about">
-            <span id ="chevron" class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <i id ="chevron" class="fa fa-chevron-circle-down"></i>
           </a>
         </div>
 
@@ -115,19 +115,6 @@
     <div id="map" class="jumbotron" style="width:90%;height:250px;margin-left:5%"></div>
   </div>
 
-
-  <script>
-    function myMap() {
-      var mapCanvas = document.getElementById("map");
-      var mapOptions = {
-        // Personnaliser vos coordonnées ici latitudepuis longitude
-        center: new google.maps.LatLng(16.1547308, -61.9560547),
-        zoom: 10,
-        disableDefaultUI: true
-      }
-      var map = new google.maps.Map(mapCanvas, mapOptions);
-    }
-  </script>
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=myMap"></script> -->
 
 {% endblock %}

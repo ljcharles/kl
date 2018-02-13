@@ -1,0 +1,29 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}404 Not Found - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron not-found">
+
+    <h1>Hu hu! 4<i class="fa fa-frown-o" style="color: LightCoral;"></i>4!</h1>
+
+    <p style="font-weight: lighter;">La page que vous chercher n'existe pas (ou plus).</p>
+
+    <a href="{{ path('kl_core_contact') }}" class="btn btn-404">
+      <i class="fa fa-phone"></i> Nous contacter
+    </a>
+
+    <a href="javascript:history.back()" class="btn btn-404">
+      <i class="fa fa-undo"></i> Revenir à la page précédente
+    </a>
+
+    <div class="clear"></div>
+
+    {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+     <img id="cake-404" src="{{ asset_url }}" alt="cake">
+    {% endimage %}
+
+  </div>
+
+{% endblock %}
