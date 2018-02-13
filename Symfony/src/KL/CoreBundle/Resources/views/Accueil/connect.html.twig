@@ -1,0 +1,31 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Connect - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron connect-form">
+    {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+      <img id="connect-logo" src="{{ asset_url }}" alt="K&L">
+    {% endimage %}
+
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
+        <input type="email" class="form-control" placeholder="Votre email">
+      </div>
+
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-lock doree"></i></div>
+        <input type="password" class="form-control" placeholder="Votre mot de passe">
+      </div>
+
+      <br><br>
+
+      <button type="submit" class="btn btn-primary btn-send">
+        Envoyer <i class="fa fa-send-o"></i>
+      </button>
+    </form>
+  </div>
+
+{% endblock %}
