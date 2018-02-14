@@ -384,8 +384,44 @@ nav{
   margin-left: -25px
 }
 
+.prix-total h2{
+	text-transform: uppercase;
+	font-size: 1.3em;
+	color: white;
+	font-family: 'Liberation Sans';
+}
+
+.bgdoree{
+	background-color: transparent;
+	border-color: #ffe13f;
+	border-radius: 50px;
+	color: white;
+	transition: background-color .7s;
+}
+
+.bgdoree:hover{
+	border-color: #E7964B;
+	background-color: #E7964B;
+	color: white;
+}
+
+.black-desc{
+	color: black;
+	font-size: .8em !important;
+}
+
+.img-panier{
+	height: 170px !important;
+}
+
+.quantity{
+	text-align:center;
+	width: 40%;
+	transform: translateX(75%);
+	margin-bottom: 10px;
+}
+
 .panier{
-	background-color:rgba(255,255,255,.7);
 	z-index: 6;
 	text-transform: uppercase;
 	min-height: 400px;
@@ -395,6 +431,16 @@ nav{
 
 .panier h4{
 	font-family: 'Liberation Sans';
+}
+.bg-panier{
+	text-align: center;
+	min-height: 300px;
+	overflow: hidden;
+	background:linear-gradient(-225deg,rgba(30,30,30,.65) 45%,rgba(30,30,30,.65) 8%),
+	url('https://images.unsplash.com/photo-1476887334197-56adbf254e1a');
+	background-position: center;
+	background-size: cover;
+	color: white;
 }
 
 .not-found{

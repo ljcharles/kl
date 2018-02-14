@@ -4,10 +4,10 @@
 
 {% block body %}
 
-  <div class="container jumbotron not-found">
+  <div class="container jumbotron bg-panier">
     <div class="etapes">
       <h1>
-        <span style="color: #428BCA;">
+        <span style="color: #ffe13f;">
           <i class="fa fa-shopping-cart"></i>
           Mon panier
         </span>
@@ -17,22 +17,60 @@
 
     <div class="clear"></div>
 
+    <div class="prix-total">
+      <h2>
+        <i class="fa fa-tags"></i>
+        Prix total 150 €
+      </h2>
+    </div>
+
+    <div class="clear"></div>
+
     <!-- ici penser a mettre la mise en forme du panier -->
 
     <div class="row">
       <div class="col-lg-12 panier">
-        <div class="col-lg-6">
-          <h4>Description</h4>
+        <div class="row">
+          <div class="col-lg-2 col-md-6 mb-4 thumbnail">
+            <div class="container-img-product">
+              <a href="#"><img class="card-img-top product-img img-panier"
+                src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2" alt=""></a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a class="product-title" href="#">Hamburger de luxe</a>
+              </h5>
+              <h5 class="product-price">24.99 €</h5>
+              <p  class="black-desc">Quantité </p>
+              <input class="form-control quantity" type="number" value="5">
+              <a href="#"
+              data-toggle="tooltip" data-placement="bottom" title="Enlever du panier">
+                <i class="fa fa-trash-o fa-2x" style="color: gray; margin-bottom: 10px;" aria-hidden="true"></i>
+                <!-- Enlever du panier icone + tooltip -->
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 thumbnail">
+            <div class="container-img-product">
+              <a href="#"><img class="card-img-top product-img img-panier"
+                src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt=""></a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a class="product-title" href="#">Pizza italienne</a>
+              </h5>
+              <h5 class="product-price">34.99 €</h5>
+              <p class="black-desc">Quantité  </p>
+              <input class="form-control quantity" type="number" value="5">
+              <a href="#"
+              data-toggle="tooltip" data-placement="bottom" title="Enlever du panier">
+                <i class="fa fa-trash-o fa-2x" style="color: gray; margin-bottom: 10px;" aria-hidden="true"></i>
+                <!-- Enlever du panier icone + tooltip -->
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-3">
-          <h4>Quantité</h4>
-        </div>
-        <div class="col-lg-3">
-          <h4>Prix</h4>
-        </div>
-        <h4>Prix total :
-          <span>150 €</span>
-        </h4>
       </div>
     </div>
 
@@ -41,13 +79,13 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="col-lg-6">
-          <a href="{{ path('kl_restauration_produit_homepage') }}" class="btn btn-primary btn-send">
+          <a href="{{ path('kl_restauration_produit_homepage') }}" class="btn bgdoree">
             <i class="fa fa-undo"></i> Continuer mes achats
           </a>
         </div>
 
         <div class="col-lg-6">
-          <a href="#" class="btn btn-primary btn-send">
+          <a href="#" class="btn bgdoree">
             Commander <i class="fa fa-arrow-right"></i>
           </a>
         </div>
