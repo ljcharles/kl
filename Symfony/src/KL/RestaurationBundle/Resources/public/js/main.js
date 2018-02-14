@@ -2,7 +2,6 @@ $(document).ready(function () {
   chevronAction();
   activeAction();
   hideMdpAction();
-  enableTooltipAction();
 });
 
 function activeAction() {
@@ -40,8 +39,4 @@ function hideMdpAction() {
       $(this).html('<i class="fa fa-eye doree"></i>');
     }
   });
-}
-
-function enableTooltipAction() {
-  $('[data-toggle="tooltip"]').tooltip();
 }
