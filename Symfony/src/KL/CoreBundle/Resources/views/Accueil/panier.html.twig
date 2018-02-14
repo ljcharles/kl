@@ -1,0 +1,58 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Mon panier - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron not-found">
+    <div class="etapes">
+      <h1>
+        <span style="color: #428BCA;">
+          <i class="fa fa-shopping-cart"></i>
+          Mon panier
+        </span>
+        > Commander > Adresse de livraison > Paiement
+      </h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <!-- ici penser a mettre la mise en forme du panier -->
+
+    <div class="row">
+      <div class="col-lg-12 panier">
+        <div class="col-lg-6">
+          <h4>Description</h4>
+        </div>
+        <div class="col-lg-3">
+          <h4>Quantité</h4>
+        </div>
+        <div class="col-lg-3">
+          <h4>Prix</h4>
+        </div>
+        <h4>Prix total :
+          <span>150 €</span>
+        </h4>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-6">
+          <a href="{{ path('kl_restauration_produit_homepage') }}" class="btn btn-primary btn-send">
+            <i class="fa fa-undo"></i> Continuer mes achats
+          </a>
+        </div>
+
+        <div class="col-lg-6">
+          <a href="#" class="btn btn-primary btn-send">
+            Commander <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

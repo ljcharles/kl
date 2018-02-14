@@ -23,6 +23,11 @@ class AccueilController extends Controller
         return $this->render('KLCoreBundle:Accueil:inscription.html.twig');
     }
 
+    public function panierAction()
+    {
+        return $this->render('KLCoreBundle:Accueil:panier.html.twig');
+    }
+
     public function contactAction(Request $request)
     {
         $form = $this->createForm('KL\RestaurationBundle\Form\ContactType',null,array(

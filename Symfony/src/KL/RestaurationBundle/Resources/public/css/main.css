@@ -25,6 +25,12 @@ h1,h2,h3,h4,h5,h6{
     color:#333
 }
 
+.etapes h1{
+	font-family: 'Liberation Sans';
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
 #connect-logo{
 	width: 500px;
 	margin-top: -70px;
@@ -378,11 +384,24 @@ nav{
   margin-left: -25px
 }
 
+.panier{
+	background-color:rgba(255,255,255,.7);
+	z-index: 6;
+	text-transform: uppercase;
+	min-height: 400px;
+	margin-bottom: 10px;
+	border-radius: 15px;
+}
+
+.panier h4{
+	font-family: 'Liberation Sans';
+}
+
 .not-found{
 	text-align: center;
 	min-height: 300px;
 	overflow: hidden;
-	background:linear-gradient(-225deg,rgba(30,30,30,.85) 45%,rgba(30,30,30,.85) 8%),
+	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(30,30,30,.8) 8%),
 	url('https://images.unsplash.com/photo-1476887334197-56adbf254e1a');
 	background-position: center;
 	background-size: cover;
@@ -412,11 +431,8 @@ nav{
   color: white;
   text-decoration: none;
   font-size: 2.5em;
-  text-align: center;
   z-index: 4;
-  top: 520px;
-  margin-left: -50px;
-  position: absolute;
+  transform: translateX(-30px);
 }
 
 #presentation-titre,.presentation-titre{

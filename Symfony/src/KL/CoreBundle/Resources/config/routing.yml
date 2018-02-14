@@ -13,3 +13,7 @@ kl_core_connect:
 kl_core_inscription:
     path:     /inscription
     defaults: { _controller: KLCoreBundle:Accueil:inscription }
+
+kl_core_panier:
+    path:     /panier
+    defaults: { _controller: KLCoreBundle:Accueil:panier }
