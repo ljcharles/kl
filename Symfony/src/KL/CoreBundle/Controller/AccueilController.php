@@ -73,7 +73,7 @@ class AccueilController extends Controller
 
         $mailer = \Swift_Mailer::newInstance($transport);
 
-        $message = \Swift_Message::newInstance("[K&LRestauration] ". $data["subject"])
+        $message = \Swift_Message::newInstance("[K & LRestauration] ". $data["subject"])
         ->setFrom(array($myappContactMail => "Message de ".$data["name"]))
         ->setTo(array(
             $myappContactMail => $myappContactMail

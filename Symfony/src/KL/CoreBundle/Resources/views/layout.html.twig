@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% block title %}K&L Restauration{% endblock %}</title>
+  <title>{% block title %}K & L Restauration{% endblock %}</title>
 
   {% image '@KLRestaurationBundle/Resources/public/img/fav.ico' %}
     <link rel="icon" type="image/x-icon" href="{{ asset_url }}">
@@ -45,7 +45,7 @@
          </button>
          <a class="navbar-brand" href="{{ path('kl_core_homepage') }}">
            {% image '@KLRestaurationBundle/Resources/public/img/Logo.png' %}
-             <img id="LogoKL" src="{{ asset_url }}" alt="K&L">
+             <img id="LogoKL" src="{{ asset_url }}" alt="K & L">
            {% endimage %}
          </a>
        </div>
@@ -111,7 +111,7 @@
 
   <footer>
     {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
-      <img id="footer-logo" src="{{ asset_url }}" alt="K&L">
+      <img id="footer-logo" src="{{ asset_url }}" alt="K & L">
     {% endimage %}
     <br>
     <small><kbd>Karen & Lo&iuml;c © 2014 - {{ 'now'|date('Y') }}</kbd></small>
@@ -121,7 +121,7 @@
     {% javascripts '@KLRestaurationBundle/Resources/public/js/jquery.min.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    {% javascripts '@KLRestaurationBundle/Resources/public/js/*' %}
+    {% javascripts '@KLRestaurationBundle/Resources/public/js/after/*' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
   {% endblock %}

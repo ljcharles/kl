@@ -11,10 +11,12 @@ function activeAction() {
 }
 
 function chevronAction() {
-  $('#chevron').click(function() {
+  $('#chevron').click(function(event) {
+    event.preventDefault();
     $('html, body').animate({
       scrollTop: $("#about").offset().top
     }, 1000);
+    return false;
   });
 }
 
