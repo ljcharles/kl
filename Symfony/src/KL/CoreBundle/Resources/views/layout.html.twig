@@ -81,6 +81,8 @@
                Mon panier
              </a>
            </li>
+
+           {% if not app.user %}
            <li>
              <a href="{{ path('login') }}">
                <i class="fa fa-user"></i>
@@ -93,6 +95,14 @@
                M'inscrire
              </a>
            </li>
+           {% else %}
+           <li>
+             <a href="{{ path('logout') }}">
+               <i class="fa fa-user"></i>
+               Se déconnecter
+             </a>
+           </li>
+           {% endif %}
          </ul>
        </div><!--/.nav-collapse -->
      </div>
