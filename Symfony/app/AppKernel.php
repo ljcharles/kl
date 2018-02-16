@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new KL\CoreBundle\KLCoreBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
+            new KL\UserBundle\KLUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

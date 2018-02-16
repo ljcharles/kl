@@ -36,6 +36,23 @@ security:
 
       security: false
 
+    main:
+
+      pattern:   ^/
+
+      anonymous: true
+
+      form_login:
+
+        login_path: login
+
+        check_path: login_check
+
+      logout:
+
+        path:       logout
+
+        target:     login
 
   access_control:
 

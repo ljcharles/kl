@@ -6,9 +6,6 @@ kl_core_contact:
     path:     /contact
     defaults: { _controller: KLCoreBundle:Accueil:contact }
 
-kl_core_connect:
-    path:     /connect
-    defaults: { _controller: KLCoreBundle:Accueil:connect }
 
 kl_core_inscription:
     path:     /inscription

@@ -13,10 +13,6 @@ class AccueilController extends Controller
         return $this->render('KLCoreBundle:Accueil:index.html.twig');
     }
 
-    public function connectAction()
-    {
-        return $this->render('KLCoreBundle:Accueil:connect.html.twig');
-    }
 
     public function inscriptionAction()
     {
