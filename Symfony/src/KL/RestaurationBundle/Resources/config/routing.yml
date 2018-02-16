@@ -31,3 +31,33 @@ kl_restauration_produit_delete:
         _controller: KLRestaurationBundle:Produit:delete
     requirements:
         id: \d+
+
+kl_restauration_ingredient_homepage:
+    path:     /ingredient
+    defaults: { _controller: KLRestaurationBundle:Ingredient:index }
+
+kl_restauration_ingredient_view:
+    path:     /ingredient/view/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Ingredient:view
+        id: 1
+    requirements:
+        id: \d+
+
+kl_restauration_ingredient_add:
+    path:     /ingredient/add
+    defaults: { _controller: KLRestaurationBundle:Ingredient:add }
+
+kl_restauration_ingredient_edit:
+    path:     /ingredient/edit/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Ingredient:edit
+    requirements:
+        id: \d+
+
+kl_restauration_ingredient_delete:
+    path:     /ingredient/delete/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Ingredient:delete
+    requirements:
+        id: \d+
