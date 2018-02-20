@@ -8,16 +8,40 @@ class ProduitController extends Controller
 {
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $listGammeProduits = $em
+          ->getRepository('KLRestaurationBundle:GammeProduit')
+          ->findAllOrderedByName()
+        ;
+
+        $listProduits = $em
+          ->getRepository('KLRestaurationBundle:Produit')
+          ->findAll()
+        ;
+
         return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
-            // ...
+            'listGammeProduits' => $listGammeProduits,
+            'listProduits' => $listProduits
         ));
     }
 
-    public function viewAction()
+    public function viewAction($id)
     {
-        return $this->render('KLRestaurationBundle:Produit:view.html.twig', array(
-            // ...
-        ));
+      $em = $this->getDoctrine()->getManager();
+      $listGammeProduits = $em
+        ->getRepository('KLRestaurationBundle:GammeProduit')
+        ->findAllOrderedByName()
+      ;
+
+      $produit = $em
+        ->getRepository('KLRestaurationBundle:Produit')
+        ->find($id)
+      ;
+
+      return $this->render('KLRestaurationBundle:Produit:view.html.twig', array(
+          'listGammeProduits' => $listGammeProduits,
+          'produit' => $produit
+      ));
     }
 
     public function editAction()
@@ -41,4 +65,25 @@ class ProduitController extends Controller
         ));
     }
 
+    public function viewGammeAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $listGammeProduits = $em
+        ->getRepository('KLRestaurationBundle:GammeProduit')
+        ->findAllOrderedByName()
+      ;
+
+      $gammeProduit = $em
+        ->getRepository('KLRestaurationBundle:GammeProduit')
+        ->find($id);
+      ;
+
+      $listProduits = $gammeProduit->getProduits();
+
+      return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
+          'listGammeProduits' => $listGammeProduits,
+          'listProduits' => $listProduits
+      ));
+    }
 }

@@ -31,8 +31,9 @@
     </form>
   </div>
   {% if error %}
-
-      <div class="alert alert-danger">{{ error.message }}</div>
-
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ error.message }}","danger"); </script>
+      {% endjavascripts %}
   {% endif %}
 {% endblock %}

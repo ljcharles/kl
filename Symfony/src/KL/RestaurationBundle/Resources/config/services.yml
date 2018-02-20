@@ -2,3 +2,10 @@ services:
 #    kl_restauration.example:
 #        class: KL\RestaurationBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+     kl_restauration.LoadGammeProduit:
+         class: 'KL\RestaurationBundle\DataFixtures\ORM\LoadGammeProduit'
+         tags: [doctrine.fixture.orm]
+
+     kl_restauration.LoadProduit:
+         class: 'KL\RestaurationBundle\DataFixtures\ORM\LoadProduit'
+         tags: [doctrine.fixture.orm]

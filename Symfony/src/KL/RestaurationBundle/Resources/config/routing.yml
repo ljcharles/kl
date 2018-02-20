@@ -1,7 +1,3 @@
-kl_restauration_homepage:
-    path:     /
-    defaults: { _controller: KLRestaurationBundle:Default:index }
-
 kl_restauration_produit_homepage:
     path:     /produit
     defaults: { _controller: KLRestaurationBundle:Produit:index }
@@ -59,5 +55,31 @@ kl_restauration_ingredient_delete:
     path:     /ingredient/delete/{id}
     defaults:
         _controller: KLRestaurationBundle:Ingredient:delete
+    requirements:
+        id: \d+
+
+kl_restauration_gamme_view:
+    path:     /produit/gamme/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:viewGamme
+        id: 1
+    requirements:
+        id: \d+
+
+kl_restauration_gamme_add:
+    path:     /produit/gamme/add
+    defaults: { _controller: KLRestaurationBundle:Produit:addGamme }
+
+kl_restauration_gamme_edit:
+    path:     /produit/gamme/edit/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:editGamme
+    requirements:
+        id: \d+
+
+kl_restauration_gamme_delete:
+    path:     /produit/gamme/delete/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Produit:deleteGamme
     requirements:
         id: \d+

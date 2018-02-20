@@ -2,6 +2,7 @@
 
 namespace KL\RestaurationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * ProduitController
@@ -63,7 +64,7 @@ class Produit
   private $ingredients;
 
   /**
-  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits")
+  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits",cascade={"all"})
   *@ORM\JoinColumn()
   */
   private $gammeProduit;
