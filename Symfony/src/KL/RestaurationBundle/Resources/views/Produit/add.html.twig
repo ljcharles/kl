@@ -1,7 +1,91 @@
-{% extends "::base.html.twig" %}
+{% extends "KLCoreBundle::layout.html.twig" %}
 
-{% block title %}KLRestaurationBundle:Produit:add{% endblock %}
+{% block title %}Ajouter un produit - {{ parent() }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Produit:add page</h1>
+
+  <div class="container jumbotron">
+
+    <div class="well" style="text-align: center;">
+      {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <br>
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.nom, "Nom du nouveau produit",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.prix, "Prix",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.description, "Description",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.note, "Note",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.note, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.gammeProduit, "Gamme de produit",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.gammeProduit, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.image, "Image du produit",
+          {'label_attr': {'class': 'col-sm-3 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <br>
+      {{ form_widget(form.sauvegarder, {'attr': {'class': 'btn btn-primary'}}) }}
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
+    </div>
+  </div>
+
+  {% if form_errors(form) %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ form_errors(form) }}","danger"); </script>
+      {% endjavascripts %}
+  {% endif %}
 {% endblock %}
