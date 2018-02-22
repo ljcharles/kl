@@ -25,6 +25,22 @@ h1,h2,h3,h4,h5,h6{
     color:#333
 }
 
+#flash_notice {
+	text-align: center;
+	width:250px;
+	padding:10px;
+	position: fixed;
+	top: 100px;
+	right: 18px;
+	z-index: 1050;
+	height:40px;
+	border-radius: 3px !important;
+	-webkit-animation: translationGauche 1s;
+	        animation: translationGauche 1s;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+
 .etapes h1{
 	font-family: 'Liberation Sans';
 	font-size: 1em;
@@ -110,7 +126,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .col-lg-trente{
-	width: 30%
+	width: 30%;
+	float: right;
 }
 
 .product-title,

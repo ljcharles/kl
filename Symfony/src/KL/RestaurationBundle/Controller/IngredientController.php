@@ -40,3 +40,4 @@ class IngredientController extends Controller
             // ...
         ));
     }
+}

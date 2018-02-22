@@ -9,103 +9,53 @@
     <h1 class="presentation-titre">Nos gammes de produits</h1>
 
     <div class="list-group">
-      <a href="#" class="list-group-item">Hamburgers</a>
-      <a href="#" class="list-group-item">Pizzas</a>
-      <a href="#" class="list-group-item">Tartes</a>
+      <a href="{{ path('kl_restauration_produit_homepage') }}"
+      class="list-group-item">Tous</a>
+
+      {% for gammeProduit in listGammeProduits %}
+        <a href="{{ path('kl_restauration_gamme_view', {'id': gammeProduit.id}) }}"
+        class="list-group-item">{{ gammeProduit.nom }}</a>
+      {% endfor %}
     </div>
   </div>
 
   <div class="col-lg-9">
 
       <div class="row">
-        <div class="col-lg-trente col-md-6 mb-4 thumbnail">
-          <div class="container-img-product">
-            <a href="#"><img class="card-img-top product-img"
-              src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2" alt=""></a>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <a class="product-title" href="#">Hamburger de luxe</a>
-            </h5>
-            <h5 class="product-price">24.99 €</h5>
-            <p class="card-text product-text">
-              Son pain moelleux, sa générosité…
-              Qu’il soit classique, végétarien ou exotique, ce burger à la cote et
-              on ne s’en lasse pas.
-              Vous aussi vous l’adulez n’est-ce pas ?
-            </p>
-          </div>
-          <div class="card-footer">
-            <p>
-              <small class="text-muted product-star">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </p>
-            <p>
-              <a class="btn btn-add-panier" href="#" role="button">
-                <i class="fa fa-shopping-cart"></i>
-                Ajouter au panier
+        {% for produit in listProduits %}
+          <div class="col-lg-trente col-md-6 mb-4 thumbnail">
+            <div class="container-img-product">
+              <a href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
+                <img class="card-img-top product-img"
+                src="{{ produit.image }}" alt="">
               </a>
-            </p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a class="product-title"
+                href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
+                  {{ produit.nom }}
+                </a>
+              </h5>
+              <h5 class="product-price">{{ produit.prix }} €</h5>
+              <p class="card-text product-text">{{ produit.description }}</p>
+            </div>
+            <div class="card-footer">
+              <p>
+                <small class="text-muted product-star">
+                  {% for i in 1 .. produit.note %} &#9733; {% endfor %}
+                  {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
+                </small>
+              </p>
+              <p>
+                <a class="btn btn-add-panier" href="#" role="button">
+                  <i class="fa fa-shopping-cart"></i>
+                  Ajouter au panier
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
-
-        <div class="col-lg-trente col-md-6 mb-4 thumbnail">
-          <div class="container-img-product">
-            <a href="#"><img class="card-img-top product-img"
-              src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt=""></a>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <a class="product-title" href="#">Pizza italienne</a>
-            </h5>
-            <h5 class="product-price">34.99 €</h5>
-            <p class="card-text product-text">
-              L'Italie vient à vous au travers de cette alléchante spécialité
-              que nous vous proposons !
-              Nos pizzas faites maison sont confectionnées dans le plus grand respect d'un
-              art qui se veut traditionnel.
-            </p>
-          </div>
-          <div class="card-footer">
-            <p>
-              <small class="text-muted product-star">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </p>
-            <p>
-              <a class="btn btn-add-panier" href="#" role="button">
-                <i class="fa fa-shopping-cart"></i>
-                Ajouter au panier
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-trente col-md-6 mb-4 thumbnail">
-          <div class="container-img-product">
-            <a href="#"><img class="card-img-top product-img"
-              src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt=""></a>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <a class="product-title" href="#">Pizza italienne</a>
-            </h5>
-            <h5 class="product-price">34.99 €</h5>
-            <p class="card-text product-text">
-              L'Italie vient à vous au travers de cette alléchante spécialité
-              que nous vous proposons !
-              Nos pizzas faites maison sont confectionnées dans le plus grand respect d'un
-              art qui se veut traditionnel.
-            </p>
-          </div>
-          <div class="card-footer">
-            <p>
-              <small class="text-muted product-star">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </p>
-            <p>
-              <a class="btn btn-add-panier" href="#" role="button">
-                <i class="fa fa-shopping-cart"></i>
-                Ajouter au panier
-              </a>
-            </p>
-          </div>
-        </div>
+        {% endfor %}
       </div>
 
   </div>

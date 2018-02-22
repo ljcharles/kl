@@ -2,6 +2,7 @@
 
 namespace KL\RestaurationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * ProduitController
@@ -63,7 +64,7 @@ class Produit
   private $ingredients;
 
   /**
-  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits")
+  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits",cascade={"all"})
   *@ORM\JoinColumn()
   */
   private $gammeProduit;
@@ -259,5 +260,25 @@ class Produit
     public function getGammeProduit()
     {
         return $this->gammeProduit;
+    }
+
+    public function myUpload()
+    {
+      if (null === $this->image) return;
+
+      $name = $this->image->getClientOriginalName();
+      $this->image->move($this->getUploadRootDir(), $name);
+      $url = '/Restauration/Symfony/web/'.$this->getUploadDir().'/'.$name;
+      $this->setImage($url);
+    }
+
+    public function getUploadDir()
+    {
+      return 'bundles/klrestauration/img/uploads';
+    }
+
+    protected function getUploadRootDir()
+    {
+      return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 }

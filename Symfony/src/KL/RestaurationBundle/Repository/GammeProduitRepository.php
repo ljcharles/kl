@@ -18,4 +18,13 @@ class GammeProduitRepository extends \Doctrine\ORM\EntityRepository
          ->setParameter('pattern', $pattern)
        ;
     }
+
+    public function findAllOrderedByName()
+    {
+      return $this->getEntityManager()
+          ->createQuery(
+            'SELECT g FROM KLRestaurationBundle:GammeProduit g ORDER BY g.nom ASC'
+            )
+          ->getResult();
+    }
 }

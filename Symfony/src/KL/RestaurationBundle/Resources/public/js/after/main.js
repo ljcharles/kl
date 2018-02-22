@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var message = null;
   chevronAction();
   activeAction();
   hideMdpAction();
