@@ -35,91 +35,86 @@ class Ingredient
   */
   protected $quantite;
 
+
   /**
-  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Produit",inversedBy="ingredients")
-  *@ORM\JoinColumn()
+  * Get id
+  *
+  * @return integer
   */
-  private $produit;
+  public function getId()
+  {
+    return $this->id;
+  }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+  * Set nom
+  *
+  * @param string $nom
+  *
+  * @return Ingredient
+  */
+  public function setNom($nom)
+  {
+    $this->nom = $nom;
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Ingredient
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+  * Get nom
+  *
+  * @return string
+  */
+  public function getNom()
+  {
+    return $this->nom;
+  }
 
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
+  /**
+  * Set quantite
+  *
+  * @param integer $quantite
+  *
+  * @return Ingredient
+  */
+  public function setQuantite($quantite)
+  {
+    $this->quantite = $quantite;
 
-    /**
-     * Set quantite
-     *
-     * @param integer $quantite
-     *
-     * @return Ingredient
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+  * Get quantite
+  *
+  * @return integer
+  */
+  public function getQuantite()
+  {
+    return $this->quantite;
+  }
 
-    /**
-     * Get quantite
-     *
-     * @return integer
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
-    }
+  /**
+  * Set produit
+  *
+  * @param \KL\RestaurationBundle\Entity\Produit $produit
+  *
+  * @return Ingredient
+  */
+  public function setProduit(\KL\RestaurationBundle\Entity\Produit $produit = null)
+  {
+    $this->produit = $produit;
 
-    /**
-     * Set produit
-     *
-     * @param \KL\RestaurationBundle\Entity\Produit $produit
-     *
-     * @return Ingredient
-     */
-    public function setProduit(\KL\RestaurationBundle\Entity\Produit $produit = null)
-    {
-        $this->produit = $produit;
+    return $this;
+  }
 
-        return $this;
-    }
-
-    /**
-     * Get produit
-     *
-     * @return \KL\RestaurationBundle\Entity\Produit
-     */
-    public function getProduit()
-    {
-        return $this->produit;
-    }
+  /**
+  * Get produit
+  *
+  * @return \KL\RestaurationBundle\Entity\Produit
+  */
+  public function getProduit()
+  {
+    return $this->produit;
+  }
 }

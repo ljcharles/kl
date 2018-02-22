@@ -3,7 +3,8 @@
 namespace KL\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+//use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -11,7 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="kl_user")
  * @ORM\Entity(repositoryClass="KL\UserBundle\Repository\UserRepository")
  */
-class User implements UserInterface
+
+
+class User implements BaseUser
 {
     /**
      * @var int
@@ -25,140 +28,64 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $username;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255)
      */
-    private $password;
+    private $prenom;
 
     /**
-     * @var string
+     * Set nom
      *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    private $salt;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="array")
-     */
-    private $roles = array();
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
+     * @param string $nom
      *
      * @return User
      */
-    public function setUsername($username)
+    public function setUsername($nom)
     {
-        $this->username = $username;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get username
+     * Get nom
      *
      * @return string
      */
-    public function getUsername()
+    public function getNom()
     {
-        return $this->username;
+        return $this->nom;
     }
 
     /**
-     * Set password
+     * Set prenom
      *
-     * @param string $password
+     * @param string $prenom
      *
      * @return User
      */
-    public function setPassword($password)
+    public function setPrenom($prenom)
     {
-        $this->password = $password;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     /**
-     * Get password
+     * Get prenom
      *
      * @return string
      */
-    public function getPassword()
+    public function getPrenom()
     {
-        return $this->password;
+        return $this->prenom;
     }
 
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     *
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function eraseCredentials()
-  {
-
+  
   }
-}

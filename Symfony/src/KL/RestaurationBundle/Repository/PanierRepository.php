@@ -14,7 +14,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
   {
     return $this->getEntityManager()
         ->createQuery(
-          'SELECT p FROM KLRestaurationBundleBundle:Commande p ORDER BY p.name ASC'
+          'SELECT p FROM KLRestaurationBundleBundle:Panier p ORDER BY p.name ASC'
           )
         ->getResult();
   }

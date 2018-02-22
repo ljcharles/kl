@@ -2,7 +2,6 @@
 
 namespace KL\RestaurationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * ProduitController
@@ -59,7 +58,7 @@ class Produit
   private $image;
 
   /**
-  *@ORM\OneToMany(targetEntity="KL\RestaurationBundle\Entity\Ingredient",mappedBy="produit",cascade={"all"})
+  *@ORM\ManyToMany(targetEntity="KL\RestaurationBundle\Entity\Ingredient",cascade={"persist"})
   */
   private $ingredients;
 
@@ -68,6 +67,17 @@ class Produit
   *@ORM\JoinColumn()
   */
   private $gammeProduit;
+
+  /**
+  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Commande",inversedBy="produits")
+  *@ORM\JoinColumn()
+  */
+  private $commande;
+  /**
+  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Panier",inversedBy="produits")
+  *@ORM\JoinColumn()
+  */
+  private $panier;
 
   public function __construct()
   {
@@ -261,6 +271,54 @@ class Produit
     {
         return $this->gammeProduit;
     }
+
+    /**
+        * Set commande
+        *
+        * @param \KL\RestaurationBundle\Entity\Commande $commande
+        *
+        * @return Produit
+        */
+       public function setCommande(\KL\RestaurationBundle\Entity\Commande $commande = null)
+       {
+           $this->commande = $commande;
+
+           return $this;
+       }
+
+       /**
+        * Get commande
+        *
+        * @return \KL\RestaurationBundle\Entity\Commande
+        */
+       public function getCommande()
+       {
+           return $this->commande;
+       }
+
+       /**
+        * Set panier
+        *
+        * @param \KL\RestaurationBundle\Entity\Panier $panier
+        *
+        * @return Produit
+        */
+       public function setPanier(\KL\RestaurationBundle\Entity\Panier $panier = null)
+       {
+           $this->panier= $panier;
+
+           return $this;
+       }
+
+       /**
+        * Get panier
+        *
+        * @return \KL\RestaurationBundle\Entity\Panier
+        */
+       public function getPanier()
+       {
+           return $this->panier;
+       }
 
     public function myUpload()
     {

@@ -6,6 +6,8 @@ security:
   encoders:
 
     Symfony\Component\Security\Core\User\User: plaintext
+    #KL\UserBundle\Entity\User: plaintext #on voit le mot de passe
+    KL\UserBundle\Entity\User: sha512
 
 
   role_hierarchy:
@@ -17,16 +19,20 @@ security:
 
   providers:
 
-    in_memory:
+    #in_memory:
 
-      memory:
+      #memory:
+        #users:
+          #user:  { password: userpass, roles: [ 'ROLE_USER' ] }
 
-        users:
+          #admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    main:
+      id: fos_user.user_provider.username
+      #entity:
 
-          user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #class: KL\UserBundle\Entity\User
 
-          admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
+        #property: username
 
   firewalls:
 
@@ -42,17 +48,27 @@ security:
 
       anonymous: true
 
+      provider: main
+
       form_login:
 
-        login_path: login
+        #login_path: login
+        login_path: fos_user_security_login
 
-        check_path: login_check
-
+        #check_path: login_check
+        check_path: fos_user_security_check
+        
       logout:
 
-        path:       logout
+        #path:       logout
+        path:       fos_user_security_logout
 
-        target:     login
+        #target:     login
+        target:     fos_user_security_login
+
+      remember_me:
+
+        secret: %secret% #secret est un parametre de parameter
 
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }

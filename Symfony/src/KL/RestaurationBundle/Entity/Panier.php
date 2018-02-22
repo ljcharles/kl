@@ -5,12 +5,12 @@ namespace KL\RestaurationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commande
+ * Panier
  *
- * @ORM\Table(name="commande")
- * @ORM\Entity(repositoryClass="KL\RestaurationBundle\Repository\CommandeRepository")
+ * @ORM\Table(name="panier")
+ * @ORM\Entity(repositoryClass="KL\RestaurationBundle\Repository\PanierRepository")
  */
-class Commande
+class Panier
 {
     /**
      * @var int
@@ -21,15 +21,8 @@ class Commande
      */
     private $id;
 
-
     /**
-    *
-    *@ORM\Column(name:"date", type="date")
-    */
-    private $date;
-
-    /**
-    * @ORM\OneToMany(targetEntity="KL\RestaurationBundle\Entity\Produit", mappedBy="commande", cascade={"all"})
+    * @ORM\OneToMany(targetEntity="KL\RestaurationBundle\Entity\Produit", mappedBy="panier", cascade={"all"})
     */
     private $produits;
 
@@ -57,7 +50,7 @@ class Commande
      *
      * @param \KL\RestaurationBundle\Entity\Produit $produit
      *
-     * @return Commande
+     * @return Panier
      */
     public function addProduit(\KL\RestaurationBundle\Entity\Produit $produit)
     {
@@ -84,16 +77,6 @@ class Commande
     public function getProduits()
     {
         return $this->produits;
-    }
-
-    /**
-     * Get date
-     *
-     * @return date
-     */
-    public function getDate()
-    {
-        return $this->id;
     }
 }
 ?>
