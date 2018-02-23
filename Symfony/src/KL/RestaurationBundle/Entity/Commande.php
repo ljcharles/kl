@@ -3,11 +3,12 @@
 namespace KL\RestaurationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Commande
  *
- * @ORM\Table(name="commande")
+ * @ORM\Table(name="kl_commande")
  * @ORM\Entity(repositoryClass="KL\RestaurationBundle\Repository\CommandeRepository")
  */
 class Commande
@@ -23,9 +24,10 @@ class Commande
 
 
     /**
-    *
-    *@ORM\Column(name:"date", type="date")
-    */
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Date", type="datetime")
+     */
     private $date;
 
     /**
@@ -39,17 +41,61 @@ class Commande
     public function __construct()
     {
         $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \Datetime();
     }
 
+    /**
+     * Get prixTotal
+     *
+     * @return int
+     */
+    public function getPrixTotal()
+    {
+
+      $prix = 0;
+
+      foreach($this->getProduits() as $produit) {
+
+        $prix += $produit->getPrix();
+
+      }
+
+      return $prix;
+
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Commande
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     /**
@@ -85,15 +131,4 @@ class Commande
     {
         return $this->produits;
     }
-
-    /**
-     * Get date
-     *
-     * @return date
-     */
-    public function getDate()
-    {
-        return $this->id;
-    }
 }
-?>

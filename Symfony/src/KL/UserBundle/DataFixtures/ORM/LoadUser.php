@@ -1,22 +1,23 @@
 <?php
-// src/OC/UserBundle/DataFixtures/ORM/LoadUser.php
+// src/kl/UserBundle/DataFixtures/ORM/LoadKLUser.php
 
-namespace OC\UserBundle\DataFixtures\ORM;
+namespace KL\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use OC\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use KL\UserBundle\Entity\User;
 
 class LoadUser implements FixtureInterface
 {
   public function load(ObjectManager $manager)
   {
-    // Les noms d'utilisateurs à créer
+    /*// Les noms d'utilisateurs à créer
     $listNames = array('Alexandre', 'Marine', 'Anna');
 
     foreach ($listNames as $name) {
       // On crée l'utilisateur
-      $user = new User;
+      $user = new KLUser();
 
       // Le nom d'utilisateur et le mot de passe sont identiques pour l'instant
       $user->setUsername($name);
@@ -32,6 +33,6 @@ class LoadUser implements FixtureInterface
     }
 
     // On déclenche l'enregistrement
-    $manager->flush();
+    $manager->flush();*/
   }
 }

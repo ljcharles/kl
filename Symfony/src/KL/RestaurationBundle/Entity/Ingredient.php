@@ -1,6 +1,7 @@
 <?php
 namespace KL\RestaurationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * IngredientController

@@ -14,7 +14,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 
 
-class User implements BaseUser
+class User extends BaseUser
 {
     /**
      * @var int
@@ -23,7 +23,7 @@ class User implements BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -87,5 +87,5 @@ class User implements BaseUser
         return $this->prenom;
     }
 
-  
+
   }

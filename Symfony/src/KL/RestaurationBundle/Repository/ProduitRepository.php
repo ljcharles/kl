@@ -12,7 +12,7 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
   {
     return $this->getEntityManager()
         ->createQuery(
-          'SELECT p FROM KLRestaurationBundleBundle:Produit p ORDER BY p.name ASC'
+          'SELECT p FROM KLRestaurationBundle:Produit p ORDER BY p.name ASC'
           )
         ->getResult();
   }
