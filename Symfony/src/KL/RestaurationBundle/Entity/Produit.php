@@ -298,7 +298,7 @@ class Produit
 
       $name = $this->image->getClientOriginalName();
       $this->image->move($this->getUploadRootDir(), $name);
-      $url = '/Restauration/Symfony/web/'.$this->getUploadDir().'/'.$name;
+      $url = '/'.$this->getUploadDir().'/'.$name;
       $this->setImage($url);
     }
 
