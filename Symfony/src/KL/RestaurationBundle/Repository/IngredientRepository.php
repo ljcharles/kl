@@ -12,7 +12,7 @@ class IngredientRepository extends \Doctrine\ORM\EntityRepository
   {
     return $this->getEntityManager()
         ->createQuery(
-          'SELECT p FROM KLRestaurationBundle:Ingredient p ORDER BY p.name ASC'
+          'SELECT i FROM KLRestaurationBundle:Ingredient i ORDER BY i.nom ASC'
           )
         ->getResult();
   }

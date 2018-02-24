@@ -38,6 +38,12 @@
               <div class="input-group-addon"> Catégorie </div>
               {{ form_widget(form.gammeProduit,{'attr': {'class': 'form-control'}}) }}
             </div>
+            <div class="card-text product-text form-group">
+              Ingrédients
+            </div>
+            <p>
+              {{ form_widget(form.ingredients) }}
+            </p>
             <div class="card-text product-text form-group input-group">
               <div class="input-group-addon"> Note </div>
               {{ form_widget(form.note,{'attr': {'class': 'form-control'}}) }}

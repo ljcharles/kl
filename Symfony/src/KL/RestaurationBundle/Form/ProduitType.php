@@ -35,6 +35,12 @@ class ProduitType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'     => false,
               ))
+          ->add('ingredients', EntityType::class, array(
+                'class'        => 'KLRestaurationBundle:Ingredient',
+                'choice_label' => 'nom',
+                'multiple'     => true,
+                'expanded'     => true,
+              ))
           ->add('image', FileType::class)
           ->add('save',      SubmitType::class);
         ;

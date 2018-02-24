@@ -20,21 +20,21 @@ class Ingredient
   *@ORM\Id
   *@ORM\GeneratedValue(strategy="AUTO")
   */
-  protected $id;
+  private $id;
 
   /**
   *@var string
   *
   *@ORM\Column(name="nom",type="string",length=255)
   */
-  protected $nom;
+  private $nom;
 
   /**
   *@var integer
   *
   *@ORM\Column(name="quantite",type="integer")
   */
-  protected $quantite;
+  private $quantite;
 
 
   /**

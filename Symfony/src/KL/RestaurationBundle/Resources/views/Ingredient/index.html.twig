@@ -1,0 +1,46 @@
+{% extends "KLRestaurationBundle::layout.html.twig" %}
+
+{% block title %}{{ parent()}}{% endblock %}
+
+{% block body %}
+<div class="row product">
+  <div class="col-lg-3">
+
+    <h1 class="presentation-titre">Nos ingrédients</h1>
+
+    <div class="list-group">
+      <a href="{{ path('kl_restauration_ingredient_homepage') }}"
+      class="list-group-item">Tous</a>
+    </div>
+
+    <div class="list-group">
+      <a href="{{ path('kl_restauration_ingredient_add') }}"
+      class="list-group-item">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Ajouter un ingrédient
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-9">
+
+      <div class="row">
+        {% for ingredient in listIngredients %}
+          <div class="col-lg-trente col-md-6 mb-4 thumbnail">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a class="product-title"
+                href="{{ path('kl_restauration_ingredient_view', {'id': ingredient.id}) }}">
+                  {{ ingredient.nom }}
+                </a>
+              </h5>
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
+              <h5 class="product-price">{{ ingredient.quantite }} </h5>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+  </div>
+</div>
+{% endblock %}

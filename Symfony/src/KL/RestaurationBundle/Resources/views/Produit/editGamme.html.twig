@@ -11,7 +11,10 @@
       <div class="list-group">
         {% for gammeProduit in listGammeProduits %}
         <a href="{{ path('kl_restauration_gamme_edit', {'id': gammeProduit.id}) }}"
-        class="list-group-item">Modifier {{ gammeProduit.nom }}</a>
+        class="list-group-item">
+          <i class="fa fa-pencil"></i>
+          Modifier {{ gammeProduit.nom }}
+        </a>
         {% endfor %}
       </div>
 
