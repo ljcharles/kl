@@ -19,7 +19,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/burger.svg' %}
               <img id="banner-1" src="{{ asset_url }}" alt="burger">
               {% endimage %}
-              <a href="#">
+              <a href="{{ path('kl_restauration_gamme_view', {'id': 9}) }}">
                 Faire un Hamburger
               </a>
             </li>
@@ -27,7 +27,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/pizza.png' %}
               <img id="banner-2" src="{{ asset_url }}" alt="pizza">
               {% endimage %}
-              <a href="#">
+              <a href="{{ path('kl_restauration_gamme_view', {'id': 10}) }}">
                 Faire une Pizza
               </a>
             </li>
@@ -35,7 +35,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
               <img id="banner-3" src="{{ asset_url }}" alt="cake">
               {% endimage %}
-              <a href="#">
+              <a href="{{ path('kl_restauration_gamme_view', {'id': 11}) }}">
                 Faire une tarte
               </a>
             </li>
@@ -49,7 +49,7 @@
           {% endimage %}
 
           <div class="clear"></div>
-          
+
           <a href="#about">
             <i id ="chevron" class="fa fa-chevron-circle-down"></i>
           </a>
@@ -95,19 +95,19 @@
 
   <div class="row cartes">
     <div class="card col-lg-4">
-      <a href="">
+      <a href="{{ path('kl_restauration_gamme_view', {'id': 9}) }}">
         <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2" alt="Card image">
       </a>
       <h2 class = "presentation-titre">Nos Hamburgers</h2>
     </div>
     <div class="card col-lg-4">
-      <a href="">
+      <a href="{{ path('kl_restauration_gamme_view', {'id': 10}) }}">
         <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt="Card image">
       </a>
       <h2 class = "presentation-titre">Nos pizzas</h2>
     </div>
     <div class="card col-lg-4">
-      <a href="">
+      <a href="{{ path('kl_restauration_gamme_view', {'id': 11}) }}">
         <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1476887334197-56adbf254e1a" alt="Card image">
       </a>
       <h2 class = "presentation-titre">Nos tartes</h2>

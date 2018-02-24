@@ -9,12 +9,7 @@ use KL\RestaurationBundle\Entity\GammeProduit;
 use KL\RestaurationBundle\Entity\Produit;
 use KL\RestaurationBundle\Form\GammeProduitType;
 use KL\RestaurationBundle\Form\ProduitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use KL\RestaurationBundle\Form\ProduitEditType;
 
 class ProduitController extends Controller
 {
@@ -56,10 +51,32 @@ class ProduitController extends Controller
       ));
     }
 
-    public function editAction()
+    public function editAction($id, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $produit = $em->getRepository('KLRestaurationBundle:Produit')->find($id);
+
+        if (null === $produit) {
+          throw new NotFoundHttpException("Le produit d'id ".$id." n'existe pas.");
+        }
+
+        $form = $this->createForm(ProduitEditType::class, $produit);
+        // Si la requête est en POST
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Produit bien modifiée.');
+
+            return $this->redirectToRoute('kl_restauration_produit_view',array(
+              'id' => $produit->getId()
+            ));
+        }
+
         return $this->render('KLRestaurationBundle:Produit:edit.html.twig', array(
-            // ...
+          'form' => $form->createView(),
+          'produit' => $produit
         ));
     }
 
@@ -92,11 +109,33 @@ class ProduitController extends Controller
        ));
     }
 
-    public function deleteAction()
+    public function deleteAction(Request $request, $id)
     {
-        return $this->render('KLRestaurationBundle:Produit:delete.html.twig', array(
-            // ...
-        ));
+      $em = $this->getDoctrine()->getManager();
+
+      $produit= $em->getRepository('KLRestaurationBundle:Produit')->find($id);
+
+      if (null === $produit) {
+        throw new NotFoundHttpException("Le produit d'id ".$id." n'existe pas.");
+      }
+
+      // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+      // Cela permet de protéger la suppression d'annonce contre cette faille
+      $form = $this->get('form.factory')->create();
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $em->remove($produit);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('info', "Ce produit a bien été supprimée.");
+
+        return $this->redirectToRoute('kl_restauration_produit_homepage');
+      }
+
+      return $this->render('KLRestaurationBundle:Produit:delete.html.twig', array(
+        'produit' => $produit,
+        'form'   => $form->createView(),
+      ));
     }
 
     public function addGammeAction(Request $request)
@@ -154,17 +193,66 @@ class ProduitController extends Controller
       ));
     }
 
-    public function editGammeAction($value='')
+    public function editGammeAction($id, Request $request)
     {
+      $em = $this->getDoctrine()->getManager();
+
+      $gamme = $em->getRepository('KLRestaurationBundle:GammeProduit')->find($id);
+
+      $listGammeProduits = $em
+        ->getRepository('KLRestaurationBundle:GammeProduit')
+        ->findAllOrderedByName()
+      ;
+
+      if (null === $gamme) {
+        throw new NotFoundHttpException("La gamme d'id ".$id." n'existe pas.");
+      }
+
+      $form = $this->createForm(GammeProduitType::class, $gamme);
+      // Si la requête est en POST
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+      {
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('success', 'Gamme bien modifiée.');
+
+          return $this->redirectToRoute('kl_restauration_gamme_add',array(
+            'id' => $gamme->getId()
+          ));
+      }
+
       return $this->render('KLRestaurationBundle:Produit:editGamme.html.twig', array(
-          // ...
+        'form' => $form->createView(),
+        'listGammeProduits' => $listGammeProduits
       ));
     }
 
-    public function deleteGammeAction($value='')
+    public function deleteGammeAction(Request $request, $id)
     {
+      $em = $this->getDoctrine()->getManager();
+
+      $gamme = $em->getRepository('KLRestaurationBundle:GammeProduit')->find($id);
+
+      if (null === $gamme) {
+        throw new NotFoundHttpException("La gamme d'id ".$id." n'existe pas.");
+      }
+
+      // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+      // Cela permet de protéger la suppression d'annonce contre cette faille
+      $form = $this->get('form.factory')->create();
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $em->remove($gamme);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('info', "Cette gamme a bien été supprimée.");
+
+        return $this->redirectToRoute('kl_restauration_produit_homepage');
+      }
+
       return $this->render('KLRestaurationBundle:Produit:deleteGamme.html.twig', array(
-          // ...
+        'gamme' => $gamme,
+        'form'   => $form->createView(),
       ));
     }
 }

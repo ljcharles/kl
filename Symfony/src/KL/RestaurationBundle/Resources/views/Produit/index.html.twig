@@ -17,6 +17,19 @@
         class="list-group-item">{{ gammeProduit.nom }}</a>
       {% endfor %}
     </div>
+
+    <div class="list-group">
+      <a href="{{ path('kl_restauration_produit_add') }}"
+      class="list-group-item">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Ajouter un produit
+      </a>
+      <a href="{{ path('kl_restauration_gamme_add') }}"
+      class="list-group-item">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Ajouter ou Modifier ou Supprimer une gamme
+      </a>
+    </div>
   </div>
 
   <div class="col-lg-9">

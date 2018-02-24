@@ -46,13 +46,27 @@
             <p>
               <small class="text-muted product-star">
                 {% for i in 1 .. produit.note %} &#9733; {% endfor %}
-                {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
+                {% if produit.note < 5 %}
+                  {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
+                {% endif %}
               </small>
             </p>
             <p>
               <a class="btn btn-add-panier" href="#" role="button">
                 <i class="fa fa-shopping-cart"></i>
                 Ajouter au panier
+              </a>
+            </p>
+            <p>
+              <a href="{{ path('kl_restauration_produit_edit', {'id': produit.id}) }}" class="btn btn-add-panier">
+                <i class="fa fa-pencil"></i>
+                Modifier ce produit
+              </a>
+            </p>
+            <p>
+              <a href="{{ path('kl_restauration_produit_delete', {'id': produit.id}) }}" class="btn btn-add-panier">
+                <i class="fa fa-trash"></i>
+                Supprimer ce produit
               </a>
             </p>
           </div>

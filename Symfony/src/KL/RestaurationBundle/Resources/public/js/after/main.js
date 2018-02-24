@@ -3,6 +3,7 @@ $(document).ready(function () {
   chevronAction();
   activeAction();
   hideMdpAction();
+  inputFileAction();
 });
 
 function activeAction() {
@@ -41,5 +42,16 @@ function hideMdpAction() {
       $(this).prev('input').prop('type','password');
       $(this).html('<i class="fa fa-eye doree"></i>');
     }
+  });
+}
+
+function inputFileAction() {
+  $('#kl_restaurationbundle_produit_image').change(function () {
+    $('#label-file').html(
+      '<i class="fa fa-check-circle fa-5x"></i>'
+    );
+    $('#no-file').html(
+      ''
+    );
   });
 }

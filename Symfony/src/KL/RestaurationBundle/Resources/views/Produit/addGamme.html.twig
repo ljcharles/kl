@@ -10,7 +10,19 @@
 
       <div class="list-group">
         {% for gammeProduit in listGammeProduits %}
-        <a href="#" class="list-group-item">{{ gammeProduit.nom }}</a>
+        <a href="{{ path('kl_restauration_gamme_edit', {'id': gammeProduit.id}) }}"
+        class="list-group-item">
+          Modifer {{ gammeProduit.nom }}
+        </a>
+        {% endfor %}
+      </div>
+
+      <div class="list-group">
+        {% for gammeProduit in listGammeProduits %}
+        <a href="{{ path('kl_restauration_gamme_delete', {'id': gammeProduit.id}) }}"
+        class="list-group-item">
+          Supprimer {{ gammeProduit.nom }}
+        </a>
         {% endfor %}
       </div>
     </div>

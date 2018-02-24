@@ -64,7 +64,7 @@ class Produit
   private $ingredients;
 
   /**
-  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits",cascade={"all"})
+  *@ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\GammeProduit",inversedBy="produits")
   *@ORM\JoinColumn()
   */
   private $gammeProduit;

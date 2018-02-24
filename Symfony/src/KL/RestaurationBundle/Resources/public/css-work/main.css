@@ -67,6 +67,33 @@ h1,h2,h3,h4,h5,h6{
 	z-index: 5;
 }
 
+.form-desc{
+	max-width: 455px;
+	min-width: 455px;
+	min-height: 55px;
+}
+
+.label-file {
+    cursor: pointer;
+    color: #00b1ca;
+    font-weight: bold;
+		height: 135px;
+		font-size: 30px;
+}
+
+.label-file:hover {
+    color: #25a5c4;
+}
+
+
+#kl_restaurationbundle_produit_nom,#kl_restaurationbundle_produit_prix{
+	width: 77%;
+}
+
+#kl_restaurationbundle_produit_image{
+	display: none;
+}
+
 .connect-form{
 	text-align: center;
 	display: -webkit-box;
@@ -118,6 +145,9 @@ h1,h2,h3,h4,h5,h6{
 
 .container-img-product{
   overflow: hidden;
+	text-align: center;
+	background-color: #222222;
+	color: white;
 }
 
 .container-img-product > a > img:hover{
@@ -126,8 +156,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .col-lg-trente{
-	width: 30%;
-	float: right;
+	width: 32%;
 }
 
 .product-title,
@@ -154,11 +183,16 @@ h1,h2,h3,h4,h5,h6{
 .btn-add-panier:hover,
 .btn-add-panier:focus,
 .btn-add-panier:active,
-.btn-add-panier:visited{
+.btn-add-panier:visited,
+#kl_restaurationbundle_produit_save{
 	border-radius: 50px;
 	color:#E7964B;
 	border-color:#E7964B;
 	background:transparent;
+}
+
+#kl_restaurationbundle_produit_save{
+	border: solid 1px;
 }
 
 .btn-404,
@@ -724,6 +758,11 @@ footer{
 		right: 10px;
 		top: 0;
 		font-size: .7em;
+	}
+
+	.form-desc{
+		max-width: 100%;
+		min-width: 100%;
 	}
 
 	#form-contact{

@@ -1,7 +1,54 @@
-{% extends "::base.html.twig" %}
+{% extends "KLCoreBundle::layout.html.twig" %}
 
-{% block title %}KLRestaurationBundle:Produit:edit{% endblock %}
+{% block title %}Editer une gamme - {{ parent() }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Produit:edit page</h1>
+
+  <div class="container jumbotron">
+    <div class="col-sm-3">
+      <h3 class="presentation-titre">Nos gammes de produits</h3>
+
+      <div class="list-group">
+        {% for gammeProduit in listGammeProduits %}
+        <a href="{{ path('kl_restauration_gamme_edit', {'id': gammeProduit.id}) }}"
+        class="list-group-item">Modifier {{ gammeProduit.nom }}</a>
+        {% endfor %}
+      </div>
+
+      <div class="list-group">
+        <a href="{{ path('kl_restauration_gamme_add') }}"
+        class="list-group-item">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          Ajouter une gamme
+        </a>
+      </div>
+    </div>
+
+    <div class="well col-sm-9" style="text-align: center; top: 20px;">
+      {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <br>
+      <div class="form-group">
+        <h3 style="font-weight: normal;">
+          {{ form_label(form.nom, "Nom de la gamme",
+          {'label_attr': {'class': 'col-sm-5 control-label presentation-titre'}})}}
+        </h3>
+
+        <div class="col-sm-7">
+          {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+      </div>
+
+      <br>
+      {{ form_widget(form.sauvegarder, {'attr': {'class': 'btn btn-primary'}}) }}
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
+    </div>
+  </div>
+
+  {% if form_errors(form) %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ form_errors(form) }}","danger"); </script>
+      {% endjavascripts %}
+  {% endif %}
 {% endblock %}
