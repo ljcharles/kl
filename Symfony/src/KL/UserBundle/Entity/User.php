@@ -13,7 +13,6 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Entity(repositoryClass="KL\UserBundle\Repository\UserRepository")
  */
 
-
 class User extends BaseUser
 {
     /**
@@ -39,6 +38,19 @@ class User extends BaseUser
      */
     private $prenom;
 
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function setEmail($email)
+    {
+        $email = is_null($email) ? '' : $email;
+        parent::setEmail($email);
+        parent::setUsername($email);
+    }
+
     /**
      * Set nom
      *
@@ -46,7 +58,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setUsername($nom)
+    public function setNom($nom)
     {
         $this->nom = $nom;
 
@@ -86,6 +98,5 @@ class User extends BaseUser
     {
         return $this->prenom;
     }
-
 
   }

@@ -1,0 +1,87 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Register - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  {% trans_default_domain 'FOSUserBundle' %}
+
+  <div class="container jumbotron connect-form">
+    {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+      <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
+    {% endimage %}
+
+    <form  action="{{ path('fos_user_registration_register') }}" method="post">
+
+       <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
+        {{ form_widget(form.nom, { 'attr': {
+          'placeholder': 'form.nom'|trans,
+          'class':'form-control'
+        } }) }}
+       </div>
+
+       <div class="clear"><br></div>
+
+       <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
+        {{ form_widget(form.prenom, { 'attr': {
+          'placeholder': 'form.prenom'|trans,
+          'class':'form-control'
+        } }) }}
+       </div>
+
+       <div class="clear"><br></div>
+
+      <div class="input-group">
+       <div class="input-group-addon"><i class="fa fa-envelope doree"></i></div>
+       {{ form_widget(form.email, { 'attr': {
+         'placeholder': 'form.email',
+         'class':'form-control'
+       } }) }}
+      </div>
+
+      <div class="clear"><br></div>
+
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-lock doree"></i></div>
+        {{ form_widget(form.plainPassword.first, { 'attr': {
+          'placeholder': 'form.password',
+          'class':'form-control'
+        } }) }}
+      </div>
+
+      <div class="clear"><br></div>
+
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-lock doree"></i></div>
+        {{ form_widget(form.plainPassword.second, { 'attr': {
+          'placeholder': 'form.password_confirmation',
+          'class':'form-control'
+        } }) }}
+      </div>
+
+      <br><br>
+
+      <button type="submit" class="btn btn-primary btn-send">
+        Créer un compte <i class="fa fa-send-o"></i>
+      </button>
+
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          {% if form_errors(form.email) %}
+            <script> flash_notice("{{ form_errors(form.email) }}","danger"); </script>
+          {% endif %}
+
+          {% if form_errors(form.plainPassword.first) %}
+            <script> flash_notice("{{ form_errors(form.plainPassword.first) }}","danger"); </script>
+          {% endif %}
+
+          {% if form_errors(form.plainPassword.second) %}
+            <script> flash_notice("{{ form_errors(form.plainPassword.second) }}","danger"); </script>
+          {% endif %}
+      {% endjavascripts %}
+    </form>
+
+  </div>
+{% endblock %}

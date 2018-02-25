@@ -5,3 +5,8 @@ services:
      kl_restauration.LoadUser:
          class: 'KL\UserBundle\DataFixtures\ORM\LoadUser'
          tags: [doctrine.fixture.orm]
+
+     app.form.registration:
+        class: KL\UserBundle\Form\RegistrationFormType
+        tags:
+            - { name: form.type }

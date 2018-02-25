@@ -10,6 +10,7 @@
     {% endimage %}
 
     <form class="form-inline" action="{{ path('fos_user_security_check') }}" method="post">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
         <input type="text" class="form-control" placeholder="Votre identifiant"
@@ -25,6 +26,12 @@
 
       <br><br>
 
+      <div class="checkbox">
+          <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+          <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+      </div>
+      <br><br>
+
       <button type="submit" class="btn btn-primary btn-send">
         Envoyer <i class="fa fa-send-o"></i>
       </button>
@@ -33,7 +40,7 @@
   {% if error %}
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
-          <script> flash_notice("{{ error.message }}","danger"); </script>
+          <script> flash_notice("{{ error.message | replace({"Bad credentials." : "Mot de passe ou identifiant invalide."}) }}","danger"); </script>
       {% endjavascripts %}
   {% endif %}
 {% endblock %}

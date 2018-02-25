@@ -28,7 +28,7 @@
               <div class="input-group-addon"> Description </div>
               {{ form_widget(
                   form.description,
-                  {'attr': {'class': 'form-control form-desc'}}
+                  {'attr': {'class': 'form-control form-desc tinymce'}}
               )}}
             </div>
             <div class="card-text product-text form-group input-group">
@@ -38,10 +38,10 @@
             <div class="card-text product-text form-group">
               Ingrédients
             </div>
-            <p>
-              {{ form_widget(form.ingredients) }}
-            </p>
-            <div 
+            <div>
+                {{ form_widget(form.ingredients) }}
+            </div>
+            <div
             <div class="card-text product-text form-group input-group">
               <div class="input-group-addon"> Note </div>
               {{ form_widget(form.note,{'attr': {'class': 'form-control'}}) }}
@@ -67,5 +67,5 @@
         <script> flash_notice("{{ form_errors(form) }}","danger"); </script>
     {% endjavascripts %}
 {% endif %}
-
+{{ tinymce_init() }}
 {% endblock %}

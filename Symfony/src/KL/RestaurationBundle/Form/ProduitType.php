@@ -25,7 +25,9 @@ class ProduitType extends AbstractType
         $builder
           ->add('nom')
           ->add('prix', MoneyType::class)
-          ->add('description')
+          ->add('description', TextareaType::class, array(
+                'attr' => array('class' => 'tinymce')
+              ))
           ->add('note', IntegerType::class, array('attr' => array(
                 'min' => '1',
                 'max' => '5',

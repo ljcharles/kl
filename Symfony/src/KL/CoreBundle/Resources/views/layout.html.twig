@@ -80,7 +80,7 @@
              </a>
            </li>
            <li>
-             <a href="{{ path('kl_core_inscription') }}">
+             <a href="{{ path('fos_user_registration_register') }}">
                <i class="fa fa-user-plus"></i>
                M'inscrire
              </a>
@@ -125,6 +125,7 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
   {% endblock %}
+  {{ tinymce_init() }}
 </main>
 
 </body>
