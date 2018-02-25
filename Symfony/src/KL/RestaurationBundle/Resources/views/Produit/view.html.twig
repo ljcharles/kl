@@ -52,7 +52,8 @@
               </small>
             </p>
             <p>
-              <a class="btn btn-add-panier" href="#" role="button">
+              <a class="btn btn-add-panier"
+              href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" role="button">
                 <i class="fa fa-shopping-cart"></i>
                 Ajouter au panier
               </a>

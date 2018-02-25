@@ -1,3 +1,21 @@
+kl_restauration_panier_homepage:
+    path:     /panier
+    defaults: { _controller: KLRestaurationBundle:Panier:index }
+
+kl_restauration_panier_add:
+    path:     /panier/add/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Panier:add
+    requirements:
+        id: \d+
+
+kl_restauration_panier_delete:
+    path:     /panier/delete/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Panier:delete
+    requirements:
+        id: \d+
+
 kl_restauration_produit_homepage:
     path:     /produit
     defaults: { _controller: KLRestaurationBundle:Produit:index }

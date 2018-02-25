@@ -1,0 +1,122 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Mon panier - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  {% set totalHT = 0 %}
+
+  <div class="container jumbotron bg-panier">
+    <div class="etapes">
+      <h1>
+        <span style="color: #ffe13f;">
+          <i class="fa fa-shopping-cart"></i>
+          Mon panier
+        </span>
+        > Commander > Adresse de livraison > Paiement
+      </h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12 panier">
+        <div class="row">
+          {% if produits|length  == 0 %}
+            <div style="text-align:center; margin-top: 120px;">
+              <h2 style="color:white;">Aucun produits dans votre panier</h2>
+            </div>
+
+            {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+             <img id="cake-404" src="{{ asset_url }}" alt="cake">
+            {% endimage %}
+          {% endif %}
+
+          {% for produit in produits %}
+            <form class="" action="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" method="get">
+              <div class="col-lg-2 col-md-6 mb-4 thumbnail thumb-panier">
+                <div class="container-img-product">
+                  <a href="#"><img class="card-img-top product-img img-panier"
+                    src="{{ produit.image }}" alt=""></a>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="product-title" href="#" style="font-weight: normal;">
+                        {{ produit.nom }}
+                      </a>
+                    </h5>
+                    <p>
+                      Prix unitaire  <span class="product-price">{{ produit.prix }} € </span>
+                      Prix HTT <span class="product-price">
+                      {{ produit.prix * panier[produit.id] }} €
+                    </span>
+                    </p>
+                    <p  class="black-desc">Quantité
+                      <select class="span1" name="qte" onchange="this.form.submit()">
+                        {% for i in 1..10 %}
+                          <option value="{{ i }}"
+                            {% if i == panier[produit.id] %}
+                            selected='selected'
+                            {% endif %}
+                            >
+                            {{ i }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                    </p>
+                  <a href="{{ path('kl_restauration_panier_delete', {'id': produit.id}) }}">
+                    <i class="fa fa-trash-o fa-2x" style="color: gray; margin-bottom: 10px;" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </form>
+            {% set totalHT = totalHT + (produit.prix * panier[produit.id]) %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    {% if produits|length  != 0 %}
+      <div class="prix-total">
+        <h2>
+          <i class="fa fa-tags"></i>
+          Prix total
+          <span style="color: #ffe13f;">
+            {{ totalHT }}
+          </span>
+          €
+        </h2>
+      </div>
+    {% endif %}
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-6">
+          <a href="{{ path('kl_restauration_produit_homepage') }}" class="btn bgdoree">
+            <i class="fa fa-undo"></i> Continuer mes achats
+          </a>
+        </div>
+
+        {% if produits|length  != 0 %}
+          <div class="col-lg-6">
+            <a href="#" class="btn bgdoree">
+              Commander <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+
+{% endblock %}
