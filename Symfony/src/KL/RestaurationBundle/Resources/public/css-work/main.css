@@ -32,13 +32,11 @@ h1,h2,h3,h4,h5,h6{
 
 #flash_notice {
 	text-align: center;
-	width:500px;
 	padding:10px;
 	position: fixed;
 	top: 100px;
 	right: 18px;
 	z-index: 1050;
-	height:60px;
 	border-radius: 3px !important;
 	-webkit-animation: translationGauche 1s;
 	        animation: translationGauche 1s;
