@@ -12,12 +12,12 @@ class CommandeController extends Controller
 {
   public function indexAction()
   {
-
+    // TODO: Voir toutes les commandes
   }
 
   public function viewAction($id)
   {
-
+    // TODO: Voir une commande spécifique
   }
 
 
@@ -39,7 +39,7 @@ class CommandeController extends Controller
           ->find($product_id);
 
       for ($i=0; $i < $product_quantity; $i++) {
-        // Ajoute un Commande produit
+
         $commandeProduit = new CommandeProduit();
         $commandeProduit->setCommande($commande);
         $commandeProduit->setProduit($produit);
@@ -48,38 +48,12 @@ class CommandeController extends Controller
         $commande->addCommandeProduit($commandeProduit);
       }
 
-      dump($produit);
-
     }
 
     $em->persist($commande);
     $em->flush();
 
-    /*
-
-    $produits = $em->getRepository('KLRestaurationBundle:Produit')
-    ->findArray(array_keys($panier));
-
-
-    foreach ($produits as $produit) {
-      $commande->addProduit($produit);
-
-      $quantity = $produit
-    }
-    */
     return $this->render('KLRestaurationBundle:Commande:add.html.twig');
-  }
-
-
-  public function editAction($id, Request $request)
-  {
-
-  }
-
-
-  public function deleteAction($id)
-  {
-
   }
 
 }
