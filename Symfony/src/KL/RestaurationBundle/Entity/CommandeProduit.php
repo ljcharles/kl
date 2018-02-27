@@ -18,21 +18,24 @@ class CommandeProduit
   private $id;
 
   /**
-   * @ORM\Column(name="quantity", type="integer")
+   * @var integer
+   *
+   * @ORM\Column(name="Etat", type="integer")
    */
-  private $quantity;
+  private $etat;
+
 
   /**
    * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Commande")
    * @ORM\JoinColumn(nullable=false)
    */
-  private $commandes;
+  private $commande;
 
   /**
    * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Produit")
    * @ORM\JoinColumn(nullable=false)
    */
-  private $produits;
+  private $produit;
 
 
     /**
@@ -45,75 +48,77 @@ class CommandeProduit
         return $this->id;
     }
 
+
+
     /**
-     * Set quantity
+     * Set etat
      *
-     * @param integer $quantity
+     * @param integer $etat
      *
      * @return CommandeProduit
      */
-    public function setQuantity($quantity)
+    public function setEtat($etat)
     {
-        $this->quantity = $quantity;
+        $this->etat = $etat;
 
         return $this;
     }
 
     /**
-     * Get quantity
+     * Get etat
      *
      * @return integer
      */
-    public function getQuantity()
+    public function getEtat()
     {
-        return $this->quantity;
+        return $this->etat;
     }
 
     /**
-     * Set commandes
+     * Set commande
      *
-     * @param \KL\RestaurationBundle\Entity\Commande $commandes
+     * @param \KL\RestaurationBundle\Entity\Commande $commande
      *
      * @return CommandeProduit
      */
-    public function setCommandes(\KL\RestaurationBundle\Entity\Commande $commandes)
+    public function setCommande(\KL\RestaurationBundle\Entity\Commande $commande)
     {
-        $this->commandes = $commandes;
+        $this->commande = $commande;
 
         return $this;
     }
 
     /**
-     * Get commandes
+     * Get commande
      *
      * @return \KL\RestaurationBundle\Entity\Commande
      */
-    public function getCommandes()
+    public function getCommande()
     {
-        return $this->commandes;
+        return $this->commande;
     }
 
     /**
-     * Set produits
+     * Set produit
      *
-     * @param \KL\RestaurationBundle\Entity\Produit $produits
+     * @param \KL\RestaurationBundle\Entity\Produit $produit
      *
      * @return CommandeProduit
      */
-    public function setProduits(\KL\RestaurationBundle\Entity\Produit $produits)
+    public function setProduit(\KL\RestaurationBundle\Entity\Produit $produit)
     {
-        $this->produits = $produits;
+        $this->produit = $produit;
 
         return $this;
     }
 
     /**
-     * Get produits
+     * Get produit
      *
      * @return \KL\RestaurationBundle\Entity\Produit
      */
-    public function getProduits()
+    public function getProduit()
     {
-        return $this->produits;
+        return $this->produit;
     }
 }

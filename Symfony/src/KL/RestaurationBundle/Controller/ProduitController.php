@@ -10,6 +10,8 @@ use KL\RestaurationBundle\Entity\Produit;
 use KL\RestaurationBundle\Form\GammeProduitType;
 use KL\RestaurationBundle\Form\ProduitType;
 use KL\RestaurationBundle\Form\ProduitEditType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitController extends Controller
 {
@@ -253,6 +255,34 @@ class ProduitController extends Controller
       return $this->render('KLRestaurationBundle:Produit:deleteGamme.html.twig', array(
         'gamme' => $gamme,
         'form'   => $form->createView(),
+      ));
+    }
+
+    public function searchBarAction()
+    {
+      $form = $this->createFormBuilder(null)
+        ->add('search', TextType::class)
+        ->add('Rechercher', SubmitType::class)
+        ->getForm();
+      return $this->render('KLRestaurationBundle:Produit:searchBar.html.twig', array(
+        'form'   => $form->createView(),
+      ));
+    }
+
+    public function searchAction(Request $request)
+    {
+      $term = $request->request->get('form')['search'];
+
+      if (strlen($term) < 3) {
+        $listProduits=[];
+      } else {
+        $em = $this->getDoctrine()->getManager();
+        $listProduits= $em->getRepository('KLRestaurationBundle:Produit')
+        ->getLikeQuery($term);
+      }
+
+      return $this->render('KLRestaurationBundle:Produit:search.html.twig', array(
+        'listProduits'   => $listProduits
       ));
     }
 }

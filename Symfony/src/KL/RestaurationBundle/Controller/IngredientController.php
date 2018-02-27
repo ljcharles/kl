@@ -75,6 +75,7 @@ class IngredientController extends Controller
   {
     $ingredient = new Ingredient();
     $form = $this->get('form.factory')->create(IngredientType::class, $ingredient);
+    // dump($request);
 
      if ($request->isMethod('POST')) {
        $form->handleRequest($request);
@@ -86,6 +87,9 @@ class IngredientController extends Controller
          $em->flush();
 
          $request->getSession()->getFlashBag()->add('notice', 'Ingrédient bien enregistrée.');
+         // dump($request);
+         // dump($request->request->get('kl_restaurationbundle_ingredient')['quantite']);
+         // die();
 
          return $this->redirectToRoute('kl_restauration_ingredient_view',array(
            'id' => $ingredient->getId()

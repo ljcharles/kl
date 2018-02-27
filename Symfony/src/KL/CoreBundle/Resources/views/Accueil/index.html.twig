@@ -115,9 +115,15 @@
   </div>
 
   <div class="container">
-    <div id="map" class="jumbotron" style="width:90%;height:250px;margin-left:5%"></div>
+    <div id="map" class="jumbotron" style="width:90%;height:250px;margin-left:5%">
+    </div>
   </div>
 
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=myMap"></script> -->
-
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
 {% endblock %}

@@ -1,3 +1,7 @@
+kl_restauration_commande_add:
+    path:     /commande/add
+    defaults: { _controller: KLRestaurationBundle:Commande:add }
+
 kl_restauration_panier_homepage:
     path:     /panier
     defaults: { _controller: KLRestaurationBundle:Panier:index }
@@ -19,6 +23,10 @@ kl_restauration_panier_delete:
 kl_restauration_produit_homepage:
     path:     /produit
     defaults: { _controller: KLRestaurationBundle:Produit:index }
+
+kl_restauration_produit_search:
+    path:     /search
+    defaults: { _controller: KLRestaurationBundle:Produit:search }
 
 kl_restauration_produit_view:
     path:     /produit/view/{id}

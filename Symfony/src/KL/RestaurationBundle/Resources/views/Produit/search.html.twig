@@ -5,48 +5,33 @@
 {% block body %}
 <div class="row product">
   <div class="col-lg-3">
-
-    <h1 class="presentation-titre">Nos gammes de produits</h1>
-
-    <div class="list-group">
-      <a href="{{ path('kl_restauration_produit_homepage') }}"
-      class="list-group-item"><i class="fa fa-list-ul" aria-hidden="true"></i> Tous</a>
-
-      {% for gammeProduit in listGammeProduits %}
-        {% set icon = '' %}
-        {% set list = { Boisson:'glass', Hamburger:'bars', Tarte:'pie-chart', Pizza:'play' } %}
-
-        {% for item,value in list %}
-          {% if gammeProduit.nom == item %} {% set icon = value %} {% endif %}
-        {% endfor %}
-
-        <a href="{{ path('kl_restauration_gamme_view', {'id': gammeProduit.id}) }}"
-        class="list-group-item"><i class="fa fa-{{ icon }}" aria-hidden="true"></i> {{ gammeProduit.nom }}</a>
-      {% endfor %}
-    </div>
-
-    <div class="list-group">
-      <a href="{{ path('kl_restauration_produit_add') }}"
-      class="list-group-item">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        Ajouter un produit
-      </a>
-      <a href="{{ path('kl_restauration_ingredient_homepage') }}"
-      class="list-group-item">
-        <i class="fa fa-eye" aria-hidden="true"></i>
-        Voir tous les ingrédients
-      </a>
-      <a href="{{ path('kl_restauration_gamme_add') }}"
-      class="list-group-item">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        Ajouter ou Modifier ou Supprimer une gamme
-      </a>
-    </div>
   </div>
 
-  <div class="col-lg-9">
+  <h1 class="presentation-titre">Résultat de votre recherche</h1>
+  <h3>
+    {% if listProduits|length == 1 %}
+        1 Résultat
+    {% elseif listProduits|length == 0 %}
+    {% else %}
+        {{ listProduits|length }} Résultats
+    {% endif %}
+  </h3>
 
+  <div class="col-lg-12">
       <div class="row">
+        {% if listProduits  is empty %}
+          <div class="container jumbotron not-found">
+            <h2 style="font-weight: lighter; color: white;">Aucun produit correspondant à votre recherche.</h2>
+            <a href="javascript:history.back()" class="btn btn-404">
+              <i class="fa fa-undo"></i> Revenir en arrière
+            </a>
+            <div class="clear"></div>
+            {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+             <img id="cake-404" src="{{ asset_url }}" alt="cake">
+            {% endimage %}
+          </div>
+        {% endif %}
+
         {% for produit in listProduits %}
           <div class="col-lg-trente col-md-6 mb-4 thumbnail">
             <div class="container-img-product">
