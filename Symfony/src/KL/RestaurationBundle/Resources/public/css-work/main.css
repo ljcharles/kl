@@ -34,6 +34,27 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 0px;
 		z-index: 10;
 		position: relative;
+		width: 700px;
+}
+
+.ui-menu-item{
+	list-style: none;
+}
+
+.ui-menu-item:before {
+  content: '\25ba';
+  display: block;
+  position: relative;
+  max-width: 0;
+  max-height: 0;
+  left: -25px;
+  top: 0;
+  color: #e7964b;
+  font-size: 20px;
+}
+
+.ui-menu-item-wrapper {
+	background-color: #ffe8d1;
 }
 
 #flash_notice {

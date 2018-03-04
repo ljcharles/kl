@@ -34,7 +34,7 @@
                     <h4 class="card-title">Commande n° {{ commande[0].id }}</h4>
                     <p>Effectué le {{ commande[0].date|date('Y-m-d H:i:s') }}</p>
                     <p>
-                      <kbd>{{ user.nom }}</kbd>
+                      <kbd>{{ user.nom }} {{ user.prenom }}</kbd>
                     </p>
                     <p>
                       <i class="fa fa-tags"></i> Prix total {{ commande[0].getPrixTotal }} €

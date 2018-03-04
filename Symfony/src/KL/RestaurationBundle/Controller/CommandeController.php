@@ -96,13 +96,11 @@ class CommandeController extends Controller
 
          $em = $this->getDoctrine()->getManager();
          $em->persist($adressLivraison);
-         $em->flush();
 
-         $commande = $this->getDoctrine()->getManager()
-         ->getRepository('KLRestaurationBundle:Commande')
-         ->find($id);
-
+         $commande = $em->getRepository('KLRestaurationBundle:Commande')->find($id);
          $commande->setAdressLivraison($adressLivraison);
+         
+         $em->flush();
 
          $request->getSession()->getFlashBag()->add('notice', 'Adresse de livraison bien enregistrée.');
 

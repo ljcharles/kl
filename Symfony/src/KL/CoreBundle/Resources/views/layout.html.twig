@@ -55,7 +55,7 @@
              {% endif %}
            </li>
            <li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rechercher <span class="caret"></span></a>
              <ul class="dropdown-menu">
                <li>
                  {{ render(
@@ -99,11 +99,18 @@
              </a>
            </li>
            {% else %}
-           <li>
-             <a href="{{ path('fos_user_security_logout') }}">
-               <i class="fa fa-power-off"></i>
-               Se déconnecter
-             </a>
+           <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+             role="button" aria-haspopup="true" aria-expanded="false">
+             <i class="fa fa-user"></i> {{ app.user.username }} <span class="caret"></span></a>
+             <ul class="dropdown-menu">
+               <li>
+                 <a href="{{ path('fos_user_security_logout') }}">
+                   <i class="fa fa-power-off"></i>
+                   Se déconnecter
+                 </a>
+               </li>
+             </ul>
            </li>
            {% endif %}
          </ul>

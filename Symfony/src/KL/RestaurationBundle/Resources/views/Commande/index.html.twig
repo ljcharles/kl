@@ -44,7 +44,7 @@
                 </h4>
                 <p>Effectué le {{ commande.date|date('Y-m-d H:i:s') }}</p>
                 <p>
-                  <kbd>{{ user.nom }}</kbd>
+                  <kbd>{{ user.nom }} {{ user.prenom }}</kbd>
                 </p>
                 <p>
                   <i class="fa fa-tags"></i> Prix total {{ commande.getPrixTotal }} €
@@ -64,7 +64,8 @@
                 </p>
                 <p>
                   <a href="{{ path('kl_restauration_commande_view', {'id': commande.id}) }}"
-                  class="btn btn-info" style="color: white;  border-radius: 50px; font-size: 12px;">
+                  class="btn" style="color: white;  border-radius: 50px;
+                  background-color: DarkMagenta; font-size: 12px;">
                   <i class="fa fa-plus-circle"></i> d'infos sur la commande
                   </a>
                 </p>
@@ -75,22 +76,27 @@
                     <i class="fa fa-arrow-right"></i> Ajouter une adresse de livraison
                     </a>
                   </p>
+                  <p class="jumbotron" style="height: 50px;">
+                    <span style="font-size: 12px; color: red; margin-top:-20px;position: absolute;margin-left: -135px;">
+                      Veuillez ajouter une adresse de livraison à la commande pour procéder au paiement.
+                    </span>
+                  </p>
                 {% else %}
-                    <p>
-                      {{ commande.adressLivraison.rue }}
-                    </p>
-                    <p>
-                      {{ commande.adressLivraison.ville }}
-                    </p>
-                    <p>
-                      {{ commande.adressLivraison.pays }}
-                    </p>
-                    <p>
-                      {{ commande.adressLivraison.codePostal }}
-                    </p>
+                    <div class="jumbotron" style="height: 50px;">
+                      <p style="font-size: 12px; margin-top:-15px;position: absolute;
+                      margin-left: -50px;">
+                        {{ commande.adressLivraison.rue }}
+                        {{ commande.adressLivraison.ville }}
+                        {{ commande.adressLivraison.pays }}
+                        {{ commande.adressLivraison.codePostal }}
+                      </p>
+                    </div>
                     <p>
                       <a href="{{ path('kl_restauration_paiement_homepage') }}"
-                      class="btn btn-success" style="color: white;  border-radius: 50px; font-size: 12px;">
+                      class="btn"
+                      style="color: white;  border-radius: 50px; margin-left: -55px;
+                      background-color: #E7964B;
+                      margin-top:-10px;position: absolute;">
                       <i class="fa fa-credit-card"></i> Paiement
                     </a>
                   </p>
@@ -114,5 +120,12 @@
       </div>
     </div>
   </div>
+
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
 
 {% endblock %}
