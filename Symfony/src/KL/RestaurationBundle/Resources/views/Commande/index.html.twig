@@ -85,21 +85,28 @@
                     <div class="jumbotron" style="height: 50px;">
                       <p style="font-size: 12px; margin-top:-15px;position: absolute;
                       margin-left: -50px;">
+                      <em>Adresse de livraison</em><br>
                         {{ commande.adressLivraison.rue }}
                         {{ commande.adressLivraison.ville }}
                         {{ commande.adressLivraison.pays }}
                         {{ commande.adressLivraison.codePostal }}
                       </p>
                     </div>
-                    <p>
-                      <a href="{{ path('kl_restauration_paiement_homepage') }}"
-                      class="btn"
-                      style="color: white;  border-radius: 50px; margin-left: -55px;
-                      background-color: #E7964B;
-                      margin-top:-10px;position: absolute;">
-                      <i class="fa fa-credit-card"></i> Paiement
-                    </a>
-                  </p>
+                    {% if commande.payer != 1 %}
+                        <p>
+                          <a href="{{ path('kl_restauration_commande_view', {'id': commande.id}) }}#paiement"
+                          class="btn"
+                          style="color: white;  border-radius: 50px; margin-left: -55px;
+                          background-color: #E7964B;
+                          margin-top:-10px;position: absolute;">
+                          <i class="fa fa-credit-card"></i> Paiement
+                        </a>
+                      </p>
+                    {% else %}
+                        <p style="color:green;">
+                          La commande à été payé le {{ commande.datePaiement|date('Y-m-d H:i:s') }} !</p>
+                    {% endif %}
+
                 {% endif %}
             </div>
           </div>
@@ -122,6 +129,13 @@
   </div>
 
   {% for flashMessage in app.session.flashbag.get('notice') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+
+  {% for flashMessage in app.session.flashbag.get('danger') %}
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
           <script> flash_notice("{{ flashMessage }}","success"); </script>

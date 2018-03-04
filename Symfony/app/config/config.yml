@@ -86,3 +86,13 @@ fos_user:
     registration:
         form:
             type: KL\UserBundle\Form\RegistrationFormType
+
+jms_payment_core:
+    secret: ENhwE3uFHJids-Y894wnqZ646LbRoaWBtM95GlnLZ3H8gpROVf3ZJrEJpmycYjsm99Q2_I_5R-K-xxWi
+
+jms_payment_paypal:
+    username: klmarchant_api1.gmail.com
+    password: XFQQMRLWF5XUNQ6B
+    signature: Ar.tS8OliPfCHiX3nqA61aSskAcoAlssXlFZNi6ZfiYTXmy93WEINBML
+    debug: true
+    useraction: commit

@@ -1,6 +1,23 @@
-kl_restauration_paiement_homepage:
-    path:     /paiement
-    defaults: { _controller: KLRestaurationBundle:Paiement:index }
+kl_restauration_paymentcreate:
+    path:     /commande/{id}/payment/create
+    defaults:
+        _controller: KLRestaurationBundle:Commande:paymentCreate
+    requirements:
+        id: \d+
+
+kl_restauration_paymentcomplete:
+    path:     /commande/{id}/payment/complete
+    defaults:
+        _controller: KLRestaurationBundle:Commande:paymentComplete
+    requirements:
+        id: \d+
+
+kl_restauration_paymentcancel:
+    path:     /commande/payment/{id}/cancel
+    defaults:
+        _controller: KLRestaurationBundle:Commande:paymentCancel
+    requirements:
+        id: \d+
 
 kl_restauration_commande_add:
     path:     /commande/add

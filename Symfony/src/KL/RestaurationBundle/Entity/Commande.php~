@@ -62,13 +62,15 @@ class Commande
     private $paymentInstruction;
 
    /**
-    * @ORM\Column(type="decimal", precision=10, scale=5, nullable=true)
+    * @ORM\Column(type="decimal", precision=10, scale=5)
+    * @ORM\JoinColumn(name="amount", nullable=true)
     */
     private $amount;
 
     /**
     * @var integer
-    * @ORM\Column(type="integer", nullable=true)
+    * @ORM\Column(type="integer")
+    * @ORM\JoinColumn(name="payer", nullable=true)
     */
      private $payer;
 
@@ -326,29 +328,5 @@ class Commande
     public function getPayer()
     {
         return $this->payer;
-    }
-
-    /**
-     * Set datePaiement
-     *
-     * @param \DateTime $datePaiement
-     *
-     * @return Commande
-     */
-    public function setDatePaiement($datePaiement)
-    {
-        $this->datePaiement = $datePaiement;
-
-        return $this;
-    }
-
-    /**
-     * Get datePaiement
-     *
-     * @return \DateTime
-     */
-    public function getDatePaiement()
-    {
-        return $this->datePaiement;
     }
 }

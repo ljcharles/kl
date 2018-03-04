@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new KL\UserBundle\KLUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
+            new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
