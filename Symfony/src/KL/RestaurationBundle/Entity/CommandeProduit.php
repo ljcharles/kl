@@ -26,13 +26,13 @@ class CommandeProduit
 
 
   /**
-   * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Commande")
+   * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Commande",inversedBy="commandeProduits")
    * @ORM\JoinColumn(nullable=false)
    */
   private $commande;
 
   /**
-   * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Produit")
+   * @ORM\ManyToOne(targetEntity="KL\RestaurationBundle\Entity\Produit",inversedBy="commandeProduits")
    * @ORM\JoinColumn(nullable=false)
    */
   private $produit;

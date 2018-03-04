@@ -1,0 +1,111 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Mes commandes - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+{% if commande|length %}
+  <div class="container jumbotron bg-panier">
+    <div class="etapes">
+      <h1>
+        Mon panier >
+        <span style="color: #ffe13f;">
+          <i class="fa fa-first-order"></i>
+          Commander >
+        </span>
+        Adresse de livraison > Paiement
+      </h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12 panier">
+        <div class="row">
+
+            <h2 style="color:white;">  Commande n° {{ commande[0].id }}</h2>
+
+            <div class="row">
+              <div class="col-lg-2 col-md-6 mb-4 thumbnail thumb-panier">
+                {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
+                  <img id="footer-logo" src="{{ asset_url }}" alt="K & L">
+                {% endimage %}
+                  <div class="card-body">
+                    <h4 class="card-title">Commande n° {{ commande[0].id }}</h4>
+                    <p>Effectué le {{ commande[0].date|date('Y-m-d H:i:s') }}</p>
+                    <p>
+                      <kbd>{{ user.nom }}</kbd>
+                    </p>
+                    <p>
+                      <i class="fa fa-tags"></i> Prix total {{ commande[0].getPrixTotal }} €
+                    </p>
+                    <p style="font-size: 13px;">
+                      Nombre de produits : {{ commande[0].nbProduitTotal }}
+                    </p>
+
+                    {% if commande[0].etat == 0 %}
+                        {% set etat,Color  = 'en attente','Tomato' %}
+                    {% elseif commande[0].etat == 1 %}
+                        {% set etat,Color = 'en préparation','orange' %}
+                    {% else %}
+                        {% set etat,Color = 'en livraison','green' %}
+                    {% endif %}
+                    <p style="font-size: 12px;">
+                      <i style="color:{{ Color }}; font-size:10px;"
+                      class="fa fa-circle"></i>  Etat : {{ etat }}
+                    </p>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                {% for commandeProduit in commande[0].commandeProduits %}
+                    <div class="col-lg-3 col-md-6 mb-4 thumbnail thumb-panier">
+                      <div class="container-img-product">
+                        <a href="#"><img class="card-img-top product-img img-panier"
+                          src="{{ commandeProduit.produit.image }}" alt=""></a>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">
+                            <a class="product-title" href="#" style="font-weight: normal;">
+                              {{ commandeProduit.produit.nom }}
+                            </a>
+                          </h5>
+                          <p>
+                            Prix unitaire  <span class="product-price">{{ commandeProduit.produit.prix }} € </span>
+                          </p>
+                          {% if commandeProduit.etat == 0 %}
+                              {% set CPetat,Couleur = 'en attente','Tomato' %}
+                          {% elseif commandeProduit.etat == 1 %}
+                              {% set CPetat,Couleur = 'en préparation','orange' %}
+                          {% else %}
+                              {% set CPetat,Couleur = 'Terminé','green' %}
+                          {% endif %}
+                          <p style="font-size: 12px;"><i style="color:{{ Couleur }}; font-size:10px;"
+                            class="fa fa-circle"></i> Statut {{ CPetat }} </p>
+                        </div>
+                      </div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-6">
+          <a href="{{ path('kl_restauration_commande_homepage') }}" class="btn bgdoree">
+            <i class="fa fa-undo"></i> Revenir à mes commandes
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <script>
+      window.location.href = '/_error/404';
+    </script>
+  {% endif %}
+
+{% endblock %}

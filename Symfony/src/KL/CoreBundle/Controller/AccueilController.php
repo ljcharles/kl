@@ -8,9 +8,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccueilController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('KLCoreBundle:Accueil:index.html.twig');
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+        return $this->render('KLCoreBundle:Accueil:index.html.twig',[
+          'panier' => $panier,
+        ]);
     }
 
     public function contactAction(Request $request)

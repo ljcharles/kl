@@ -49,13 +49,17 @@
            <li><a id="apropos" href="{{ path('kl_core_homepage') }}#about">À propos</a></li>
            <li><a href="{{ path('kl_restauration_produit_homepage') }}">Boutique</a></li>
            <li><a href="{{ path('kl_core_contact') }}">Contact</a></li>
+           <li>
+             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+             <a href="{{ path('kl_restauration_commande_homepage') }}">Mes commandes</a>
+             {% endif %}
+           </li>
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
              <ul class="dropdown-menu">
-               <li><a href="#">Une autre action</a></li>
                <li>
                  {{ render(
-                    controller('KLRestaurationBundle:Produit:searchBar')
+                 controller('KLRestaurationBundle:Produit:searchBar')
                  )}}
                </li>
              </ul>
@@ -65,7 +69,19 @@
            <li>
              <a href="{{ path('kl_restauration_panier_homepage') }}">
                <i class="fa fa-shopping-cart"></i>
-               Mon panier
+                  {% if panier is defined %}
+                    {% set sum = 0 %}
+                    {% for value in panier %}
+                      {% set sum = sum + value %}
+                    {% endfor %}
+                    {% if sum != 0 %}
+                      ( {{ sum }} article{% if sum > 1 %}s{% endif %} )
+                    {% else %}
+                      Mon panier
+                    {% endif %}
+                  {% else %}
+                      Mon panier
+                  {% endif %}
              </a>
            </li>
 

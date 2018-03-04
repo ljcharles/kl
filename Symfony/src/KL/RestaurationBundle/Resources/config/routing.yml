@@ -1,6 +1,29 @@
+kl_restauration_paiement_homepage:
+    path:     /paiement
+    defaults: { _controller: KLRestaurationBundle:Paiement:index }
+
 kl_restauration_commande_add:
     path:     /commande/add
     defaults: { _controller: KLRestaurationBundle:Commande:add }
+
+kl_restauration_commande_homepage:
+    path:     /commande
+    defaults: { _controller: KLRestaurationBundle:Commande:index }
+
+kl_restauration_commande_view:
+    path:     /commande/view/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Commande:view
+        id: 1
+    requirements:
+        id: \d+
+
+kl_restauration_commande_adress_add:
+    path:     /commande/adressAdd/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Commande:adressAdd
+    requirements:
+        id: \d+
 
 kl_restauration_panier_homepage:
     path:     /panier

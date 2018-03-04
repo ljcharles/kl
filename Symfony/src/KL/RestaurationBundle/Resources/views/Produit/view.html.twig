@@ -58,13 +58,19 @@
                 {% endif %}
               </small>
             </p>
-            <p>
-              <a class="btn btn-add-panier"
-              href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" role="button">
-                <i class="fa fa-shopping-cart"></i>
-                Ajouter au panier
-              </a>
-            </p>
+            {% if panier[produit.id] is not defined %}
+              <p>
+                  <a class="btn btn-add-panier"
+                  href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" role="button">
+                  <i class="fa fa-shopping-cart"></i>
+                  Ajouter au panier
+                </a>
+              </p>
+            {% else %}
+                <p style="color:#74bda8; font-size: 12px;">
+                  Ce produit est déjà présent dans votre panier.
+                </p>
+            {% endif %}
             <p>
               <a href="{{ path('kl_restauration_produit_edit', {'id': produit.id}) }}" class="btn btn-add-panier">
                 <i class="fa fa-pencil"></i>

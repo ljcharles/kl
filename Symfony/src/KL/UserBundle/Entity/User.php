@@ -38,6 +38,11 @@ class User extends BaseUser
      */
     private $prenom;
 
+    /**
+    * @ORM\OneToMany(targetEntity="KL\RestaurationBundle\Entity\Commande", mappedBy="user", cascade={"all"})
+    */
+    private $commandes;
+
 
     public function __construct()
     {
@@ -99,4 +104,38 @@ class User extends BaseUser
         return $this->prenom;
     }
 
-  }
+  
+    /**
+     * Add commande
+     *
+     * @param \KL\RestaurationBundle\Entity\Commande $commande
+     *
+     * @return User
+     */
+    public function addCommande(\KL\RestaurationBundle\Entity\Commande $commande)
+    {
+        $this->commandes[] = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Remove commande
+     *
+     * @param \KL\RestaurationBundle\Entity\Commande $commande
+     */
+    public function removeCommande(\KL\RestaurationBundle\Entity\Commande $commande)
+    {
+        $this->commandes->removeElement($commande);
+    }
+
+    /**
+     * Get commandes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+}

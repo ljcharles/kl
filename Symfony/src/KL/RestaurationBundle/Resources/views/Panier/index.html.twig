@@ -53,7 +53,7 @@
                     </p>
                     <p  class="black-desc">Quantité
                       <select class="span1" name="qte" onchange="this.form.submit()">
-                        {% for i in 1..10 %}
+                        {% for i in 1..50 %}
                           <option value="{{ i }}"
                             {% if i == panier[produit.id] %}
                             selected='selected'
@@ -103,7 +103,7 @@
 
         {% if produits|length  != 0 %}
           <div class="col-lg-6">
-            <a href="#" class="btn bgdoree">
+            <a href="{{ path('kl_restauration_commande_add') }}" class="btn bgdoree">
               Commander <i class="fa fa-arrow-right"></i>
             </a>
           </div>

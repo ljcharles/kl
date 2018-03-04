@@ -18,4 +18,22 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
           )
         ->getResult();
   }
+
+  public function findWithUser($id,$user)
+  {
+    $parameters = [
+      'id' => $id,
+      'user' => $user,
+    ];
+
+    $dql =  'SELECT p
+             FROM KLRestaurationBundle:Commande p
+             WHERE p.id = :id
+             AND p.user = :user';
+
+    return $this->getEntityManager()
+        ->createQuery($dql)
+        ->setParameters($parameters)
+        ->getResult();
+  }
 }

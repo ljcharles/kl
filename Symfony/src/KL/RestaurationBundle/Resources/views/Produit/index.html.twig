@@ -72,14 +72,20 @@
                   {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
                 </small>
               </p>
-              <p>
-                <a class="btn btn-add-panier"
-                href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}"
-                role="button">
+              {% if panier[produit.id] is not defined %}
+                <p>
+                  <a class="btn btn-add-panier"
+                  href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}"
+                  role="button">
                   <i class="fa fa-shopping-cart"></i>
                   Ajouter au panier
                 </a>
               </p>
+              {% else %}
+                  <p style="color:#74bda8; font-size: 12px;">
+                    Ce produit est déjà présent dans votre panier.
+                  </p>
+              {% endif %}
             </div>
           </div>
         {% endfor %}

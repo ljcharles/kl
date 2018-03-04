@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $listGammeProduits = $em
@@ -28,13 +28,17 @@ class ProduitController extends Controller
           ->findAll()
         ;
 
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+
         return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
             'listGammeProduits' => $listGammeProduits,
-            'listProduits' => $listProduits
+            'listProduits' => $listProduits,
+            'panier' => $panier
         ));
     }
 
-    public function viewAction($id)
+    public function viewAction($id,Request $request)
     {
       $em = $this->getDoctrine()->getManager();
       $listGammeProduits = $em
@@ -47,9 +51,13 @@ class ProduitController extends Controller
         ->find($id)
       ;
 
+      $session = $request->getSession();
+      $panier = $session->get('panier');
+
       return $this->render('KLRestaurationBundle:Produit:view.html.twig', array(
           'listGammeProduits' => $listGammeProduits,
-          'produit' => $produit
+          'produit' => $produit,
+          'panier' => $panier
       ));
     }
 
@@ -173,7 +181,7 @@ class ProduitController extends Controller
         ));
     }
 
-    public function viewGammeAction($id)
+    public function viewGammeAction($id, Request $request)
     {
       $em = $this->getDoctrine()->getManager();
 
@@ -189,10 +197,14 @@ class ProduitController extends Controller
 
       $listProduits = $gammeProduit->getProduits();
 
+      $session = $request->getSession();
+      $panier = $session->get('panier');
+
       return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
           'listGammeProduits' => $listGammeProduits,
-          'listProduits' => $listProduits
-      ));
+          'listProduits' => $listProduits,
+          'panier' => $panier
+        ));
     }
 
     public function editGammeAction($id, Request $request)
@@ -281,8 +293,12 @@ class ProduitController extends Controller
         ->getLikeQuery($term);
       }
 
+      $session = $request->getSession();
+      $panier = $session->get('panier');
+
       return $this->render('KLRestaurationBundle:Produit:search.html.twig', array(
-        'listProduits'   => $listProduits
+        'listProduits'   => $listProduits,
+        'panier' => $panier
       ));
     }
 }

@@ -35,7 +35,10 @@ class Commande
     */
     private $commandeProduits;
 
-    //ManyToOne
+    /**
+    *@ORM\ManyToOne(targetEntity="KL\UserBundle\Entity\User",inversedBy="commandes")
+    *@ORM\JoinColumn()
+    */
     private $user;
 
     /**
@@ -46,11 +49,16 @@ class Commande
     private $etat;
 
     /**
+   * @ORM\OneToOne(targetEntity="KL\RestaurationBundle\Entity\AdressLivraison", cascade={"persist"})
+   * @ORM\JoinColumn(name="adressLivraison", nullable=true)
+   */
+    private $adressLivraison;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
         $this->date = new \Datetime();
     }
 
@@ -61,17 +69,25 @@ class Commande
      */
     public function getPrixTotal()
     {
-
       $prix = 0;
 
-      foreach($this->getProduits() as $produit) {
-
-        $prix += $produit->getPrix();
-
+      $commandeProduits = $this->getCommandeProduits();
+      foreach ($commandeProduits as $commandeProduit ) {
+        $produits = $commandeProduit->getProduit();
+        $prix += $produits->getPrix();
       }
-
       return $prix;
+    }
 
+    public function getNbProduitTotal()
+    {
+      $nb = 0;
+      $commandeProduits = $this->getCommandeProduits();
+      foreach ($commandeProduits as $commandeProduit ) {
+        $produits = $commandeProduit->getProduit();
+        $nb += sizeof($produits);
+      }
+      return $nb;
     }
 
     /**
@@ -164,5 +180,53 @@ class Commande
     public function getCommandeProduits()
     {
         return $this->commandeProduits;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \KL\UserBundle\Entity\User $user
+     *
+     * @return Commande
+     */
+    public function setUser(\KL\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \KL\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set adressLivraison
+     *
+     * @param \KL\RestaurationBundle\Entity\AdressLivraison $adressLivraison
+     *
+     * @return Commande
+     */
+    public function setAdressLivraison(\KL\RestaurationBundle\Entity\AdressLivraison $adressLivraison = null)
+    {
+        $this->adressLivraison = $adressLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Get adressLivraison
+     *
+     * @return \KL\RestaurationBundle\Entity\AdressLivraison
+     */
+    public function getAdressLivraison()
+    {
+        return $this->adressLivraison;
     }
 }

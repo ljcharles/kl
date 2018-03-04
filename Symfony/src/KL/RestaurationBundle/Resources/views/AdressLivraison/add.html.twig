@@ -1,0 +1,105 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Adresse de livraison- {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron bg-panier">
+    <div class="etapes">
+      <h1>
+        Mon panier >  Commander >
+        <span style="color: #ffe13f;">
+          <i class="fa fa-bicycle"></i>
+          Adresse de livraison >
+        </span>
+        Paiement
+      </h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12 panier">
+        <div class="row">
+          <h2 style="color:white;">Ajouter une adresse de livraison</h2>
+
+          <br><br>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-6">
+            {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+              <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
+            {% endimage %}
+
+            {{ form_start(form) }}
+
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-building doree"></i></div>
+              {{ form_widget(form.ville, { 'attr': {
+              'placeholder': 'Entrer votre Ville',
+              'class':'form-control'
+              } }) }}
+            </div>
+
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-globe doree"></i></div>
+              {{ form_widget(form.pays, { 'attr': {
+              'placeholder': 'Entrer votre pays',
+              'class':'form-control'
+              } }) }}
+            </div>
+
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-list-ol doree"></i></div>
+              {{ form_widget(form.codePostal, { 'attr': {
+              'placeholder': 'Entrer votre code Postal',
+              'class':'form-control'
+              } }) }}
+            </div>
+
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-road doree"></i></div>
+              {{ form_widget(form.rue, { 'attr': {
+              'placeholder': 'Entrer votre Rue',
+              'class':'form-control'
+              } }) }}
+            </div>
+
+            <br><br>
+
+            {{ form_widget(form.sauvegarder, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-6">
+          <a href="{{ path('kl_restauration_commande_homepage') }}" class="btn bgdoree">
+            <i class="fa fa-undo"></i> Revenir à mes commandes
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% stylesheets '@KLRestaurationBundle/Resources/public/js/map/css/jquery-ui.css' filter='cssrewrite' %}
+      <link rel="stylesheet" href="{{ asset_url }}">
+  {% endstylesheets %}
+
+  {% javascripts '@KLRestaurationBundle/Resources/public/js/map/*' %}
+      <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
