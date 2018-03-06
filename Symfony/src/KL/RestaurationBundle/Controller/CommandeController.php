@@ -10,8 +10,6 @@ use KL\RestaurationBundle\Entity\CommandeProduit;
 use KL\RestaurationBundle\Entity\Commande;
 use KL\RestaurationBundle\Entity\AdressLivraison;
 use KL\RestaurationBundle\Form\AdressLivraisonType;
-use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
-use JMS\Payment\CoreBundle\PluginController\Result;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CommandeController extends Controller
@@ -20,11 +18,14 @@ class CommandeController extends Controller
   {
     if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
       $user = $this->getUser();
-
+      $em = $this->getDoctrine()->getManager();
       $commandes = $user->getCommandes();
 
       foreach ($commandes as $commande) {
-        $commande->setEtat($this->verifCommande($commande));
+        $etat = $this->verifCommande($commande);
+        $commande->setEtat($etat);
+        $em->persist($commande);
+        $em->flush();
       }
 
       return $this->render('KLRestaurationBundle:Commande:index.html.twig', array(
@@ -43,47 +44,14 @@ class CommandeController extends Controller
       ->getRepository('KLRestaurationBundle:Commande')
       ->findWithUser($id,$user);
 
-      $commande[0]->setEtat($this->verifCommande($commande[0]));
-
-      $config = [
-          'paypal_express_checkout' => [
-            'return_url' => $this->generateUrl('kl_restauration_paymentcreate', [
-                'id' => $commande[0]->getId(),
-            ], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('kl_restauration_paymentcancel', [
-                'id' => $commande[0]->getId(),
-            ], UrlGeneratorInterface::ABSOLUTE_URL),
-            'useraction' => 'commit',
-          ],
-      ];
-
-      $form = $this->createForm(ChoosePaymentMethodType::class, null, [
-          'amount'   => $commande[0]->getAmount(),
-          'currency' => 'EUR',
-          'default_method' => 'payment_paypal',
-          'predefined_data' => $config,
-      ]);
-
-      $form->handleRequest($request);
-
-      if ($form->isSubmitted() && $form->isValid()) {
-          $ppc = $this->get('payment.plugin_controller');
-          $ppc->createPaymentInstruction($instruction = $form->getData());
-
-          $commande[0]->setPaymentInstruction($instruction);
-
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($commande[0]);
-          $em->flush($commande[0]);
-
-          return $this->redirect($this->generateUrl('kl_restauration_paymentcreate', [
-              'id' => $commande[0]->getId(),
-          ]));
+      if (!isset($commande[0])) {
+        return $this->redirectToRoute('kl_core_error');
       }
+
+
 
       return $this->render('KLRestaurationBundle:Commande:view.html.twig', array(
           'commande' => $commande,
-          'form'  => $form->createView(),
           'user' => $user
       ));
     }
@@ -168,67 +136,16 @@ class CommandeController extends Controller
       $listCommandeProduits = $commande->getCommandeProduits();
 
     	foreach ($listCommandeProduits as $commandeproduit) {
-        if($commandeproduit->getEtat()!=2) return 0;
+        if($commandeproduit->getEtat()!=2){
+          if ($commandeproduit->getEtat() == 1) {
+            return 1;
+          }else {
+            return 0;
+          }
+        }
     	}
     }
     return 1;
-  }
-
-  private function createPayment($id)
-  {
-      $user = $this->getUser();
-
-      $em = $this->getDoctrine()->getManager();
-      $commande = $em->getRepository('KLRestaurationBundle:Commande')
-      ->findWithUser($id,$user);
-      $montant = $commande[0]->getPrixTotal();
-      $commande[0]->setAmount($montant);
-      $em->persist($commande[0]);
-      $em->flush();
-
-      $instruction = $commande[0]->getPaymentInstruction();
-      $pendingTransaction = $instruction->getPendingTransaction();
-
-      if ($pendingTransaction !== null) {
-          return $pendingTransaction->getPayment();
-      }
-
-      $ppc = $this->get('payment.plugin_controller');
-      $amount = $instruction->getAmount() - $instruction->getDepositedAmount();
-
-      return $ppc->createPayment($instruction->getId(), $amount);
-  }
-
-  public function paymentCreateAction($id,Request $request)
-  {
-
-      $payment = $this->createPayment($id);
-      $ppc = $this->get('payment.plugin_controller');
-
-      $result = $ppc->approveAndDeposit($payment->getId(), $payment->getTargetAmount());
-
-      if (Result::STATUS_PENDING === $result->getStatus()) {
-        $ex = $result->getPluginException();
-
-        if ($ex instanceof ActionRequiredException) {
-            $action = $ex->getAction();
-
-            if ($action instanceof VisitUrl) {
-                return new RedirectResponse($action->getUrl());
-            }
-
-            throw $ex;
-        }
-      }else if (Result::STATUS_SUCCESS !== $result->getStatus()){
-        $request->getSession()->getFlashBag()->add('danger', 'Le paiement ne s\'est pas déroulé comme prévu.');
-        // throw new \RuntimeException('Transaction was not successful: '.$result->getReasonCode());
-        throw $result->getPluginException();
-        return $this->redirectToRoute('kl_restauration_commande_homepage');
-      }
-
-      return $this->redirectToRoute('kl_restauration_paymentcomplete',array(
-        'id' => $id
-      ));
   }
 
   public function paymentCompleteAction($id, Request $request)
@@ -257,6 +174,12 @@ class CommandeController extends Controller
       return $this->redirectToRoute('kl_restauration_commande_view',array(
         'id' => $id
       ));
+  }
+
+  public function paymentErrorAction(Request $request)
+  {
+      $request->getSession()->getFlashBag()->add('notice', 'Une erreur s\'est produite durant la transaction.');
+      return $this->redirectToRoute('kl_restauration_commande_homepage');
   }
 
 

@@ -10,6 +10,9 @@
     <link rel="icon" type="image/x-icon" href="{{ asset_url }}">
   {% endimage %}
 
+  {% block headers %}
+  {% endblock %}
+
   {% block stylesheets %}
 
     {% stylesheets 'bundles/bmatznerfontawesome/css/font-awesome.min.css' filter='cssrewrite' %}

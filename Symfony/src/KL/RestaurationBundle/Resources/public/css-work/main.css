@@ -391,6 +391,7 @@ h1,h2,h3,h4,h5,h6{
   margin-right: 10px;
   border-top: solid 2px;
   border-top-color: #E7964B;
+	z-index: 3;
 }
 
 nav{

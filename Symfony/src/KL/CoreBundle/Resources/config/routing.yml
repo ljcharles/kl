@@ -5,3 +5,6 @@ kl_core_homepage:
 kl_core_contact:
     path:     /contact
     defaults: { _controller: KLCoreBundle:Accueil:contact }
+
+kl_core_error:
+    path:     /_error/404

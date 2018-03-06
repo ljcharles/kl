@@ -2,6 +2,10 @@
 
 {% block title %}Mes commandes - {{ parent() }}{% endblock %}
 
+{% block headers %}
+  <script src="https://www.paypalobjects.com/api/checkout.min.js"></script>
+{% endblock %}
+
 {% block body %}
 
 {% if commande|length %}
@@ -32,7 +36,7 @@
                 {% endimage %}
                   <div class="card-body">
                     <h4 class="card-title">Commande n° {{ commande[0].id }}</h4>
-                    <p>Effectué le {{ commande[0].date|date('Y-m-d H:i:s') }}</p>
+                    <p>Effectué le {{ commande[0].date|date('d-m-Y H:i:s') }}</p>
                     <p>
                       <kbd>{{ user.nom }} {{ user.prenom }}</kbd>
                     </p>
@@ -47,8 +51,10 @@
                         {% set etat,Color  = 'en attente','Tomato' %}
                     {% elseif commande[0].etat == 1 %}
                         {% set etat,Color = 'en préparation','orange' %}
+                    {% elseif commande[0].etat == 2 %}
+                        {% set etat,Color = 'en livraison','purple' %}
                     {% else %}
-                        {% set etat,Color = 'en livraison','green' %}
+                        {% set etat,Color = 'livré','green' %}
                     {% endif %}
                     <p style="font-size: 12px;">
                       <i style="color:{{ Color }}; font-size:10px;"
@@ -69,6 +75,7 @@
                               {{ commandeProduit.produit.nom }}
                             </a>
                           </h5>
+                          <!-- <p>{{ commandeProduit.produit.id }}</p> -->
                           <p>
                             Prix unitaire  <span class="product-price">{{ commandeProduit.produit.prix }} € </span>
                           </p>
@@ -104,7 +111,7 @@
   </div>
   {% else %}
     <script>
-      window.location.href = '/_error/404';
+      window.location.href = '{{ path('kl_core_error')}}';
     </script>
   {% endif %}
 
@@ -112,13 +119,76 @@
     <div class="jumbotron" id="paiement">
       {% if commande[0].payer == 1 %}
         <p style="color:green;">
-          La commande à été payé le {{ commande[0].datePaiement|date('Y-m-d H:i:s') }} !
+          La commande à été payé le {{ commande[0].datePaiement|date('d-m-Y H:i:s') }} !
         </p>
       {% else %}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Payer {{ commande[0].getPrixTotal }} €">
-        {{ form_end(form) }}
+        <h3>Méthode de paiement</h3>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-lg-6">
+              <p>
+                <p>Total: {{ commande[0].prixTotal }} €</p>
+                <div id="paypal-button"></div>
+
+                <script>
+                    paypal.Button.render({
+                      env: 'sandbox', // Or 'production',
+
+                      locale: 'fr_FR',
+
+                      client: {
+                               sandbox:    'AbQpJV_9ocy9589vY9JgeKd4c2kQuiOC_c1xFvLb6G6TmQnKA9XZ0UIHMudS7xOYL1ozvTtAttkA368u',
+                               production: 'AU03FD45QAKIIDQX4YKqejO92DnSZZIolleM-OOTuh3rRyag6sMgn5V-br8Wbyhc8JKweyHQuxDHYkpU'
+                           },
+
+                      commit: true, // Show a 'Pay Now' button
+
+                      style: {
+                          label: 'buynow',
+                          fundingicons: true, // optional
+                          branding: true, // optional
+                          size:  'small', // small | medium | large | responsive
+                          shape: 'pill',   // pill | rect
+                          color: 'gold'   // gold | blue | silve | black
+                      },
+
+                      payment: function(data, actions) {
+                        return actions.payment.create({
+                            payment: {
+                                transactions: [
+                                    {
+                                        amount: { total: '{{ commande[0].prixTotal }}', currency: 'EUR' }
+                                    },
+                                ]
+                            }
+                        });
+                      },
+
+                      onAuthorize: function(data, actions) {
+                        return actions.payment.execute().then(function(payment) {
+                            window.location.href = '{{ path('kl_restauration_paymentcomplete', {'id': commande[0].id}) }}';
+                        });
+                      },
+
+                      onCancel: function(data, actions) {
+                        window.location.href = '{{ path('kl_restauration_paymentcancel', {'id': commande[0].id}) }}';
+                      },
+
+                      onError: function(err) {
+                        window.location.href = '{{ path('kl_restauration_paymenterror')}}';
+                      }
+                    }, '#paypal-button');
+                </script>
+              </p>
+            </div>
+            <div class="col-lg-6">
+              {% image '@KLRestaurationBundle/Resources/public/img/logo_paypal_site_fr.png' %}
+                <img src="{{ asset_url }}" alt="logo-paypal">
+              {% endimage %}
+            </div>
+          </div>
+        </div>
+
       {% endif %}
     </div>
   {% endif %}
@@ -127,6 +197,13 @@
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
           <script> flash_notice("{{ flashMessage }}","danger"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+
+  {% for flashMessage in app.session.flashbag.get('danger') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
       {% endjavascripts %}
   {% endfor %}
 

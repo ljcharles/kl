@@ -4,7 +4,6 @@ namespace KL\RestaurationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 
 /**
  * Commande
@@ -54,12 +53,6 @@ class Commande
    * @ORM\JoinColumn(name="adressLivraison", nullable=true)
    */
     private $adressLivraison;
-
-    /**
-     * @ORM\OneToOne(targetEntity="JMS\Payment\CoreBundle\Entity\PaymentInstruction")
-     * @ORM\JoinColumn(name="paymentInstruction", nullable=true)
-     */
-    private $paymentInstruction;
 
    /**
     * @ORM\Column(type="decimal", precision=10, scale=5, nullable=true)
@@ -278,30 +271,6 @@ class Commande
     public function getAmount()
     {
         return $this->amount;
-    }
-
-    /**
-     * Set paymentInstruction
-     *
-     * @param \JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction
-     *
-     * @return Commande
-     */
-    public function setPaymentInstruction(\JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction = null)
-    {
-        $this->paymentInstruction = $paymentInstruction;
-
-        return $this;
-    }
-
-    /**
-     * Get paymentInstruction
-     *
-     * @return \JMS\Payment\CoreBundle\Entity\PaymentInstruction
-     */
-    public function getPaymentInstruction()
-    {
-        return $this->paymentInstruction;
     }
 
     /**

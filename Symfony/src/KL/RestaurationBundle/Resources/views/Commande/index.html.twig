@@ -42,7 +42,7 @@
                 <h4 class="card-title">
                     Commande n° {{ commande.id }}
                 </h4>
-                <p>Effectué le {{ commande.date|date('Y-m-d H:i:s') }}</p>
+                <p>Effectué le {{ commande.date|date('d-m-Y H:i:s') }}</p>
                 <p>
                   <kbd>{{ user.nom }} {{ user.prenom }}</kbd>
                 </p>
@@ -55,8 +55,10 @@
                     {% set etat,Color  = 'en attente','Tomato' %}
                 {% elseif commande.etat == 1 %}
                     {% set etat,Color = 'en préparation','orange' %}
+                {% elseif commande.etat == 2 %}
+                    {% set etat,Color = 'en livraison','purple' %}
                 {% else %}
-                    {% set etat,Color = 'en livraison','green' %}
+                    {% set etat,Color = 'livré','green' %}
                 {% endif %}
                 <p style="font-size: 12px;">
                   <i style="color:{{ Color }}; font-size:10px;"
@@ -85,7 +87,7 @@
                     <div class="jumbotron" style="height: 50px;">
                       <p style="font-size: 12px; margin-top:-15px;position: absolute;
                       margin-left: -50px;">
-                      <em>Adresse de livraison</em><br>
+                      <em><i class="fa fa-building doree"></i> Adresse de livraison</em><br>
                         {{ commande.adressLivraison.rue }}
                         {{ commande.adressLivraison.ville }}
                         {{ commande.adressLivraison.pays }}
