@@ -54,6 +54,7 @@ class User extends BaseUser
         $email = is_null($email) ? '' : $email;
         parent::setEmail($email);
         parent::setUsername($email);
+        parent::setRoles(['ROLE_USER']);
     }
 
     /**
@@ -104,7 +105,7 @@ class User extends BaseUser
         return $this->prenom;
     }
 
-  
+
     /**
      * Add commande
      *

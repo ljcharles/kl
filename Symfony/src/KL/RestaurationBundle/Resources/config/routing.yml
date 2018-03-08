@@ -1,30 +1,30 @@
 kl_restauration_paymentcomplete:
-    path:     /commande/{id}/payment/complete
+    path:     /commande/{id}/payment/complete/
     defaults:
         _controller: KLRestaurationBundle:Commande:paymentComplete
     requirements:
         id: \d+
 
 kl_restauration_paymentcancel:
-    path:     /commande/payment/{id}/cancel
+    path:     /commande/payment/{id}/cancel/
     defaults:
         _controller: KLRestaurationBundle:Commande:paymentCancel
     requirements:
         id: \d+
 kl_restauration_paymenterror:
-    path:     /commande/payement/error
+    path:     /commande/payement/error/
     defaults: { _controller: KLRestaurationBundle:Commande:paymentError }
 
 kl_restauration_commande_add:
-    path:     /commande/add
+    path:     /commande/add/
     defaults: { _controller: KLRestaurationBundle:Commande:add }
 
 kl_restauration_commande_homepage:
-    path:     /commande
+    path:     /commande/
     defaults: { _controller: KLRestaurationBundle:Commande:index }
 
 kl_restauration_commande_view:
-    path:     /commande/view/{id}
+    path:     /commande/view/{id}/
     defaults:
         _controller: KLRestaurationBundle:Commande:view
         id: 1
@@ -39,33 +39,33 @@ kl_restauration_commande_adress_add:
         id: \d+
 
 kl_restauration_panier_homepage:
-    path:     /panier
+    path:     /panier/
     defaults: { _controller: KLRestaurationBundle:Panier:index }
 
 kl_restauration_panier_add:
-    path:     /panier/add/{id}
+    path:     /panier/add/{id}/
     defaults:
         _controller: KLRestaurationBundle:Panier:add
     requirements:
         id: \d+
 
 kl_restauration_panier_delete:
-    path:     /panier/delete/{id}
+    path:     /panier/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Panier:delete
     requirements:
         id: \d+
 
 kl_restauration_produit_homepage:
-    path:     /produit
+    path:     /produit/
     defaults: { _controller: KLRestaurationBundle:Produit:index }
 
 kl_restauration_produit_search:
-    path:     /search
+    path:     /search/
     defaults: { _controller: KLRestaurationBundle:Produit:search }
 
 kl_restauration_produit_view:
-    path:     /produit/view/{id}
+    path:     /produit/view/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:view
         id: 1
@@ -73,29 +73,29 @@ kl_restauration_produit_view:
         id: \d+
 
 kl_restauration_produit_add:
-    path:     /produit/add
+    path:     /produit/add/
     defaults: { _controller: KLRestaurationBundle:Produit:add }
 
 kl_restauration_produit_edit:
-    path:     /produit/edit/{id}
+    path:     /produit/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:edit
     requirements:
         id: \d+
 
 kl_restauration_produit_delete:
-    path:     /produit/delete/{id}
+    path:     /produit/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:delete
     requirements:
         id: \d+
 
 kl_restauration_ingredient_homepage:
-    path:     /ingredient
+    path:     /ingredient/
     defaults: { _controller: KLRestaurationBundle:Ingredient:index }
 
 kl_restauration_ingredient_view:
-    path:     /ingredient/view/{id}
+    path:     /ingredient/view/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:view
         id: 1
@@ -103,25 +103,25 @@ kl_restauration_ingredient_view:
         id: \d+
 
 kl_restauration_ingredient_add:
-    path:     /ingredient/add
+    path:     /ingredient/add/
     defaults: { _controller: KLRestaurationBundle:Ingredient:add }
 
 kl_restauration_ingredient_edit:
-    path:     /ingredient/edit/{id}
+    path:     /ingredient/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:edit
     requirements:
         id: \d+
 
 kl_restauration_ingredient_delete:
-    path:     /ingredient/delete/{id}
+    path:     /ingredient/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:delete
     requirements:
         id: \d+
 
 kl_restauration_gamme_view:
-    path:     /produit/gamme/{id}
+    path:     /produit/gamme/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:viewGamme
         id: 1
@@ -129,18 +129,18 @@ kl_restauration_gamme_view:
         id: \d+
 
 kl_restauration_gamme_add:
-    path:     /produit/gamme/add
+    path:     /produit/gamme/add/
     defaults: { _controller: KLRestaurationBundle:Produit:addGamme }
 
 kl_restauration_gamme_edit:
-    path:     /produit/gamme/edit/{id}
+    path:     /produit/gamme/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:editGamme
     requirements:
         id: \d+
 
 kl_restauration_gamme_delete:
-    path:     /produit/gamme/delete/{id}
+    path:     /produit/gamme/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:deleteGamme
     requirements:

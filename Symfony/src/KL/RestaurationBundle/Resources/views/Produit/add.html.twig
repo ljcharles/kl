@@ -19,32 +19,32 @@
             <p id="no-file">Aucune image sélectionnée</p>
           </div>
           <div class="card-body">
-            <div class="card-text product-text form-group input-group">
+            <div class="product-text form-group input-group">
               <div class="input-group-addon"> Nom </div>
               {{ form_widget(form.nom,{'attr': {'class': 'form-control'}}) }}
             </div>
-            <div class="card-text product-text form-group input-group">
+            <div class="product-text form-group input-group">
               <div class="input-group-addon"> Prix </div>
               {{ form_widget(form.prix) }}
             </div>
-            <div class="card-text product-text form-group input-group">
+            <div class="product-text form-group input-group">
               <div class="input-group-addon"> Description </div>
               {{ form_widget(
                   form.description,
                   {'attr': {'class': 'form-control form-desc tinymce'}}
               )}}
             </div>
-            <div class="card-text product-text form-group input-group">
+            <div class="product-text form-group input-group">
               <div class="input-group-addon"> Catégorie </div>
               {{ form_widget(form.gammeProduit,{'attr': {'class': 'form-control'}}) }}
             </div>
-            <div class="card-text product-text form-group">
+            <div class="product-text form-group">
               Ingrédients
             </div>
             <div>
                 {{ form_widget(form.ingredients) }}
             </div>
-            <div class="card-text product-text form-group input-group">
+            <div class="product-text form-group input-group">
               <div class="input-group-addon"> Note </div>
               {{ form_widget(form.note,{'attr': {'class': 'form-control'}}) }}
             </div>

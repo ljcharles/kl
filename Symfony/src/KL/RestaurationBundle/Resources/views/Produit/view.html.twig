@@ -38,10 +38,10 @@
           <div class="card-body">
             <h5 class="card-title product-title"> {{ produit.nom }} </h5>
             <h5 class="product-price">{{ produit.prix }} €</h5>
-            <p class="card-text product-text">{{ produit.description }}</p>
-            <p class="card-text product-text">Catégorie : {{ produit.gammeProduit.nom }}</p>
+            <span class="product-text">{{ produit.description|raw }}</span>
+            <p class="product-text">Catégorie : {{ produit.gammeProduit.nom }}</p>
             {% if not produit.ingredients.empty %}
-              <p class="card-text product-text">
+              <p class="product-text">
                 Ingrédients :
                 {% for ingredient in produit.ingredients %}
                   {{ ingredient.nom }}{% if not loop.last %}, {% endif %}

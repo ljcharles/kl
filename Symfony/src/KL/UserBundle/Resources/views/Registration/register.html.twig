@@ -11,8 +11,7 @@
       <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
     {% endimage %}
 
-    <form  action="{{ path('fos_user_registration_register') }}" method="post">
-
+    {{ form_start(form, {'action': path('fos_user_registration_register'), 'method': 'post'}) }}
        <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
         {{ form_widget(form.nom, { 'attr': {
@@ -27,6 +26,16 @@
         <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
         {{ form_widget(form.prenom, { 'attr': {
           'placeholder': 'form.prenom'|trans,
+          'class':'form-control'
+        } }) }}
+       </div>
+
+       <div class="clear"><br></div>
+
+       <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-user doree"></i></div>
+        {{ form_widget(form.username, { 'attr': {
+          'placeholder': 'form.username'|trans,
           'class':'form-control'
         } }) }}
        </div>
@@ -66,22 +75,37 @@
       <button type="submit" class="btn btn-primary btn-send">
         Créer un compte <i class="fa fa-send-o"></i>
       </button>
+      
+      {{ form_rest(form) }}
 
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
-          {% if form_errors(form.email) %}
-            <script> flash_notice("{{ form_errors(form.email) }}","danger"); </script>
-          {% endif %}
 
-          {% if form_errors(form.plainPassword.first) %}
-            <script> flash_notice("{{ form_errors(form.plainPassword.first) }}","danger"); </script>
-          {% endif %}
+            {% if  form_errors( form.email )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
 
-          {% if form_errors(form.plainPassword.second) %}
-            <script> flash_notice("{{ form_errors(form.plainPassword.second) }}","danger"); </script>
-          {% endif %}
+            {% if  form_errors( form.plainPassword.first )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
+
+            {% if  form_errors( form.plainPassword.second )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
+
+            {% if  form_errors( form.nom )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
+
+            {% if  form_errors( form.prenom )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
+
+            {% if  form_errors( form )  %}
+              <script> flash_notice("{{ name }}","danger"); </script>
+            {% endif %}
+
       {% endjavascripts %}
-    </form>
-
+    {{ form_end(form) }}
   </div>
 {% endblock %}

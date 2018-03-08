@@ -15,7 +15,7 @@ html, body {
 body{
     font-family:'Open Sans',sans-serif;
     font-size:16px;
-    background-color: #F8F8F8;
+    background-color: #FAFAFA;
     line-height:1.5em;
     letter-spacing:.013em;
     overflow-x: hidden;
@@ -69,6 +69,36 @@ h1,h2,h3,h4,h5,h6{
 	        animation: translationGauche 1s;
   -webkit-transition: all .2s ease-out;
   transition: all .2s ease-out;
+}
+
+.line-1 {
+ position:relative;
+ top:50%;
+ width:100%;
+ border-right:2px solid rgba(255,255,255,.75);
+ white-space:nowrap;
+ overflow:hidden;
+ transform:translateY(-50%)
+}
+
+.anim-typewriter {
+ animation:typewriter 4s steps(44) 1s 1 normal both,blinkTextCursor .4s steps(44) 1s 1 normal both
+}
+@keyframes typewriter {
+ from {
+  width:0
+ }
+ to {
+  width:100%
+ }
+}
+@keyframes blinkTextCursor {
+ from {
+  border-right-color:rgba(255,255,255,.75)
+ }
+ to {
+  border-right-color:transparent
+ }
 }
 
 .etapes h1{
@@ -157,8 +187,8 @@ h1,h2,h3,h4,h5,h6{
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-	background:linear-gradient(-225deg,rgba(30,30,30,.85) 45%,rgba(30,30,30,.85) 8%),
-	url('https://images.unsplash.com/photo-1476887334197-56adbf254e1a');
+	background:linear-gradient(-225deg,rgba(30,30,30,.60) 45%,rgba(30,30,30,.75) 8%),
+	url('/bundles/klrestauration/css/img/cake.png');
 	background-position: center;
 	background-size: cover;
 	color: white;
@@ -227,6 +257,35 @@ h1,h2,h3,h4,h5,h6{
 	text-align: center;
 }
 
+.card-text{
+	opacity: 0;
+	transition: all 0.3s
+}
+
+.carte:hover .card-text{
+	opacity: 1
+}
+
+.carte{
+	overflow: hidden;
+}
+
+.carte__body{
+	padding-bottom: 37px;
+	height: 40px;
+	transition: all .3s;
+}
+
+.carte:hover .carte__body {
+	height: 198px;
+}
+
+.btn-add-pos{
+	color: white !important;  border-radius: 50px; margin-left: -80px;
+	background-color: #E7964B !important;
+	margin-top:-4px;position: absolute;
+}
+
 .btn-add-panier,
 .btn-add-panier:hover,
 .btn-add-panier:focus,
@@ -274,6 +333,23 @@ h1,h2,h3,h4,h5,h6{
 
 .btn-send{
 	border-radius: 40px;
+}
+
+.building{
+	color: white;
+	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(46,60,46,.6) 8%),
+	url('/bundles/klrestauration/img/building.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+#form_search:focus {
+	width: 100%;
+}
+
+#form_search {
+	width: 54%;
+	transition: all .3s;
 }
 
 #contact-burger{
@@ -395,6 +471,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 nav{
+	border-radius: 0;
   z-index: 5
 }
 

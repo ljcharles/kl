@@ -2,7 +2,11 @@
     'attr': { 'class': 'navbar-form navbar-left', 'action': path('kl_restauration_produit_search')}
 }) }}
 
-    <div class="form-group">
+
+    <div class="form-group input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-search"></i>
+      </div>
       {{ form_widget(form.search,{
       'attr': { 'class': 'form-control', 'placeholder':"Taper le nom d'un produit"
       }
@@ -11,8 +15,4 @@
 
     <br> <div class="clear"></div>
     {{ form_rest(form) }}
-
-    {{ form_widget(form.Rechercher, {
-    'attr': { 'class': 'btn btn-default'}
-    }) }}
 {{ form_end(form)}}

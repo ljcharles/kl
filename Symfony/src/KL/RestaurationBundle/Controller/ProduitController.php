@@ -11,7 +11,7 @@ use KL\RestaurationBundle\Form\GammeProduitType;
 use KL\RestaurationBundle\Form\ProduitType;
 use KL\RestaurationBundle\Form\ProduitEditType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 class ProduitController extends Controller
 {
@@ -273,8 +273,7 @@ class ProduitController extends Controller
     public function searchBarAction()
     {
       $form = $this->createFormBuilder(null)
-        ->add('search', TextType::class)
-        ->add('Rechercher', SubmitType::class)
+        ->add('search', SearchType::class)
         ->getForm();
       return $this->render('KLRestaurationBundle:Produit:searchBar.html.twig', array(
         'form'   => $form->createView(),

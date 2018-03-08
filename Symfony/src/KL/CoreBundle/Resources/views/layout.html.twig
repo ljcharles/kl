@@ -27,7 +27,7 @@
 
 <body data-spy="spyscroll" data-target=".navbar-default">
   <main>
-    <nav class="navbar navbar-default container">
+    <nav class="navbar navbar-default">
      <div class="container">
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -36,8 +36,8 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="{{ path('kl_core_homepage') }}">
-           {% image '@KLRestaurationBundle/Resources/public/img/Logo.png' %}
+         <a class="navbar-brand" href="{{ path('kl_core_homepage') }}" style="background-color:#E7964B;">
+           {% image '@KLRestaurationBundle/Resources/public/img/LogoWhite.png' %}
              <img id="LogoKL" src="{{ asset_url }}" alt="K & L">
            {% endimage %}
          </a>
@@ -46,39 +46,25 @@
          <ul class="nav navbar-nav">
            <li>
              <a href="{{ path('kl_core_homepage') }}">
-               Accueil
+               <i class="fa fa-home"></i> Accueil
              </a>
            </li>
            <li><a id="apropos" href="{{ path('kl_core_homepage') }}#about">À propos</a></li>
            <li><a href="{{ path('kl_restauration_produit_homepage') }}">Boutique</a></li>
            <li><a href="{{ path('kl_core_contact') }}">Contact</a></li>
-           <li>
-             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-             <a href="{{ path('kl_restauration_commande_homepage') }}">Mes commandes</a>
-             {% endif %}
-           </li>
-           <li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rechercher <span class="caret"></span></a>
-             <ul class="dropdown-menu">
-               <li>
-                 {{ render(
-                 controller('KLRestaurationBundle:Produit:searchBar')
-                 )}}
-               </li>
-             </ul>
-           </li>
+           <li>{{ render(controller('KLRestaurationBundle:Produit:searchBar'))}}</li>
          </ul>
          <ul class="nav navbar-nav navbar-right">
            <li>
              <a href="{{ path('kl_restauration_panier_homepage') }}">
                <i class="fa fa-shopping-cart"></i>
-                  {% if panier is defined %}
+                  {% if app.session.get('panier') is defined %}
                     {% set sum = 0 %}
-                    {% for value in panier %}
+                    {% for value in app.session.get('panier') %}
                       {% set sum = sum + value %}
                     {% endfor %}
                     {% if sum != 0 %}
-                      ( {{ sum }} article{% if sum > 1 %}s{% endif %} )
+                      Mon panier <span class="badge badge-default">{{ sum }}</span>
                     {% else %}
                       Mon panier
                     {% endif %}
@@ -91,7 +77,7 @@
            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
            <li>
              <a href="{{ path('fos_user_security_login') }}">  <!--path('login')-->
-               <i class="fa fa-user"></i>
+               <i class="fa fa-user-circle-o"></i>
                Me connecter
              </a>
            </li>
@@ -102,10 +88,16 @@
              </a>
            </li>
            {% else %}
+           <li>
+             <a href="{{ path('kl_restauration_commande_homepage') }}">
+               <i class="fa fa-list"></i>
+               Mes commandes
+             </a>
+           </li>
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
              role="button" aria-haspopup="true" aria-expanded="false">
-             <i class="fa fa-user"></i> {{ app.user.username }} <span class="caret"></span></a>
+             <i class="fa fa-user-circle-o"></i> {{ app.user.username }} <span class="caret"></span></a>
              <ul class="dropdown-menu">
                <li>
                  <a href="{{ path('fos_user_security_logout') }}">
@@ -148,6 +140,7 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
   {% endblock %}
+  {% block js %}{% endblock %}
   {{ tinymce_init() }}
 </main>
 

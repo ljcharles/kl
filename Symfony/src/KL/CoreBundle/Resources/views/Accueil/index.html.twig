@@ -1,11 +1,6 @@
 {% extends "KLCoreBundle::layout.html.twig" %}
 
-
-{% block title %}
-
-  Accueil - {{ parent() }}
-
-{% endblock %}
+{% block title %} Accueil - {{ parent() }} {% endblock %}
 
 
 {% block body %}
@@ -79,9 +74,9 @@
     </div>
   {% endfor %}
 
-  <div id = "about" class="container">
+  <div id = "about">
     <div class="jumbotron">
-      <h1 id = "presentation-titre">Notre restaurant en Guadeloupe, depuis 4 ans</h1>
+      <h1 class="anim-typewriter line-1" id = "presentation-titre">Notre restaurant en Guadeloupe, depuis 4 ans</h1>
       <p> <span class = "presentation-titre">K & L</span> est une véritable institution
         célébrée par tous ceux qui aiment la cuisine authentique.
         Depuis 2014, notre équipe poursuit l’histoire avec une régularité
@@ -93,37 +88,62 @@
     </div>
   </div>
 
-  <div class="row cartes">
+  <div class="row cartes" style="background-color: #222;">
+    <br><br>
     <div class="card col-lg-4">
       <a href="{{ path('kl_restauration_gamme_view', {'id': 9}) }}">
-        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1428660386617-8d277e7deaf2" alt="Card image">
+        {% image '@KLRestaurationBundle/Resources/public/img/uploads/hamburger1.jpg' %}
+        <img class="card-img img-fluid" src="{{ asset_url }}" alt="burger">
+        {% endimage %}
       </a>
       <h2 class = "presentation-titre">Nos Hamburgers</h2>
     </div>
     <div class="card col-lg-4">
       <a href="{{ path('kl_restauration_gamme_view', {'id': 10}) }}">
-        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1510693206972-df098062cb71" alt="Card image">
+        {% image '@KLRestaurationBundle/Resources/public/img/uploads/pizza3.jpg' %}
+        <img class="card-img img-fluid" src="{{ asset_url }}" alt="burger">
+        {% endimage %}
       </a>
       <h2 class = "presentation-titre">Nos pizzas</h2>
     </div>
     <div class="card col-lg-4">
       <a href="{{ path('kl_restauration_gamme_view', {'id': 11}) }}">
-        <img class="card-img img-fluid" src="https://images.unsplash.com/photo-1476887334197-56adbf254e1a" alt="Card image">
+        {% image '@KLRestaurationBundle/Resources/public/img/uploads/tarte1.jpg' %}
+        <img class="card-img img-fluid" src="{{ asset_url }}" alt="burger">
+        {% endimage %}
       </a>
       <h2 class = "presentation-titre">Nos tartes</h2>
     </div>
   </div>
 
-  <div class="container">
-    <div id="map" class="jumbotron" style="width:90%;height:250px;margin-left:5%">
+  <br>
+  <section id="main-contact" class="contact">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-7 jumbotron building">
+          <h2 class = "presentation-titre" style="text-align:center;">Nous contacter</h2><br>
+          <div class="col-lg-12" style="margin-left: 22%;">
+            <i class="fa fa-building doree"></i> Fouillole, Pointe-à-Pitre<br>
+            <i class="fa fa-globe doree"></i> Université des Antilles, Guadeloupe <br>
+            <i class="fa fa-road doree"></i> 97157
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div id="map" class="jumbotron" style="height:255px;"></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=myMap"></script> -->
+
   {% for flashMessage in app.session.flashbag.get('notice') %}
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
           <script> flash_notice("{{ flashMessage }}","success"); </script>
       {% endjavascripts %}
   {% endfor %}
+{% endblock %}
+
+{% block js %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=myMap"></script>
 {% endblock %}

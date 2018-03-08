@@ -14,9 +14,11 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
   {
     return $this->getEntityManager()
         ->createQuery(
-          'SELECT p FROM KLUserBundleBundle:User p ORDER BY p.username ASC'
+          'SELECT p FROM KLUserBundle:User p ORDER BY p.username ASC'
           )
         ->getResult();
   }
+
+
 }
 ?>

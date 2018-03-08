@@ -1,0 +1,47 @@
+{% extends "KLRestaurationBundle::layout.html.twig" %}
+
+{% block title %}{{ parent()}}{% endblock %}
+
+{% block body %}
+<h1 class="presentation-titre" style="text-align: center;">Nos Utilisateurs</h1>
+<div class="row product jumbotron" style="background-color:#222;">
+  <div class="col-lg-3">
+    <h3 class="presentation-titre">Modification role</h3>
+  </div>
+
+  <div class="col-lg-9">
+
+      <div class="row">
+        <br>
+        {% for user in listuser %}
+          <div class="col-lg-trente col-md-6 mb-4 thumbnail">
+            <div class="card-body">
+              <p>
+                <h5 class="card-title">
+                  <i class="fa fa-user-circle-o fa-3x" style="color:gray;"></i><br><br>
+                  <span style="color:green;">{{ user.nom }}</span><br>
+                  ({% for r in user.roles %} {{r}}{% if not loop.last %}, {% endif %} {% endfor %})
+                </h5>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_user_gerant_edit', {'id_user': user.id}) }}"  class="btn btn-add-panier">
+                  <i class="fa fa-eye"></i>
+                  Modifier cet utilisateur
+                </a>
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_user_delete', {'id': user.id}) }}" class="btn btn-add-panier">
+                  <i class="fa fa-trash"></i>
+                  Supprimer cet utilisateur
+                </a>
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+  </div>
+</div>
+<br>
+{% endblock %}

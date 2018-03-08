@@ -48,14 +48,14 @@
 
       <div class="row">
         {% for produit in listProduits %}
-          <div class="col-lg-trente col-md-6 mb-4 thumbnail">
+          <div class="col-lg-trente col-md-6 mb-4 thumbnail carte">
             <div class="container-img-product">
               <a href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
                 <img class="card-img-top product-img"
                 src="{{ produit.image }}" alt="">
               </a>
             </div>
-            <div class="card-body">
+            <div class="card-body carte__body">
               <h5 class="card-title">
                 <a class="product-title"
                 href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
@@ -63,17 +63,17 @@
                 </a>
               </h5>
               <h5 class="product-price">{{ produit.prix }} €</h5>
-              <p class="card-text product-text">{{ produit.description }}</p>
+              <span class="card-text">{{ produit.description|raw }}</span>
             </div>
-            <div class="card-footer">
-              <p>
+            <div class="card-footer" style="background-color: white;">
+              <p style="background-color:white;">
                 <small class="text-muted product-star">
                   {% for i in 1 .. produit.note %} &#9733; {% endfor %}
                   {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
                 </small>
               </p>
               {% if panier[produit.id] is not defined %}
-                <p>
+                <p style="background-color:white;">
                   <a class="btn btn-add-panier"
                   href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}"
                   role="button">
@@ -82,7 +82,7 @@
                 </a>
               </p>
               {% else %}
-                  <p style="color:#74bda8; font-size: 12px;">
+                  <p style="color:#74bda8; font-size: 12px; background-color: white;">
                     Ce produit est déjà présent dans votre panier.
                   </p>
               {% endif %}

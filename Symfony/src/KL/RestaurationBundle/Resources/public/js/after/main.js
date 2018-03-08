@@ -55,3 +55,14 @@ function inputFileAction() {
     );
   });
 }
+
+function myMap() {
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {
+    // Personnaliser vos coordonnées ici latitude puis longitude
+    center: new google.maps.LatLng(16.2530949, -61.5554001),
+    zoom: 10,
+    disableDefaultUI: true
+  }
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+}

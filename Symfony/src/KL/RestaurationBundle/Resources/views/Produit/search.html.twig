@@ -48,7 +48,7 @@
                 </a>
               </h5>
               <h5 class="product-price">{{ produit.prix }} €</h5>
-              <p class="card-text product-text">{{ produit.description }}</p>
+              <p class="product-text">{{ produit.description|raw }}</p>
             </div>
             <div class="card-footer">
               <p>

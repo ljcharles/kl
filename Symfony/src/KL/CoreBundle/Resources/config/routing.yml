@@ -3,8 +3,35 @@ kl_core_homepage:
     defaults: { _controller: KLCoreBundle:Accueil:index }
 
 kl_core_contact:
-    path:     /contact
+    path:     /contact/
     defaults: { _controller: KLCoreBundle:Accueil:contact }
 
 kl_core_error:
-    path:     /_error/404
+    path:     /_error/404/
+
+kl_restauration_gerant_homepage:
+    path: /gerant/
+    defaults: { _controller: KLUserBundle:User:indexuser}
+
+kl_restauration_user_gerant_edit:
+    path:     /gerant/edit/{id_user}/
+    defaults:
+      _controller: KLUserBundle:User:editUser
+      id_user: 1
+    requirements:
+      id_user: \d+
+
+kl_restauration_user_view:
+    path:     /user/view/{id}/
+    defaults:
+        _controller: KLUserBundle:User:view
+        id: 1
+    requirements:
+        id: \d+
+
+kl_restauration_user_delete:
+    path:     /gerant/delete/{id}/
+    defaults:
+        _controller: KLUserBundle:User:deleteUser
+    requirements:
+        id: \d+

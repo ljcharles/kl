@@ -1,0 +1,27 @@
+{% extends "KLRestaurationBundle::layout.html.twig" %}
+
+{% block title %}{{ parent()}}{% endblock %}
+
+{% block body %}
+<div class="row product">
+  <div class="col-lg-3">
+
+    <h1 class="presentation-titre">Nos Utilisateurs</h1>
+
+    <div class="list-group">
+      <a href="{{ path('kl_restauration_gerant_homepage') }}"
+      class="list-group-item">Tous</a>
+    </div>
+
+    
+  </div>
+
+  <div class="col-lg-9">
+    <div class="row">
+      {{form_start(editUserForm)}}
+      {{form_widget(editUserForm)}}
+      {{form_end(editUserForm)}}
+    </div>
+  </div>
+</div>
+{% endblock %}

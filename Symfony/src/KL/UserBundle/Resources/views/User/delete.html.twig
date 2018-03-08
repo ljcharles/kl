@@ -1,0 +1,24 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Supprimer un utilisateur- {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron" style="height: 350px;text-align: center;font-size: 5em;">
+  <h2 style="margin-top: 75px;">Supprimer un utilisateur</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer l'utilisateur "{{ user.nom }} {{ user.prenom }}" ?
+  </p>
+
+  <form action="{{ path('kl_restauration_user_delete', {'id': user.id}) }}" method="post">
+    <a href="{{ path('kl_restauration_user_view', {'id': user.id}) }}" class="btn btn-default">
+      <i class="fa fa-undo"></i>
+      Voir cet utilisateur
+    </a>
+
+    <input type="submit" value="Supprimer" class="btn btn-danger">
+    {{ form_rest(form) }}
+  </form>
+</div>
+{% endblock %}
