@@ -75,5 +75,7 @@ security:
         secret: 2bf17e4cc728d1828f389de63269c8166fa750c6 #secret est un parametre de parameter
 
   access_control:
-    - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/cuisinier, roles: ROLE_CUISINIER }
+    - { path: ^/livreur, roles: ROLE_LIVREUR }
     #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

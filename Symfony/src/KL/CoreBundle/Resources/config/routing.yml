@@ -10,19 +10,19 @@ kl_core_error:
     path:     /_error/404/
 
 kl_restauration_gerant_homepage:
-    path: /gerant/
+    path: /admin/
     defaults: { _controller: KLUserBundle:User:indexuser}
 
 kl_restauration_user_gerant_edit:
-    path:     /gerant/edit/{id_user}/
+    path:     /admin/edit/{id_user}/
     defaults:
       _controller: KLUserBundle:User:editUser
       id_user: 1
     requirements:
       id_user: \d+
-      
+
 kl_restauration_user_delete:
-    path:     /gerant/delete/{id}/
+    path:     /admin/delete/{id}/
     defaults:
         _controller: KLUserBundle:User:deleteUser
     requirements:

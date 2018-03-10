@@ -3,33 +3,49 @@
 
   {% trans_default_domain 'FOSUserBundle' %}
 
-  <div class="container jumbotron connect-form">
-    {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
-      <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
-    {% endimage %}
+  <div class="row">
+      <div class="col-lg-4" style="text-align: center;">
+        <div class="container jumbotron">
+          <i class="fa fa-user-circle-o fa-5x" style="font-size: 150px;"></i>
+        </div>
+      </div>
+      <div class="col-lg-6" style="text-align: center;">
+        <div class="container jumbotron">
+          {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
+            <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
+          {% endimage %}
 
-    <div class="fos_user_user_show" >
-        <p>
-          <i class="fa fa-circle" style="color: lime;"></i>
-          {{ 'profile.show.username'|trans }}: {{ user.username }}
-        </p>
-        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-        <p>{{ 'form.nom'|trans }}: {{ user.nom }}</p>
-        <p>{{ 'form.prenom'|trans }}: {{ user.prenom }}</p>
-        <br>
-        <p>
-          <a class="btn btn-add-panier"
-            href="{{ path('fos_user_change_password') }}" role="button">
-            <i class="fa fa-key"></i>
-            Changer mon mot de passe
-          </a>
-          <a class="btn btn-add-panier"
-            href="{{ path('fos_user_profile_edit') }}" role="button">
-            <i class="fa fa-cog"></i>
-            Editer mon profile
-          </a>
-        </p>
+          <div class="fos_user_user_show" >
+              <p>
+                <i class="fa fa-circle" style="color: lime;"></i>
+                {{ 'profile.show.username'|trans }}: {{ user.username }}
+              </p>
+              <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+              <p>{{ 'form.nom'|trans }}: {{ user.nom }}</p>
+              <p>{{ 'form.prenom'|trans }}: {{ user.prenom }}</p>
+              <p>
+                {% for r in user.roles %}
+                  {% if r != 'ROLE_USER' %}
+                    {{r}}
+                  {% endif %}
+                  {% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+              <br>
+              <p>
+                <a class="btn btn-add-panier"
+                  href="{{ path('fos_user_change_password') }}" role="button">
+                  <i class="fa fa-key"></i>
+                  Changer mon mot de passe
+                </a>
+                <a class="btn btn-add-panier"
+                  href="{{ path('fos_user_profile_edit') }}" role="button">
+                  <i class="fa fa-cog"></i>
+                  Editer mon profile
+                </a>
+              </p>
+          </div>
+      </div>
     </div>
-
   </div>
 {% endblock %}
