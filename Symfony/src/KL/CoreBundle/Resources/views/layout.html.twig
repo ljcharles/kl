@@ -100,6 +100,18 @@
              <i class="fa fa-user-circle-o"></i> {{ app.user.username }} <span class="caret"></span></a>
              <ul class="dropdown-menu">
                <li>
+                 <a href="{{ path('fos_user_profile_show') }}">
+                   <i class="fa fa-user-circle-o"></i>
+                   Mon compte
+                 </a>
+               </li>
+               <li>
+                 <a href="{{ path('fos_user_profile_edit') }}">
+                   <i class="fa fa-cog"></i>
+                   Editer mes informations
+                 </a>
+               </li>
+               <li>
                  <a href="{{ path('fos_user_security_logout') }}">
                    <i class="fa fa-power-off"></i>
                    Se déconnecter

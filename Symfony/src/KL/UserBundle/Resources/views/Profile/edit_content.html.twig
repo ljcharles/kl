@@ -1,0 +1,21 @@
+
+{% block body %}
+
+  {% trans_default_domain 'FOSUserBundle' %}
+
+  <div class="container jumbotron connect-form" style="color:black;">
+    {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+      <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
+    {% endimage %}
+
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_widget(form) }}
+        <br><br>
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+  </div>
+{% endblock %}

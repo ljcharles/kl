@@ -83,6 +83,13 @@ kl_restauration_produit_edit:
     requirements:
         id: \d+
 
+kl_restauration_produit_create:
+    path:     /produit/create/{gamme}/
+    defaults:
+        _controller: KLRestaurationBundle:Produit:create
+    requirements:
+        gamme: \d+
+
 kl_restauration_produit_delete:
     path:     /produit/delete/{id}/
     defaults:

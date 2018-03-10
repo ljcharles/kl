@@ -41,7 +41,7 @@ class ProduitType extends AbstractType
                 'class'        => 'KLRestaurationBundle:Ingredient',
                 'choice_label' => 'nom',
                 'multiple'     => true,
-                'expanded'     => true,
+                'expanded'     => true
               ))
           ->add('image', FileType::class)
           ->add('save',      SubmitType::class);

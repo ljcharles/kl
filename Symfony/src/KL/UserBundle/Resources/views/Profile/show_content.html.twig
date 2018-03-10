@@ -1,0 +1,35 @@
+
+{% block body %}
+
+  {% trans_default_domain 'FOSUserBundle' %}
+
+  <div class="container jumbotron connect-form">
+    {% image '@KLRestaurationBundle/Resources/public/img/LogokandL-white.png' %}
+      <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
+    {% endimage %}
+
+    <div class="fos_user_user_show" >
+        <p>
+          <i class="fa fa-circle" style="color: lime;"></i>
+          {{ 'profile.show.username'|trans }}: {{ user.username }}
+        </p>
+        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+        <p>{{ 'form.nom'|trans }}: {{ user.nom }}</p>
+        <p>{{ 'form.prenom'|trans }}: {{ user.prenom }}</p>
+
+        <p>
+          <a class="btn btn-add-panier"
+            href="{{ path('fos_user_change_password') }}" role="button">
+            <i class="fa fa-key"></i>
+            Changer mon mot de passe
+          </a>
+          <a class="btn btn-add-panier"
+            href="{{ path('fos_user_profile_edit') }}" role="button">
+            <i class="fa fa-cog"></i>
+            Editer mon profile
+          </a>
+        </p>
+    </div>
+
+  </div>
+{% endblock %}

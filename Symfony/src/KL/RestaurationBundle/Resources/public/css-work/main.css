@@ -134,6 +134,22 @@ h1,h2,h3,h4,h5,h6{
 	font-size: 14px;
 }
 
+.more-prod{
+	text-align: center;
+	height: 150px;
+	color: white;
+	background-color: #222;
+}
+
+.fos_user_profile_edit label{
+	color: white !important;
+	padding-right: 10px;
+}
+
+.pad label{
+	padding-right: 10px;
+}
+
 .show-password {
 	position: absolute;
 	cursor: pointer;
@@ -339,6 +355,30 @@ h1,h2,h3,h4,h5,h6{
 	color: white;
 	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(46,60,46,.6) 8%),
 	url('/bundles/klrestauration/img/building.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.bg-burger{
+	color: white;
+	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(46,60,46,.6) 8%),
+	url('/bundles/klrestauration/img/uploads/hamburger1.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.bg-tarte{
+	color: white;
+	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(46,60,46,.6) 8%),
+	url('/bundles/klrestauration/img/uploads/tarte1.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.bg-pizza{
+	color: white;
+	background:linear-gradient(-225deg,rgba(30,30,30,.8) 45%,rgba(46,60,46,.6) 8%),
+	url('/bundles/klrestauration/img/uploads/pizza1.jpg');
 	background-size: cover;
 	background-position: center;
 }

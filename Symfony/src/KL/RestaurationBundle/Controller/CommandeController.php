@@ -33,6 +33,8 @@ class CommandeController extends Controller
           'user' => $user
       ));
     }
+
+    return $this->redirectToRoute('fos_user_security_login');
   }
 
   public function viewAction($id,Request $request)
@@ -55,6 +57,8 @@ class CommandeController extends Controller
           'user' => $user
       ));
     }
+
+    return $this->redirectToRoute('fos_user_security_login');
   }
 
 
@@ -98,6 +102,8 @@ class CommandeController extends Controller
 
       return $this->redirectToRoute('kl_restauration_commande_homepage');
     }
+
+    return $this->redirectToRoute('fos_user_security_login');
   }
 
   public function adressAddAction($id,Request $request)
