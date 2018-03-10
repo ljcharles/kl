@@ -5,6 +5,7 @@ $(document).ready(function () {
   hideMdpAction();
   inputFileAction();
   scrollAction();
+  switchAction();
 });
 
 function activeAction() {

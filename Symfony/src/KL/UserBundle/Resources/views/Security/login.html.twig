@@ -26,9 +26,15 @@
 
       <br><br>
 
-      <div class="checkbox">
-          <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-          <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+      <div class="checkbox login-check" style="margin-left: -235px;">
+        <div class="TriSea-technologies-Switch pull-right">
+          <input type="checkbox" id="remember_me" name="_remember_me" checked="true" value="on">
+          <label class="label-default" id="label-move" for="remember_me">
+            <span style="position: absolute;top: -13px;left: 45px;width: 158px;">
+              {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+            </span>
+          </label>
+        </div>
       </div>
       <br><br>
 
