@@ -108,10 +108,12 @@ class ProduitController extends Controller
         $user = $this->getUser();
         date_default_timezone_set("UTC");
 
+        $jour = date('d-m-Y');
+
         $produit = new Produit();
-        $produit->setNom($GammeProduit->getNom().'-'.$user->getUsername().'-'.time());
+        $produit->setNom($GammeProduit->getNom().'_'.date('H:i:s'));
         $produit->setGammeProduit($GammeProduit);
-        $produit->setDescription('Produit créer par '.$user->getUsername());
+        $produit->setDescription('Produit créer le '.$jour.' par '.$user->getUsername());
         $produit->setNote(3);
         $produit->setPrix(5 + $OneProduit[0]->getPrix());
 
@@ -146,6 +148,7 @@ class ProduitController extends Controller
 
          return $this->render('KLRestaurationBundle:Produit:create.html.twig', array(
              'form' => $form->createView(),
+             'typeProduit' => $GammeProduit->getNom()
          ));
       }
 

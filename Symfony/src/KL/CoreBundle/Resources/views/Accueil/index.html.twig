@@ -14,7 +14,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/burger.svg' %}
               <img id="banner-1" src="{{ asset_url }}" alt="burger">
               {% endimage %}
-              <a href="{{ path('kl_restauration_gamme_view', {'id': 9}) }}">
+              <a href="{{ path('kl_restauration_produit_create', {'gamme': 9}) }}">
                 Faire un Hamburger
               </a>
             </li>
@@ -22,7 +22,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/pizza.png' %}
               <img id="banner-2" src="{{ asset_url }}" alt="pizza">
               {% endimage %}
-              <a href="{{ path('kl_restauration_gamme_view', {'id': 10}) }}">
+              <a href="{{ path('kl_restauration_produit_create', {'gamme': 10}) }}">
                 Faire une Pizza
               </a>
             </li>
@@ -30,7 +30,7 @@
               {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
               <img id="banner-3" src="{{ asset_url }}" alt="cake">
               {% endimage %}
-              <a href="{{ path('kl_restauration_gamme_view', {'id': 11}) }}">
+              <a href="{{ path('kl_restauration_produit_create', {'gamme': 11}) }}">
                 Faire une tarte
               </a>
             </li>
@@ -68,12 +68,6 @@
 
   <div class="clear"></div>
 
-  {% for message in app.flashes('notice') %}
-    <div class="alert alert-info">
-      <i class="glyphicon glyphicon-info-sign"></i> {{ message }}
-    </div>
-  {% endfor %}
-
   <div id = "about">
     <div class="jumbotron">
       <h1 class="anim-typewriter line-1" id = "presentation-titre">Notre restaurant en Guadeloupe, depuis 4 ans</h1>
@@ -101,7 +95,7 @@
     <div class="card col-lg-4">
       <a href="{{ path('kl_restauration_gamme_view', {'id': 10}) }}">
         {% image '@KLRestaurationBundle/Resources/public/img/uploads/pizza3.jpg' %}
-        <img class="card-img img-fluid" src="{{ asset_url }}" alt="burger">
+        <img class="card-img img-fluid" src="{{ asset_url }}" alt="pizza">
         {% endimage %}
       </a>
       <h2 class = "presentation-titre">Nos pizzas</h2>
@@ -109,7 +103,7 @@
     <div class="card col-lg-4">
       <a href="{{ path('kl_restauration_gamme_view', {'id': 11}) }}">
         {% image '@KLRestaurationBundle/Resources/public/img/uploads/tarte1.jpg' %}
-        <img class="card-img img-fluid" src="{{ asset_url }}" alt="burger">
+        <img class="card-img img-fluid" src="{{ asset_url }}" alt="tarte">
         {% endimage %}
       </a>
       <h2 class = "presentation-titre">Nos tartes</h2>

@@ -17,5 +17,18 @@
         {{ form_rest(form) }}
     {{ form_end(form) }}
 
+    <br>
+    <p>
+      <a class="btn btn-add-panier"
+        href="{{ path('fos_user_change_password') }}" role="button">
+        <i class="fa fa-key"></i>
+        Changer mon mot de passe
+      </a>
+      <a class="btn btn-add-panier"
+        href="{{ path('fos_user_profile_show') }}" role="button">
+        <i class="fa fa-cog"></i>
+        Voir mon profile
+      </a>
+    </p>
   </div>
 {% endblock %}

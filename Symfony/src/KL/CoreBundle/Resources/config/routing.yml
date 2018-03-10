@@ -20,15 +20,7 @@ kl_restauration_user_gerant_edit:
       id_user: 1
     requirements:
       id_user: \d+
-
-kl_restauration_user_view:
-    path:     /user/view/{id}/
-    defaults:
-        _controller: KLUserBundle:User:view
-        id: 1
-    requirements:
-        id: \d+
-
+      
 kl_restauration_user_delete:
     path:     /gerant/delete/{id}/
     defaults:
