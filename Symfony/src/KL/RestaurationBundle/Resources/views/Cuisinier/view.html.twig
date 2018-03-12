@@ -3,5 +3,70 @@
 {% block title %}{{ parent()}}{% endblock %}
 
 {% block body %}
-  <h1>Mes commandes</h1>
+  <h1>Préparation</h1>
+  <div class="row product">
+    <div class="col-lg-3">
+
+      <h1 class="presentation-titre">En cuisine</h1>
+
+      <div class="list-group">
+        <a href="{{ path('kl_restauration_cuisinier_homepage') }}"
+        class="list-group-item">Produits en attente</a>
+      </div>
+      <div class="list-group">
+        <a href="{{ path('kl_restauration_cuisinier_historique',{'id_cuisinier': app.user.id}) }}"
+        class="list-group-item">Ce que j'ai fait</a>
+      </div>
+
+    </div>
+
+    <div class="col-lg-9">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4"></div>
+          <div class="col-lg-7 col-md-6 mb-4 thumbnail">
+            <div class="container-img-product">
+              <a href=”#” onclick="return false;">
+                <img style="height: 300px;" class="card-img-top product-img" src="{{ commandeProduit.produit.image }}" alt="">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title product-title"> {{ commandeProduit.produit.nom }} </h5>
+              <h5 class="product-price">{{ commandeProduit.produit.prix }} €</h5>
+              <span class="product-text">{{ commandeProduit.produit.description|raw }}</span>
+              <p class="product-text">Catégorie : {{ commandeProduit.produit.gammeProduit.nom }}</p>
+              {% if not commandeProduit.produit.ingredients.empty %}
+                <p class="product-text">
+                  Ingrédients :
+                  {% for ingredient in commandeProduit.produit.ingredients %}
+                    {{ ingredient.nom }}{% if not loop.last %}, {% endif %}
+                  {% endfor %}
+                </p>
+              {% endif %}
+            </div>
+            <div class="card-footer">
+              <p>
+                <small class="text-muted product-star">
+                  {% for i in 1 .. commandeProduit.produit.note %} &#9733; {% endfor %}
+                  {% if commandeProduit.produit.note < 5 %}
+                    {% for i in 1 .. (5 - commandeProduit.produit.note) %} &#9734; {% endfor %}
+                  {% endif %}
+                </small>
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_produit_fini', {'id': commandeProduit.id}) }}" class="btn btn-add-panier">
+                  <i class="fa fa-pencil"></i>
+                  Terminé
+                </a>
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_produit_preparation_annuler', {'id': commandeProduit.id}) }}" class="btn btn-add-panier">
+                  <i class="fa fa-trash"></i>
+                  Annuler
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
 {% endblock %}

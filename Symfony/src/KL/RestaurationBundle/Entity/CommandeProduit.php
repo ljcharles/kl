@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="KL\RestaurationBundle\Repository\CommandeProduitRepository")
  * @ORM\Table(name="kl_commande_produit")
  */
 class CommandeProduit
@@ -36,6 +36,11 @@ class CommandeProduit
    * @ORM\JoinColumn(nullable=false)
    */
   private $produit;
+
+  /**
+   * @ORM\Column(name="cuisinier", type="integer", nullable=true)
+   */
+  private $cuisinier;
 
 
     /**
@@ -120,5 +125,29 @@ class CommandeProduit
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set cuisinier
+     *
+     * @param integer $cuisinier
+     *
+     * @return CommandeProduit
+     */
+    public function setCuisinier($cuisinier = null)
+    {
+        $this->cuisinier = $cuisinier;
+
+        return $this;
+    }
+
+    /**
+     * Get cuisinier
+     *
+     * @return integer
+     */
+    public function getCuisinier()
+    {
+        return $this->cuisinier;
     }
 }

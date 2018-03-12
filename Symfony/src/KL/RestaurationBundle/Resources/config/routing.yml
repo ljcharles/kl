@@ -73,7 +73,7 @@ kl_restauration_produit_view:
         id: \d+
 
 kl_restauration_produit_add:
-    path:     /produit/add/
+    path:     /admin/produit/add/
     defaults: { _controller: KLRestaurationBundle:Produit:add }
 
 kl_restauration_produit_edit:
@@ -91,18 +91,18 @@ kl_restauration_produit_create:
         gamme: \d+
 
 kl_restauration_produit_delete:
-    path:     /produit/delete/{id}/
+    path:     /admin/produit/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:delete
     requirements:
         id: \d+
 
 kl_restauration_ingredient_homepage:
-    path:     /ingredient/
+    path:     /admin/ingredient/
     defaults: { _controller: KLRestaurationBundle:Ingredient:index }
 
 kl_restauration_ingredient_view:
-    path:     /ingredient/view/{id}/
+    path:     /admin/ingredient/view/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:view
         id: 1
@@ -110,18 +110,18 @@ kl_restauration_ingredient_view:
         id: \d+
 
 kl_restauration_ingredient_add:
-    path:     /ingredient/add/
+    path:     /admin/ingredient/add/
     defaults: { _controller: KLRestaurationBundle:Ingredient:add }
 
 kl_restauration_ingredient_edit:
-    path:     /ingredient/edit/{id}/
+    path:     /admin/ingredient/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:edit
     requirements:
         id: \d+
 
 kl_restauration_ingredient_delete:
-    path:     /ingredient/delete/{id}/
+    path:     /admin/ingredient/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Ingredient:delete
     requirements:
@@ -136,18 +136,18 @@ kl_restauration_gamme_view:
         id: \d+
 
 kl_restauration_gamme_add:
-    path:     /produit/gamme/add/
+    path:     /admin/produit/gamme/add/
     defaults: { _controller: KLRestaurationBundle:Produit:addGamme }
 
 kl_restauration_gamme_edit:
-    path:     /produit/gamme/edit/{id}/
+    path:     /admin/produit/gamme/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:editGamme
     requirements:
         id: \d+
 
 kl_restauration_gamme_delete:
-    path:     /produit/gamme/delete/{id}/
+    path:     /admin/produit/gamme/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:deleteGamme
     requirements:

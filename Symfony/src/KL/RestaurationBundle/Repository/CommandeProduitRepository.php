@@ -2,37 +2,33 @@
 
 namespace KL\RestaurationBundle\Repository;
 
-/**
-*CommandeProduitRepository
-*/
-
 class CommandeProduitRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllOrderedByName()
-   {
-     return $this->getEntityManager()
-         ->createQuery(
-           'SELECT i FROM KLRestaurationBundle:CommandeProduit i '
-           )
-         ->getResult();
-   }
+  public function findAll()
+  {
+    return $this->getEntityManager()
+        ->createQuery(
+          'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.etat=0 ORDER BY i.commande'
+          )
+        ->getResult();
+  }
 
-   public function findAllOrderedByCommand()
+   public function findBylesCommande()
    {
      return $this->getEntityManager()
          ->createQuery(
-           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.statut=0 ORDER BY i.commande'
+           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.etat=0 ORDER BY i.commande'
            )
          ->getResult();
    }
 
   //ranger par ordre croisant car se sera l'id_command
 
-   public function findAllOrderedByProduit()
+   public function findBylesProduit()
    {
      return $this->getEntityManager()
          ->createQuery(
-           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.statut=0 ORDER BY i.produit'
+           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.etat=0 ORDER BY i.produit'
            )
          ->getResult();
    }
@@ -41,7 +37,7 @@ class CommandeProduitRepository extends \Doctrine\ORM\EntityRepository
    {
      return $this->getEntityManager()
          ->createQuery(
-           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.commande=:id_commande ORDER BY i.statut'
+           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.commande=:id_commande ORDER BY i.etat'
            )
          ->setParameters('id_commande', $id_commande)
          ->getResult();
@@ -51,9 +47,19 @@ class CommandeProduitRepository extends \Doctrine\ORM\EntityRepository
    {
      return $this->getEntityManager()
          ->createQuery(
-           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.produit=:id_produit ORDER BY i.statut'
+           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.produit=:id_produit ORDER BY i.etat'
            )
          ->setParameters('id_produit', $id_produit)
+         ->getResult();
+   }
+
+   public function findMonhistorique($id_cuisinier)
+   {
+     return $this->getEntityManager()
+         ->createQuery(
+           'SELECT i FROM KLRestaurationBundle:CommandeProduit i WHERE i.cuisinier=:id_cuisinier and i.etat=2 ORDER BY i.id'
+           )
+         ->setParameter('id_cuisinier', $id_cuisinier)
          ->getResult();
    }
 } ?>

@@ -96,8 +96,8 @@
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: new google.maps.LatLng(16.2547308, -61.5560547),
-    zoom: 10
+    center: new google.maps.LatLng(16.0547308, -61.5560547),
+    zoom: 2
   });
   var infoWindow = new google.maps.InfoWindow;
 
@@ -121,7 +121,7 @@ function initMap() {
         text.textContent = address
         infowincontent.appendChild(text);
 
-        var image = 'http://127.0.0.1:8000/bundles/klrestauration/img/icon.png';
+        var image = 'http://127.0.0.1:8000/bundles/klrestauration/img/pizza.png';
         var marker = new google.maps.Marker({
           map: map,
           animation: google.maps.Animation.DROP,

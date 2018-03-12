@@ -21,6 +21,50 @@ kl_restauration_user_gerant_edit:
     requirements:
       id_user: \d+
 
+
+kl_restauration_cuisinier_homepage:
+    path:     /cuisinier/
+    defaults: { _controller: KLRestaurationBundle:Cuisinier:index }
+
+kl_restauration_cuisinier_vue_par_commande:
+    path:     /cuisinier/vue_par_commande
+    defaults: { _controller: KLRestaurationBundle:Cuisinier:vueparcommande }
+
+kl_restauration_cuisinier_vue_par_produit:
+    path:     /cuisinier/vue_par_produit
+    defaults: { _controller: KLRestaurationBundle:Cuisinier:vueparproduit }
+
+
+kl_restauration_cuisinier_faireproduit:
+    path:     /cuisinier/faireproduit/{id_cuisinier}/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Cuisinier:faireproduit
+    requirements:
+        id_cuisinier: \d+
+        id: \d+
+
+kl_restauration_cuisinier_historique:
+    path:     /cuisinier/historique/{id_cuisinier}
+    defaults:
+      _controller: KLRestaurationBundle:Cuisinier:monhistorique
+    requirements:
+      id_cuisinier: \d+
+
+kl_restauration_produit_fini:
+    path:     /cuisinier/produitTerminer/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Cuisinier:produitTerminer
+    requirements:
+        id: \d+
+
+kl_restauration_produit_preparation_annuler:
+    path:     /cuisinier/Annulation/{id}
+    defaults:
+        _controller: KLRestaurationBundle:Cuisinier:PreparationAnnuler
+    requirements:
+        id: \d+
+
+
 kl_restauration_livreur_homepage:
     path: /livreur/
     defaults: { _controller: KLUserBundle:Livreur:index}

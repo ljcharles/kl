@@ -3,5 +3,94 @@
 {% block title %}{{ parent()}}{% endblock %}
 
 {% block body %}
-  <h1>Mes commandes</h1>
+<h1>Mes commandes</h1>
+<div class="container jumbotron bg-panier">
+  <div class="row">
+    <div class="col-lg-12 panier">
+      <div class="row">
+
+        <div class="row">
+          <div class="col-lg-3">
+            <a class="btn btn-add-panier"
+            href="{{ path('kl_restauration_cuisinier_vue_par_commande') }}" role="button">
+            <i class="fa fa-cog"></i>
+            Affichage par commande
+          </a>
+          <a class="btn btn-add-panier"
+          href="{{ path('kl_restauration_cuisinier_vue_par_produit') }}" role="button">
+          <i class="fa fa-cog"></i>
+          Affichage par produit
+        </a>
+        <a class="btn btn-add-panier"
+        href="{{ path('kl_restauration_cuisinier_historique',{'id_cuisinier': app.user.id}) }}"role="button">
+        <i class="fa fa-cog"></i>
+        Ce que j'ai fait
+      </a>
+
+
+    </div>
+    <div class="col-lg-9">
+      {% if listproduit %}
+      {% for commandeProduit in listproduit %}
+      <div class="col-lg-3 col-md-6 mb-4 thumbnail thumb-panier">
+        <div class="container-img-product">
+          <a href="#"><img class="card-img-top product-img img-panier"
+            src="{{ commandeProduit.produit.image }}" alt=""></a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a class="product-title" href="#" style="font-weight: normal;">
+                {{ commandeProduit.produit.nom }}
+              </a>
+            </h5>
+            <!-- <p>{{ commandeProduit.produit.id }}</p> -->
+            <p>
+              Prix unitaire  <span class="product-price">{{ commandeProduit.produit.prix }} € </span>
+            </p>
+            {% if commandeProduit.etat == 0 %}
+            {% set CPetat,Couleur = 'en attente','Tomato' %}
+            {% elseif commandeProduit.etat == 1 %}
+            {% set CPetat,Couleur = 'en préparation','orange' %}
+            {% else %}
+            {% set CPetat,Couleur = 'Terminé','green' %}
+            {% endif %}
+            <p style="font-size: 12px;"><i style="color:{{ Couleur }}; font-size:10px;"
+              class="fa fa-circle"></i> Statut {{ CPetat }} </p>
+              {% if commandeProduit.etat != 2 %}
+              <a class="btn btn-add-panier"
+              href="{{ path('kl_restauration_cuisinier_faireproduit',{'id': commandeProduit.id,'id_cuisinier': app.user.id}) }}" role="button">
+              <i class="fa fa-cog"></i>
+              Faire un produit
+            </a>
+            {% endif %}
+
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        Vous avez aucun produit
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+{% for flashMessage in app.session.flashbag.get('danger') %}
+{% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+<script src="{{ asset_url }}"></script>
+<script> flash_notice("{{ flashMessage }}","danger"); </script>
+{% endjavascripts %}
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('danger') %}
+{% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+<script src="{{ asset_url }}"></script>
+<script> flash_notice("{{ flashMessage }}","success"); </script>
+{% endjavascripts %}
+{% endfor %}
+
 {% endblock %}
