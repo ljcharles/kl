@@ -168,4 +168,19 @@ function initMap() {
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=initMap">
   </script>
+
+  {% for flashMessage in app.session.flashbag.get('danger') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","danger"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+
+  {% for flashMessage in app.session.flashbag.get('danger') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+  
 {% endblock %}

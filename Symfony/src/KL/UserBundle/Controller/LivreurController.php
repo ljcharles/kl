@@ -81,10 +81,17 @@ class LivreurController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $commande = $em->getRepository('KLRestaurationBundle:Commande')->find($id);
+      $user = $this->getUser();
 
-      $commande->setEtat(4);
-      $em->persist($commande);
-      $em->flush();
+      if ($commande->getInfoLivreur() === ($user->getNom().' '.$user->getPrenom())) {
+        $commande->setEtat(4);
+        $em->persist($commande);
+        $em->flush();
+      } else {
+        # commande déjà pris en charge
+        $request->getSession()->getFlashBag()
+        ->add('danger', 'Commande déjà pris en charge par '.$commande->getInfoLivreur());
+      }
 
       if (!isset($commande)) return $this->redirectToRoute('kl_core_error');
 
