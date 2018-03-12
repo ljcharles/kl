@@ -13,6 +13,8 @@ $("#kl_restaurationbundle_adresslivraison_codePostal").autocomplete({
                         return { label: item.properties.postcode + " - " + item.properties.city + " - " + item.properties.context,
                                  city: item.properties.city,
                                  country: item.properties.context,
+                                 latitude: item.geometry.coordinates[0],
+                                 longitude: item.geometry.coordinates[1],
                                  value: item.properties.postcode
                         };
                     }
@@ -24,6 +26,8 @@ $("#kl_restaurationbundle_adresslivraison_codePostal").autocomplete({
     select: function(event, ui) {
         $('#kl_restaurationbundle_adresslivraison_ville').val(ui.item.city);
         $('#kl_restaurationbundle_adresslivraison_pays').val(ui.item.country);
+        $('#kl_restaurationbundle_adresslivraison_latitude').val(ui.item.latitude);
+        $('#kl_restaurationbundle_adresslivraison_longitude').val(ui.item.longitude);
     }
 });
 $("#kl_restaurationbundle_adresslivraison_ville").autocomplete({
@@ -41,6 +45,8 @@ $("#kl_restaurationbundle_adresslivraison_ville").autocomplete({
                         return { label: item.properties.postcode + " - " + item.properties.city + " - " + item.properties.context,
                                  postcode: item.properties.postcode,
                                  country: item.properties.context,
+                                 latitude: item.geometry.coordinates[0],
+                                 longitude: item.geometry.coordinates[1],
                                  value: item.properties.city
                         };
                     }
@@ -52,5 +58,7 @@ $("#kl_restaurationbundle_adresslivraison_ville").autocomplete({
     select: function(event, ui) {
         $('#kl_restaurationbundle_adresslivraison_codePostal').val(ui.item.postcode);
         $('#kl_restaurationbundle_adresslivraison_pays').val(ui.item.country);
+        $('#kl_restaurationbundle_adresslivraison_latitude').val(ui.item.latitude);
+        $('#kl_restaurationbundle_adresslivraison_longitude').val(ui.item.longitude);
     }
 });

@@ -1,0 +1,171 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Livreur - commandes - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="container jumbotron bg-panier">
+
+  <div class="row">
+    <div class="col-lg-12 panier">
+      <div class="row">
+        <h2 style="color:white;">Livreur - commandes</h2>
+
+        {% if commandes|length  == 0 %}
+        <div style="text-align:center; margin-top: 120px;">
+          <h2 style="color:white;">Aucune commandes pour le moment</h2>
+        </div>
+
+        {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+        <img id="cake-404" src="{{ asset_url }}" alt="cake">
+        {% endimage %}
+        {% endif %}
+
+        {% for commande in commandes %}
+        <div class="col-lg-2 col-md-6 mb-4 thumbnail thumb-panier">
+          <div class="card-body" style="overflow-x: hidden;">
+            <h4 class="card-title">
+              Commande n° {{ commande.id }}
+            </h4>
+            <p>Effectué le {{ commande.date|date('d-m-Y H:i:s') }}</p>
+            <p>
+              <kbd>{{ commande.user.nom }} {{ commande.user.prenom }}</kbd>
+            </p>
+
+            <div class="jumbotron">
+              <p style="font-size: 12px; margin-top:-15px;position: absolute;
+              margin-left: -50px;">
+              <em><i class="fa fa-building doree"></i> Adresse de livraison</em><br>
+              {{ commande.adressLivraison.rue }}
+              {{ commande.adressLivraison.ville }}
+              {{ commande.adressLivraison.pays }}
+              {{ commande.adressLivraison.codePostal }}
+            </p>
+          </div>
+
+          {% if commande.etat == 0 %}
+          {% set etat,Color  = 'en attente','Tomato' %}
+          {% elseif commande.etat == 1 %}
+          {% set etat,Color = 'en préparation','orange' %}
+          {% elseif commande.etat == 2 %}
+          {% set etat,Color = 'préparé','blue' %}
+          {% elseif commande.etat == 3 %}
+          {% set etat,Color = 'en livraison','purple' %}
+          <p>
+            <i class="fa fa-bicycle fa-3x velo" style="color:#E7964B;"></i>
+          </p>
+          {% else %}
+          {% set etat,Color = 'livré','green' %}
+          {% endif %}
+          <p style="font-size: 12px;">
+            <i style="color:{{ Color }}; font-size:10px;"
+            class="fa fa-circle"></i>   Etat : {{ etat }}
+          </p>
+
+          {% if commande.etat == 2  %}
+          <p>
+            <a href="{{ path('kl_restauration_livreur_en_livraison',
+            {'id': commande.id, 'id_user': app.user.id}) }}"  class="btn btn-add-panier" style="font-size: 12px;">
+            <i class="fa fa-cog"></i>
+            Passer en livraison
+          </a>
+        </p>
+        {% elseif commande.etat == 3 %}
+        <em style="font-size: 12px;">Livreur en charge </em>
+        <p style="font-size: 12px;">
+          {{ commande.infoLivreur }}
+        </p>
+        <p>
+          <a href="{{ path('kl_restauration_livreur_livrer', {'id': commande.id}) }}"  class="btn btn-add-panier">
+            <i class="fa fa-cog"></i>
+            Livrer
+          </a>
+        </p>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>
+<div id="map" class="jumbotron" style="height: 500px;"></div>
+
+<script>
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: new google.maps.LatLng(16.2547308, -61.5560547),
+    zoom: 10
+  });
+  var infoWindow = new google.maps.InfoWindow;
+
+  downloadUrl('http://127.0.0.1:8000/bundles/klrestauration/XML/point.xml', function(data) {
+    var xml = data.responseXML;
+    var markers = xml.documentElement.getElementsByTagName('marker');
+    Array.prototype.forEach.call(markers, function(markerElem) {
+      var name = markerElem.getAttribute('name');
+      var address = markerElem.getAttribute('address');
+      var point = new google.maps.LatLng(
+        parseFloat(markerElem.getAttribute('lng')),
+        parseFloat(markerElem.getAttribute('lat')));
+
+        var infowincontent = document.createElement('div');
+        var strong = document.createElement('strong');
+        strong.textContent = name
+        infowincontent.appendChild(strong);
+        infowincontent.appendChild(document.createElement('br'));
+
+        var text = document.createElement('text');
+        text.textContent = address
+        infowincontent.appendChild(text);
+
+        var image = 'http://127.0.0.1:8000/bundles/klrestauration/img/icon.png';
+        var marker = new google.maps.Marker({
+          map: map,
+          animation: google.maps.Animation.DROP,
+          icon: image,
+          position: point
+        });
+        marker.addListener('click', function() {
+          infoWindow.setContent(infowincontent);
+          infoWindow.open(map, marker);
+          toggleBounce();
+        });
+
+        function toggleBounce() {
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+        }
+      });
+    });
+  }
+
+
+
+  function downloadUrl(url, callback) {
+    var request = window.ActiveXObject ?
+    new ActiveXObject('Microsoft.XMLHTTP') :
+    new XMLHttpRequest;
+
+    request.onreadystatechange = function() {
+      if (request.readyState == 4) {
+        request.onreadystatechange = doNothing;
+        callback(request, request.status);
+      }
+    };
+
+    request.open('GET', url, true);
+    request.send(null);
+  }
+
+  function doNothing() {}
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvyVj5nBBgaf6C3zSUbVXUV1ujtKcvyM&callback=initMap">
+  </script>
+{% endblock %}

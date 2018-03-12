@@ -52,6 +52,8 @@
                     {% elseif commande[0].etat == 1 %}
                         {% set etat,Color = 'en préparation','orange' %}
                     {% elseif commande[0].etat == 2 %}
+                            {% set etat,Color = 'préparé','blue' %}
+                    {% elseif commande[0].etat == 3 %}
                         {% set etat,Color = 'en livraison','purple' %}
                     {% else %}
                         {% set etat,Color = 'livré','green' %}

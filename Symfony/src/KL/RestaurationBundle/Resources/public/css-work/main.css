@@ -79,6 +79,10 @@ a, a:focus{
     left: 20px;
 }
 
+.create-ing > label:before{
+	display: none !important;
+}
+
 .ui-autocomplete {
     border-radius: 0px;
 		z-index: 10;
@@ -267,8 +271,55 @@ a, a:focus{
     color: #25a5c4;
 }
 
-#kl_restaurationbundle_produit_ingredients label {
-	display: block;
+.velo{
+	-webkit-transition: all .2s;
+					transition: all .2s;
+	-webkit-animation: veloMove 1.7s infinite;
+					animation: veloMove 1.7s infinite;
+}
+
+@-webkit-keyframes veloMove {
+	0% {
+    -webkit-transform: translateX(-120px);
+						transform: translateX(-120px);
+		opacity: 0;
+		animation-timing-function:ease-in-out
+  }
+
+	50% {
+		-webkit-transform: translateX(0px);
+            transform: translate(0px, 12px) rotateZ(0.001deg);
+		animation-timing-function:ease-in-out
+	}
+
+  100% {
+    -webkit-transform: translateX(120px);
+            transform: translateX(120px);
+		opacity: 1;
+		animation-timing-function:ease-in-out
+  }
+}
+
+@keyframes veloMove {
+  0% {
+    -webkit-transform: translateX(-120px);
+						transform: translateX(-120px);
+		opacity: 0;
+		animation-timing-function:ease-in-out
+  }
+
+	50% {
+		-webkit-transform: translateX(0px);
+            transform: translate(0px, 12px) rotateZ(0.001deg);
+		animation-timing-function:ease-in-out
+	}
+
+  100% {
+    -webkit-transform: translateX(120px);
+            transform: translateX(120px);
+		opacity: 1;
+		animation-timing-function:ease-in-out
+  }
 }
 
 #kl_restaurationbundle_produit_nom,#kl_restaurationbundle_produit_prix{

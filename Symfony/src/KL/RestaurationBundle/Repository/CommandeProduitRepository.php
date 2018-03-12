@@ -6,7 +6,7 @@ namespace KL\RestaurationBundle\Repository;
 *CommandeProduitRepository
 */
 
-class CommandeProduit extends \Doctrine\ORM\EntityRepository
+class CommandeProduitRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findAllOrderedByName()
    {

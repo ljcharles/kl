@@ -1,6 +1,6 @@
 {% extends "KLRestaurationBundle::layout.html.twig" %}
 
-{% block title %}{{ parent()}}{% endblock %}
+{% block title %}User edit{% endblock %}
 
 {% block body %}
 <div class="row product">
@@ -13,13 +13,13 @@
       class="list-group-item">Tous</a>
     </div>
 
-    
+
   </div>
 
   <div class="col-lg-9">
     <div class="row">
       {{form_start(editUserForm)}}
-      {{form_widget(editUserForm)}}
+      {{ form_rest(editUserForm) }}
       {{form_end(editUserForm)}}
     </div>
   </div>

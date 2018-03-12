@@ -148,7 +148,9 @@ class ProduitController extends Controller
 
          return $this->render('KLRestaurationBundle:Produit:create.html.twig', array(
              'form' => $form->createView(),
-             'typeProduit' => $GammeProduit->getNom()
+             'typeProduit' => $GammeProduit->getNom(),
+             'price' => $OneProduit[0]->getPrix(),
+             'totalPrice' => $OneProduit[0]->getPrix() + 5
          ));
       }
 

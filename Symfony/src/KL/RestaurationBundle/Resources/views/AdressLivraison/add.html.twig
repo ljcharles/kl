@@ -72,6 +72,26 @@
               } }) }}
             </div>
 
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-globe doree"></i></div>
+              {{ form_widget(form.latitude, { 'attr': {
+              'placeholder': 'Latitude',
+              'class':'form-control'
+              } }) }}
+            </div>
+
+            <div class="clear"><br></div>
+
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-globe doree"></i></div>
+              {{ form_widget(form.longitude, { 'attr': {
+              'placeholder': 'Longitude',
+              'class':'form-control'
+              } }) }}
+            </div>
+
             <br><br>
 
             {{ form_widget(form.sauvegarder, {'attr': {'class': 'btn btn-primary rounded'}}) }}

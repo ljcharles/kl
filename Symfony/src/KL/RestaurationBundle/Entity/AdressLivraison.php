@@ -42,6 +42,15 @@ class AdressLivraison
     */
     private $codePostal;
 
+    /**
+    * @ORM\Column(type="decimal", precision=8, scale=6, nullable=true)
+    */
+    private $latitude;
+
+    /**
+    * @ORM\Column(type="decimal", precision=8, scale=6, nullable=true)
+    */
+    private $longitude;
 
     /**
      * Get id
@@ -147,5 +156,53 @@ class AdressLivraison
     public function getCodePostal()
     {
         return $this->codePostal;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return AdressLivraison
+     */
+    public function setLatitude($latitude = null)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return AdressLivraison
+     */
+    public function setLongitude($longitude = null)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }

@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use KL\UserBundle\Entity\User;
 use KL\UserBundle\Form\User2Type;
+use KL\UserBundle\Form\AvatarType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserController extends Controller
 {
@@ -22,6 +25,57 @@ class UserController extends Controller
             'listuser' => $listuser
         ));
     }
+
+    public function avatarAction(Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $user= $this->getUser();
+
+      $form = $this->get('form.factory')->create(AvatarType::class, $user);
+
+      // Si la requête est en POST
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+      {
+          $user->myUpload();
+
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($user);
+          $em->flush();
+
+          return $this->redirectToRoute('fos_user_profile_show');
+      }
+
+      return $this->render('KLUserBundle:User:avatar.html.twig', array(
+        'form'   => $form->createView(),
+      ));
+    }
+
+     public function deleteProfileAction(Request $request, $id)
+     {
+       $em = $this->getDoctrine()->getManager();
+
+       $user= $em->getRepository('KLUserBundle:User')->find($id);
+
+       if (null === $user) {
+         throw new NotFoundHttpException("L utilisateur d'id ".$id." n'existe pas.");
+       }
+
+       $form = $this->get('form.factory')->create();
+
+       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+         $em->remove($user);
+         $em->flush();
+
+         $request->getSession()->getFlashBag()->add('info', "Cet utilisateur a bien été supprimée.");
+
+         return $this->redirectToRoute('kl_restauration_homepage');
+       }
+
+       return $this->render('KLUserBundle:User:deleteProfile.html.twig', array(
+         'user' => $user,
+         'form'   => $form->createView(),
+       ));
+     }
 
     public function editUserAction(Request $request,$id_user)
     {

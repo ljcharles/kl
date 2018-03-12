@@ -12,13 +12,17 @@
           <div class="card-body">
             <div class="product-text form-group">
               <h2>Création {{ typeProduit }}</h2>
-              <i class="fa fa-plus-circle"></i>
-              <em>
-                Cliquer sur les ingrédients que vous souhaiter ajouter
-              </em>
+              <p>
+                <i class="fa fa-plus-circle"></i>
+                <em>
+                  Cliquer sur les ingrédients que vous souhaiter ajouter
+                </em>
+              </p>
+              <p>Prix de base : {{ price }} €</p>
+              <p>Prix total : {{ totalPrice }} €</p>
             </div>
             <div>
-                {{ form_widget(form.ingredients) }}
+                {{ form_widget(form.ingredients, {'attr': {'class': 'TriSea-technologies-Switch pull-right create-ing'}}) }}
             </div>
             <p>
               {{ form_rest(form) }}

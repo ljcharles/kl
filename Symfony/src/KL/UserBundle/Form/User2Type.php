@@ -24,26 +24,34 @@ class User2Type extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
 
-    $permissions = array(
-      'ROLE_USER'        => 'Aucun droit',
-      'ROLE_CUISINIER'     => 'Cuisinier',
-      'ROLE_LIVREUR'     => 'Livreur',
-      'ROLE_ADMIN' => 'Administrateur'
-    );
+    // $permissions = array(
+    //   'ROLE_USER'        => 'Aucun droit',
+    //   'ROLE_CUISINIER'     => 'Cuisinier',
+    //   'ROLE_LIVREUR'     => 'Livreur',
+    //   'ROLE_ADMIN' => 'Administrateur'
+    // );
 
     $builder->add('nom')->add('prenom')
-    ->add(
-      'roles',
-      ChoiceType::class,
-      array(
-        'label'   => 'Rôle à attribuer',
-        'choices' => $permissions,
-        'multiple'=>true,
-        'attr'    => array(
-          'class' => "select2"
-        )
-      )
-      )
+      ->add('isUtilisateur', CheckboxType::class, array(
+          'label'    => 'Utilisateur',
+          'required' => false,
+          'attr' => array('class' => 'TriSea-technologies-Switch')
+      ))
+      ->add('isGerant', CheckboxType::class, array(
+          'label'    => 'Gérant',
+          'required' => false,
+          'attr' => array('class' => 'TriSea-technologies-Switch')
+      ))
+      ->add('isLivreur', CheckboxType::class, array(
+          'label'    => 'Livreur',
+          'required' => false,
+          'attr' => array('class' => 'TriSea-technologies-Switch')
+      ))
+      ->add('isCuisinier', CheckboxType::class, array(
+          'label'    => 'Cuisinier',
+          'required' => false,
+          'attr' => array('class' => 'TriSea-technologies-Switch')
+      ))
       ->add('save',      SubmitType::class);
     }/**
     * {@inheritdoc}

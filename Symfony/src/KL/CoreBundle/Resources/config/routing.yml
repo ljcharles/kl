@@ -21,9 +21,42 @@ kl_restauration_user_gerant_edit:
     requirements:
       id_user: \d+
 
+kl_restauration_livreur_homepage:
+    path: /livreur/
+    defaults: { _controller: KLUserBundle:Livreur:index}
+
+kl_restauration_livreur_en_livraison:
+    path:     /livreur/{id}/{id_user}/
+    defaults:
+      _controller: KLUserBundle:Livreur:enLivraison
+      id: 1
+      id_user: 1
+    requirements:
+      id: \d+
+      id_user: \d+
+
+kl_restauration_livreur_livrer:
+    path:     /livreur/{id}/livrer
+    defaults:
+      _controller: KLUserBundle:Livreur:livrer
+      id: 1
+    requirements:
+      id: \d+
+
 kl_restauration_user_delete:
     path:     /admin/delete/{id}/
     defaults:
         _controller: KLUserBundle:User:deleteUser
     requirements:
         id: \d+
+
+kl_restauration_user_delete_profile:
+    path:     /delete_profile/{id}/
+    defaults:
+        _controller: KLUserBundle:User:deleteProfile
+    requirements:
+        id: \d+
+
+kl_userbundle_profile_avatar:
+    path: /user_avatar/
+    defaults: { _controller: KLUserBundle:User:avatar}

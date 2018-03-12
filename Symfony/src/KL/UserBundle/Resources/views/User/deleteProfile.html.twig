@@ -1,0 +1,24 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Supprimer mon compte- {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron" style="height: 350px;text-align: center;font-size: 5em;">
+  <h2 style="margin-top: 75px;">Supprimer mon compte</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer votre compte "{{ user.nom }} {{ user.prenom }}" ?
+  </p>
+
+  <form action="{{ path('kl_restauration_user_delete_profile', {'id': user.id}) }}" method="post">
+    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">
+      <i class="fa fa-undo"></i>
+      Voir mon profile
+    </a>
+
+    <input type="submit" value="Supprimer" class="btn btn-danger">
+    {{ form_rest(form) }}
+  </form>
+</div>
+{% endblock %}

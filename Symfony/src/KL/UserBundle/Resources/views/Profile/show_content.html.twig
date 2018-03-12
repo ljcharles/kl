@@ -3,14 +3,48 @@
 
   {% trans_default_domain 'FOSUserBundle' %}
 
-  <div class="row">
-      <div class="col-lg-4" style="text-align: center;">
-        <div class="container jumbotron">
-          <i class="fa fa-user-circle-o fa-5x" style="font-size: 150px;"></i>
+  <div class="row bg-tarte" style="color:black; padding-top:10px; margin-top:-20px;">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-4" style="text-align: center; margin-top: 25px;">
+        <div class="container jumbotron" style="min-height: 476px;">
+
+          {% if user.avatar %}
+            <img class="" src="{{ user.avatar }}" alt="img_pic"
+            style="width: 150px; height: 150px; border-radius: 100px;">
+          {% else %}
+            <i class="fa fa-user-circle-o fa-5x" style="color:#E7964B; font-size: 150px;"></i>
+          {% endif %}
+
+          <br>
+          <p>
+            {{ render(controller('KLUserBundle:User:avatar'))}}
+          </p>
+          <p>
+            <a class="btn btn-add-panier"
+              href="{{ path('fos_user_change_password') }}" role="button">
+              <i class="fa fa-key"></i>
+              Changer mon mot de passe
+            </a>
+          </p>
+          <p>
+            <a class="btn btn-add-panier"
+            href="{{ path('fos_user_profile_edit') }}" role="button">
+            <i class="fa fa-cog"></i>
+            Editer mon profile
+          </a>
+          </p>
+
+            <a class="btn btn-add-panier"
+            style="color:red; border-color: red;"
+            href="{{ path('kl_restauration_user_delete_profile', {'id':user.id}) }}" role="button">
+            <i class="fa fa-trash"></i>
+            Supprimer mon compte
+          </a>
         </div>
       </div>
-      <div class="col-lg-6" style="text-align: center;">
+      <div class="col-lg-6" style="text-align: center; margin-top: 25px;">
         <div class="container jumbotron">
+          <br>
           {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
             <img id="connect-logo" src="{{ asset_url }}" alt="K & L" style="width: 300px;">
           {% endimage %}
@@ -31,19 +65,8 @@
                   {% if not loop.last %}, {% endif %}
                 {% endfor %}
               </p>
+              <p>Dernière connection : {{ user.lastLogin|date('d-m-Y H:i:s') }}</p>
               <br>
-              <p>
-                <a class="btn btn-add-panier"
-                  href="{{ path('fos_user_change_password') }}" role="button">
-                  <i class="fa fa-key"></i>
-                  Changer mon mot de passe
-                </a>
-                <a class="btn btn-add-panier"
-                  href="{{ path('fos_user_profile_edit') }}" role="button">
-                  <i class="fa fa-cog"></i>
-                  Editer mon profile
-                </a>
-              </p>
           </div>
       </div>
     </div>

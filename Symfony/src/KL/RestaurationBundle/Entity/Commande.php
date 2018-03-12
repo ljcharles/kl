@@ -72,6 +72,13 @@ class Commande
       */
      private $datePaiement;
 
+     /**
+     *@var string
+     *
+     *@ORM\Column(name="infoLivreur",type="string",length=255, nullable=true)
+     */
+     private $infoLivreur;
+
 
     /**
      * Constructor
@@ -319,5 +326,29 @@ class Commande
     public function getDatePaiement()
     {
         return $this->datePaiement;
+    }
+
+    /**
+     * Set infoLivreur
+     *
+     * @param string $infoLivreur
+     *
+     * @return Commande
+     */
+    public function setInfoLivreur($infoLivreur = null)
+    {
+        $this->infoLivreur = $infoLivreur;
+
+        return $this;
+    }
+
+    /**
+     * Get infoLivreur
+     *
+     * @return string
+     */
+    public function getInfoLivreur()
+    {
+        return $this->infoLivreur;
     }
 }

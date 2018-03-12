@@ -43,6 +43,33 @@ class User extends BaseUser
     */
     private $commandes;
 
+    /**
+    *@var FileUpload
+    *
+    *@ORM\Column(name="avatar",type="string", nullable=true)
+    */
+    private $avatar;
+
+    /**
+    * @ORM\Column(type="boolean", nullable=true)
+    **/
+    protected $isLivreur;
+
+    /**
+    * @ORM\Column(type="boolean", nullable=true)
+    **/
+    protected $isCuisinier;
+
+    /**
+    * @ORM\Column(type="boolean", nullable=true)
+    **/
+    protected $isGerant;
+
+    /**
+    * @ORM\Column(type="boolean", nullable=true)
+    **/
+    protected $isUtilisateur;
+
 
     public function __construct()
     {
@@ -138,5 +165,168 @@ class User extends BaseUser
     public function getCommandes()
     {
         return $this->commandes;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     *
+     * @return User
+     */
+    public function setAvatar($avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function myUpload()
+    {
+      if (null === $this->avatar) return;
+
+      $name = $this->avatar->getClientOriginalName();
+      $this->avatar->move($this->getUploadRootDir(), $name);
+      $url = '/'.$this->getUploadDir().'/'.$name;
+      $this->setAvatar($url);
+    }
+
+    public function getUploadDir()
+    {
+      return 'bundles/klrestauration/img/profile';
+    }
+
+    protected function getUploadRootDir()
+    {
+      return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    /**
+     * Set isLivreur
+     *
+     * @param boolean $isLivreur
+     *
+     * @return User
+     */
+    public function setIsLivreur($isLivreur = null)
+    {
+        $this->isLivreur = $isLivreur;
+
+        if($isLivreur){
+          $this->addRole('ROLE_LIVREUR');
+        }else{
+          $this->removeRole('ROLE_LIVREUR');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get isLivreur
+     *
+     * @return boolean
+     */
+    public function getIsLivreur()
+    {
+        return $this->isLivreur;
+    }
+
+    /**
+     * Set isCuisinier
+     *
+     * @param boolean $isCuisinier
+     *
+     * @return User
+     */
+    public function setIsCuisinier($isCuisinier = null)
+    {
+        $this->isCuisinier = $isCuisinier;
+
+        if($isCuisinier){
+          $this->addRole('ROLE_CUISINIER');
+        }else{
+          $this->removeRole('ROLE_CUISINIER');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get isCuisinier
+     *
+     * @return boolean
+     */
+    public function getIsCuisinier()
+    {
+        return $this->isCuisinier;
+    }
+
+    /**
+     * Set isGerant
+     *
+     * @param boolean $isGerant
+     *
+     * @return User
+     */
+    public function setIsGerant($isGerant = null)
+    {
+        $this->isGerant = $isGerant;
+
+        if($isGerant){
+          $this->addRole('ROLE_ADMIN');
+        }else{
+          $this->removeRole('ROLE_ADMIN');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get isGerant
+     *
+     * @return boolean
+     */
+    public function getIsGerant()
+    {
+        return $this->isGerant;
+    }
+
+    /**
+     * Set isUtilisateur
+     *
+     * @param boolean $isUtilisateur
+     *
+     * @return User
+     */
+    public function setIsUtilisateur($isUtilisateur = null)
+    {
+        $this->isUtilisateur = $isUtilisateur;
+        if($isUtilisateur){
+          $this->addRole('ROLE_USER');
+        }else{
+          $this->removeRole('ROLE_USER');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get isUtilisateur
+     *
+     * @return boolean
+     */
+    public function getIsUtilisateur()
+    {
+        return $this->isUtilisateur;
     }
 }
