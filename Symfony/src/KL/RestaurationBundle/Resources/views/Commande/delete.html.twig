@@ -1,0 +1,24 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Supprimer une Commande - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron" style="height: 350px;text-align: center;font-size: 5em;">
+  <h2 style="margin-top: 75px;">Supprimer une commande</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer la commande d'id "{{ commande.id }}" ?
+  </p>
+
+  <form action="{{ path('kl_restauration_commande_delete', {'id': commande.id}) }}" method="post">
+    <a href="{{ path('kl_restauration_commande_view', {'id': commande.id}) }}" class="btn btn-default">
+      <i class="fa fa-undo"></i>
+      Retour à la liste des commandes
+    </a>
+
+    <input type="submit" value="Supprimer" class="btn btn-danger">
+    {{ form_rest(form) }}
+  </form>
+</div>
+{% endblock %}

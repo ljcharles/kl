@@ -16,10 +16,14 @@ class LivreurController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $commandes = $em
-          ->getRepository('KLRestaurationBundle:Commande')
-          ->findBy(['etat' => [2,3]])
-        ;
+
+        $qb = $em->createQueryBuilder();
+        $commandes = $qb->select('t')
+        ->from('KLRestaurationBundle:Commande','t')
+        ->where($qb->expr()->isNotNull('t.adressLivraison'))
+        ->andWhere("t.etat = 2 OR t.etat = 3")
+        ->getQuery()
+        ->getResult();
 
         $list = [];
         foreach ($commandes as $commande) {

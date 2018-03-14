@@ -20,109 +20,71 @@
           {% if gammeProduit.nom == item %} {% set icon = value %} {% endif %}
         {% endfor %}
 
-        <a href="{{ path('kl_restauration_gamme_view', {'id': gammeProduit.id}) }}"
-        class="list-group-item"><i class="fa fa-{{ icon }}" aria-hidden="true"></i> {{ gammeProduit.nom }}</a>
+        <div class="list-group-item" id="cat{{gammeProduit.id}}">
+          <i class="fa fa-{{ icon }}" aria-hidden="true"></i> {{ gammeProduit.nom }}
+        </div>
       {% endfor %}
     </div>
 
-    <div class="list-group">
-      <a href="{{ path('kl_restauration_produit_add') }}"
-      class="list-group-item">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        Ajouter un produit
-      </a>
-      <a href="{{ path('kl_restauration_ingredient_homepage') }}"
-      class="list-group-item">
-        <i class="fa fa-eye" aria-hidden="true"></i>
-        Voir tous les ingrédients
-      </a>
-      <a href="{{ path('kl_restauration_gamme_add') }}"
-      class="list-group-item">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        Ajouter ou Modifier ou Supprimer une gamme
-      </a>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+      <div class="list-group">
+        <a href="{{ path('kl_restauration_produit_add') }}"
+        class="list-group-item">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          Ajouter un produit
+        </a>
+        <a href="{{ path('kl_restauration_ingredient_homepage') }}"
+        class="list-group-item">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          Voir tous les ingrédients
+        </a>
+        <a href="{{ path('kl_restauration_gamme_add') }}"
+        class="list-group-item">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          Ajouter ou Modifier ou Supprimer une gamme
+        </a>
+      </div>
+    {% endif %}
+
   </div>
 
   <div class="col-lg-9">
 
       <div class="row">
-        {% for produit in listProduits %}
-          <div class="col-lg-trente col-md-6 mb-4 thumbnail carte">
-            <div class="container-img-product">
-              <a href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
-                <img class="card-img-top product-img"
-                src="{{ produit.image }}" alt="">
-              </a>
-            </div>
-            <div class="card-body carte__body">
-              <h5 class="card-title">
-                <a class="product-title"
-                href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}">
-                  {{ produit.nom }}
-                </a>
-              </h5>
-              <h5 class="product-price">{{ produit.prix }} €</h5>
-              <span class="card-text">{{ produit.description|raw }}</span>
-            </div>
-            <div class="card-footer" style="background-color: white;">
-              <p style="background-color:white;">
-                <small class="text-muted product-star">
-                  {% for i in 1 .. produit.note %} &#9733; {% endfor %}
-                  {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
-                </small>
-              </p>
-              {% if panier[produit.id] is not defined %}
-                <p style="background-color:white;">
-                  <a class="btn btn-add-panier"
-                  href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}"
-                  role="button">
-                  <i class="fa fa-shopping-cart"></i>
-                  Ajouter au panier
-                </a>
-              </p>
-              {% else %}
-                  <p style="color:#74bda8; font-size: 12px; background-color: white;">
-                    Ce produit est déjà présent dans votre panier.
-                  </p>
-              {% endif %}
-            </div>
-          </div>
-          {% if loop.last %}
-            <a href="{{ path('kl_restauration_produit_create', {'gamme': produit.gammeProduit.id}) }}">
-              {% if produit.gammeProduit.nom == 'Hamburger' %}
-              <div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-burger">
-                <p class="" style="margin-top: 10%;">
-                  <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                </p>
-                <p>
-                  Faire un Hamburger
-                </p>
-              </div>
-              {% elseif produit.gammeProduit.nom == 'Pizza' %}
-              <div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-pizza">
-                <p style="margin-top: 10%;">
-                  <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                </p>
-                <p>
-                  Faire une Pizza
-                </p>
-              </div>
-              {% elseif produit.gammeProduit.nom == 'Tarte' %}
-              <div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-tarte">
-                <p style="margin-top: 10%;">
-                  <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                </p>
-                <p>
-                  Faire une Tarte
-                </p>
-              </div>
-              {% endif %}
-              {% endif %}
-            </a>
-        {% endfor %}
+
+        <div class="test" id="result"></div>
+
       </div>
 
   </div>
 </div>
+
+{% block header %}
+  {% javascripts '@KLRestaurationBundle/Resources/public/js/jquery.min.js' %}
+  <script src="{{ asset_url }}"></script>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url:'{{ path('kl_restauration_produit_charger') }}',
+        dataType:'html',
+        success: function(Result) {
+          $('#result').html(Result);
+        }
+      });
+
+      {% for gammeProduit in listGammeProduits %}
+        $('#cat{{gammeProduit.id}}').click(function() {
+          $.ajax({
+            type : 'get',
+            url : '{{ path('kl_restauration_gammes_charger', {'id': gammeProduit.id}) }}',
+            success: function(Result) {
+              $('#result').html(Result);
+            }
+          });
+        });
+      {% endfor %}
+    })
+  </script>
+  {% endjavascripts %}
+{% endblock %}
 {% endblock %}

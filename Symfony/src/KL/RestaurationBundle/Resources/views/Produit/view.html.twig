@@ -71,6 +71,8 @@
                   Ce produit est déjà présent dans votre panier.
                 </p>
             {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
             <p>
               <a href="{{ path('kl_restauration_produit_edit', {'id': produit.id}) }}" class="btn btn-add-panier">
                 <i class="fa fa-pencil"></i>
@@ -83,6 +85,7 @@
                 Supprimer ce produit
               </a>
             </p>
+            {% endif %}      
           </div>
         </div>
       </div>

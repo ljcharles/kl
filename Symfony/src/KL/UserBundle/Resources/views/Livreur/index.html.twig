@@ -36,10 +36,12 @@
               <p style="font-size: 12px; margin-top:-15px;position: absolute;
               margin-left: -50px;">
               <em><i class="fa fa-building doree"></i> Adresse de livraison</em><br>
-              {{ commande.adressLivraison.rue }}
-              {{ commande.adressLivraison.ville }}
-              {{ commande.adressLivraison.pays }}
-              {{ commande.adressLivraison.codePostal }}
+              {% if  commande.adressLivraison != null %}
+                {{ commande.adressLivraison.rue }}
+                {{ commande.adressLivraison.ville }}
+                {{ commande.adressLivraison.pays }}
+                {{ commande.adressLivraison.codePostal }}
+              {% endif %}
             </p>
           </div>
 
@@ -182,5 +184,5 @@ function initMap() {
           <script> flash_notice("{{ flashMessage }}","success"); </script>
       {% endjavascripts %}
   {% endfor %}
-  
+
 {% endblock %}

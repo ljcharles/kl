@@ -23,6 +23,33 @@ kl_restauration_commande_homepage:
     path:     /commande/
     defaults: { _controller: KLRestaurationBundle:Commande:index }
 
+kl_restauration_listecommande_homepage:
+    path:     /admin/listecommandes/
+    defaults: {_controller: KLUserBundle:Gerant:indexlistecommande}
+
+kl_restauration_commande_delete:
+    path:     /admin/deletecommande/{id}/
+    defaults:
+        _controller: KLUserBundle:Gerant:deleteCommande
+    requirements:
+        id: \d+
+
+kl_restauration_commande_edit:
+    path:     /admin/editcommande/{id}/
+    defaults:
+        _controller: KLUserBundle:Gerant:editCommande
+    requirements:
+        id: \d+
+
+kl_restauration_commande_view_admin:
+    path:     /admin/commande/viewAdmin/{id}/
+    defaults:
+        _controller: KLUserBundle:Gerant:viewadmin
+        id: 1
+    requirements:
+        id: \d+
+
+
 kl_restauration_commande_view:
     path:     /commande/view/{id}/
     defaults:
@@ -30,6 +57,8 @@ kl_restauration_commande_view:
         id: 1
     requirements:
         id: \d+
+
+
 
 kl_restauration_commande_adress_add:
     path:     /commande/adressAdd/{id}
@@ -77,7 +106,7 @@ kl_restauration_produit_add:
     defaults: { _controller: KLRestaurationBundle:Produit:add }
 
 kl_restauration_produit_edit:
-    path:     /produit/edit/{id}/
+    path:     /admin/produit/edit/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:edit
     requirements:
@@ -94,6 +123,19 @@ kl_restauration_produit_delete:
     path:     /admin/produit/delete/{id}/
     defaults:
         _controller: KLRestaurationBundle:Produit:delete
+    requirements:
+        id: \d+
+
+kl_restauration_produit_charger:
+    path:     /produit/load/
+    defaults:
+        _controller: KLRestaurationBundle:Produit:load
+
+kl_restauration_gammes_charger:
+    path:     /gamme/load/{id}/
+    defaults:
+        _controller: KLRestaurationBundle:Produit:loadGamme
+        id: 1
     requirements:
         id: \d+
 

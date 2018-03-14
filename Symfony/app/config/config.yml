@@ -66,6 +66,9 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            datetime_functions:
+                DATE: KL\RestaurationBundle\DQL\DQLDate
 
 # Swiftmailer Configuration
 swiftmailer:

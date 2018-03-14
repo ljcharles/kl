@@ -202,7 +202,7 @@
       {% endjavascripts %}
   {% endfor %}
 
-  {% for flashMessage in app.session.flashbag.get('danger') %}
+  {% for flashMessage in app.session.flashbag.get('success') %}
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
           <script src="{{ asset_url }}"></script>
           <script> flash_notice("{{ flashMessage }}","success"); </script>

@@ -1,0 +1,117 @@
+{% extends "KLRestaurationBundle::layout.html.twig" %}
+
+{% block title %}{{ parent()}}{% endblock %}
+
+{% block body %}
+<h1 class="presentation-titre" style="text-align: center;">Nos Commandes</h1>
+<div class="row product jumbotron" style="background-color:#222;">
+  <div class="col-lg-12">
+    <h3 class="presentation-titre">Gestion des commandes</h3>
+
+      <div class="row">
+        <br>
+        {% if commandes|length  == 0 %}
+          <div style="text-align:center; margin-top: 120px;">
+            <h2 style="color:white;">Aucune commandes pour le moment</h2>
+          </div>
+
+          {% image '@KLRestaurationBundle/Resources/public/img/cake.svg' %}
+           <img id="cake-404" src="{{ asset_url }}" alt="cake">
+          {% endimage %}
+        {% endif %}
+
+        {% for commande in commandes %}
+        <div class="col-lg-3 col-md-6 mb-4 thumbnail thumb-panier">
+          {% image '@KLRestaurationBundle/Resources/public/img/Logokandl-black.png' %}
+            <img id="footer-logo" src="{{ asset_url }}" alt="K & L">
+          {% endimage %}
+            <div class="card-body">
+              <h4 class="card-title">
+                  Commande n° {{ commande.id }}
+              </h4>
+
+              {% if commande.etat == 0 %}
+                  {% set etat,Color  = 'en attente','Tomato' %}
+              {% elseif commande.etat == 1 %}
+                  {% set etat,Color = 'en préparation','orange' %}
+              {% elseif commande.etat == 2 %}
+                  {% set etat,Color = 'préparé','blue' %}
+              {% elseif commande.etat == 3 %}
+                  {% set etat,Color = 'en livraison','purple' %}
+              {% else %}
+                  {% set etat,Color = 'livré','green' %}
+              {% endif %}
+              <p style="font-size: 12px;">
+                <i style="color:{{ Color }}; font-size:10px;"
+                class="fa fa-circle"></i>   Etat : {{ etat }}
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_commande_view_admin', {'id': commande.id}) }}"
+                class="btn" style="color: white;  border-radius: 50px;
+                background-color: DarkMagenta; font-size: 12px;">
+                <i class="fa fa-plus-circle"></i> d'infos sur la commande
+                </a>
+              </p>
+              <p>
+                <a href="{{ path('kl_restauration_commande_edit', {'id': commande.id}) }}"
+                class="btn" style="color: white;  border-radius: 50px;
+                background-color: #8e44ad; font-size: 12px;">
+                <i class="fa fa-eye"></i> Editer cette commande
+              </a>
+              </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-2">
+
+  </div>
+  <div class="jumbotron col-lg-8">
+    <canvas id="lineChart" style="width: 100px; height: 60px;"></canvas>
+  </div>
+
+</div>
+
+{% block header %}
+  {% javascripts '@KLRestaurationBundle/Resources/public/js/chart.min.js' %}
+  <script src="{{ asset_url }}"></script>
+  <script>
+    function displayLineChart() {
+      var data = {
+          labels: [
+            {% for item in nbCommande %}
+                {{ item['day']|date('d') }}
+                {% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          datasets: [
+              {
+                  label: "Nombre de commandes par jour",
+                  data: [
+                    {% for item in nbCommande %}
+                        {{ item['amount'] }}
+                        {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                  ],
+              }
+          ]
+      };
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      var options = { };
+      var lineChart = new Chart(ctx , {
+              type: "line",
+              data: data,
+          });
+    }
+    displayLineChart();
+  </script>
+  {% endjavascripts %}
+{% endblock %}
+
+<br>
+{% endblock %}

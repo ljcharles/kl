@@ -8,6 +8,7 @@ kl_core_contact:
 
 kl_core_error:
     path:     /_error/404/
+    defaults: { _controller: KLCoreBundle:Accueil:error }
 
 kl_restauration_gerant_homepage:
     path: /admin/

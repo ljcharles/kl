@@ -215,6 +215,24 @@ class ProduitController extends Controller
       ));
     }
 
+    public function loadGammeAction($id,Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $gammeProduit = $em
+        ->getRepository('KLRestaurationBundle:GammeProduit')
+        ->find($id);
+      ;
+
+      $listProduits = $gammeProduit->getProduits();
+
+      $session = $request->getSession();
+      $panier = $session->get('panier');
+
+      $this->htmlRender($listProduits);
+      return new Response();
+    }
+
     public function addGammeAction(Request $request)
     {
        $gamme = new GammeProduit();
@@ -248,31 +266,31 @@ class ProduitController extends Controller
         ));
     }
 
-    public function viewGammeAction($id, Request $request)
-    {
-      $em = $this->getDoctrine()->getManager();
-
-      $listGammeProduits = $em
-        ->getRepository('KLRestaurationBundle:GammeProduit')
-        ->findAllOrderedByName()
-      ;
-
-      $gammeProduit = $em
-        ->getRepository('KLRestaurationBundle:GammeProduit')
-        ->find($id);
-      ;
-
-      $listProduits = $gammeProduit->getProduits();
-
-      $session = $request->getSession();
-      $panier = $session->get('panier');
-
-      return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
-          'listGammeProduits' => $listGammeProduits,
-          'listProduits' => $listProduits,
-          'panier' => $panier
-        ));
-    }
+    // public function viewGammeAction($id, Request $request)
+    // {
+    //   $em = $this->getDoctrine()->getManager();
+    //
+    //   $listGammeProduits = $em
+    //     ->getRepository('KLRestaurationBundle:GammeProduit')
+    //     ->findAllOrderedByName()
+    //   ;
+    //
+    //   $gammeProduit = $em
+    //     ->getRepository('KLRestaurationBundle:GammeProduit')
+    //     ->find($id);
+    //   ;
+    //
+    //   $listProduits = $gammeProduit->getProduits();
+    //
+    //   $session = $request->getSession();
+    //   $panier = $session->get('panier');
+    //
+    //   return $this->render('KLRestaurationBundle:Produit:index.html.twig', array(
+    //       'listGammeProduits' => $listGammeProduits,
+    //       'listProduits' => $listProduits,
+    //       'panier' => $panier
+    //     ));
+    // }
 
     public function editGammeAction($id, Request $request)
     {
@@ -366,5 +384,116 @@ class ProduitController extends Controller
         'listProduits'   => $listProduits,
         'panier' => $panier
       ));
+    }
+
+    public function htmlRender($listProduits)
+    {
+      $count = count($listProduits);
+      $index = 0;
+
+      foreach ($listProduits as $produit) {
+        $index++;
+        $html = '<div class="col-lg-trente col-md-6 mb-4 thumbnail carte">
+            <div class="container-img-product">
+              <a href="'.$this->generateUrl('kl_restauration_produit_view', ['id' => $produit->getId()]).'">
+                <img class="card-img-top product-img"
+                src="'.$produit->getImage().'" alt="">
+              </a>
+            </div>
+            <div class="card-body carte__body">
+              <h5 class="card-title">
+                <a class="product-title"
+                href="'.$this->generateUrl('kl_restauration_produit_view', ['id' => $produit->getId()]).'">
+                  '.$produit->getNom().'
+                </a>
+              </h5>
+              <h5 class="product-price"> '.$produit->getPrix().' €</h5>
+              <span class="card-text">'.$produit->getDescription().'</span>
+            </div>
+            <div class="card-footer" style="background-color: white;">
+              <p style="background-color:white;">
+                <small class="text-muted product-star">';
+                  for ($i=0; $i < intval($produit->getNote()); $i++) {
+                    $html .= '&#9733;';
+                  }
+                  for ($i=0; $i < 5 - intval($produit->getNote()); $i++) {
+                    $html .= '&#9734;';
+                  }
+
+              $html .= '</small>
+              </p>';
+
+              if (!isset($panier[$produit->getId()])) {
+                $html .= '<p style="background-color:white;">
+                  <a class="btn btn-add-panier"
+                  href="'.$this->generateUrl('kl_restauration_panier_add', ['id' => $produit->getId()]).'"
+                  role="button">
+                  <i class="fa fa-shopping-cart"></i>
+                  Ajouter au panier
+                </a>
+              </p>';
+              } else {
+                $html .='<p style="color:#74bda8; font-size: 12px; background-color: white;">
+                  Ce produit est déjà présent dans votre panier.
+                </p>';
+              }
+
+              $html .='</div>
+          </div>';
+
+          if ($count == $index) {
+              $html .= '
+                <a href="'.$this->generateUrl('kl_restauration_produit_create', ['gamme' => $produit->getGammeProduit()->getId()]).'">';
+
+                if ($produit->getGammeProduit()->getNom() === 'Hamburger') {
+                  $html .='<div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-burger">
+                      <p class="" style="margin-top: 10%;">
+                        <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                      </p>
+                      <p>
+                        Faire un Hamburger
+                      </p>
+                    </div>';
+                } else if ($produit->getGammeProduit()->getNom() === 'Pizza') {
+                  $html .='<div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-pizza">
+                      <p style="margin-top: 10%;">
+                        <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                      </p>
+                      <p>
+                        Faire une Pizza
+                      </p>
+                    </div>';
+                } else if ($produit->getGammeProduit()->getNom() === 'Tarte') {
+                  $html .='<div class="col-lg-trente col-md-6 mb-4 thumbnail more-prod bg-tarte">
+                      <p style="margin-top: 10%;">
+                        <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                      </p>
+                      <p>
+                        Faire une Tarte
+                      </p>
+                    </div>
+                  </a>';
+                }
+
+          }
+
+          echo $html;
+      }
+    }
+
+    public function loadAction(Request $request)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $listProduits = $em
+        ->getRepository('KLRestaurationBundle:Produit')
+        ->findAll()
+      ;
+
+      $session = $request->getSession();
+      $panier = $session->get('panier');
+
+      $this->htmlRender($listProduits);
+      return new Response();
     }
 }

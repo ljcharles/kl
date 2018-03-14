@@ -110,6 +110,20 @@ a, a:focus{
 	background-color: #ffe8d1;
 }
 
+.translationGauche{
+	-webkit-animation: translationGauche 1s;
+					animation: translationGauche 1s;
+	-webkit-transition: all .2s ease-out;
+	transition: all .2s ease-out;
+}
+
+.translationDroite{
+	-webkit-animation: translationDroite 1s;
+					animation: translationDroite 1s;
+	-webkit-transition: all .2s ease-out;
+	transition: all .2s ease-out;
+}
+
 #flash_notice {
 	text-align: center;
 	padding:10px;

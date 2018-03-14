@@ -112,10 +112,25 @@
 
   <br>
   <div id = "team">
-    <div class="jumbotron">
+    <div class="jumbotron  bg-tarte" style="text-align:center;">
       <h1 class="presentation-titre doree">Notre équipe</h1>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-6">
+            {% image '@KLRestaurationBundle/Resources/public/img/profile/pp.jpeg' %}
+            <img class="translationDroite" src="{{ asset_url }}" style="float: right; height: 200px; border-radius: 50%;" alt="Karen">
+            {% endimage %}
+          </div>
+          <div class="col-lg-6">
+            {% image '@KLRestaurationBundle/Resources/public/img/profile/ma photo.jpg' %}
+            <img class="translationGauche" src="{{ asset_url }}" style="float: left; height: 200px; border-radius: 50%;" alt="Loic">
+            {% endimage %}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
   <br>
 
   <section id="main-contact" class="contact">
@@ -138,11 +153,51 @@
 
   <br>
   <div id = "temoignages">
-    <div class="jumbotron">
-      <h1 class="presentation-titre">Ce qu'en pense nos clients</h1>
+    <div class="jumbotron bg-tarte">
+      <h1 class="presentation-titre" style="text-align:center;">Ce qu'en pense nos clients</h1>
     </div>
   </div>
   <br>
+
+  <div class="row cartes">
+    <div class="card col-lg-4">
+    </div>
+    <div class="card col-lg-4" style="background-color: #222; border-radius: 10px;">
+      <br>
+      &nbsp;&nbsp;<i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <i class="fa fa-star fa-3x doree"></i>
+      <i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <br><br>
+      <div class="row">
+        <div style="margin-left: 130px;" class="col-lg-5 thumbnail thumb-panier">
+          <div class="container-img-product">
+            <a href="{{ path('kl_restauration_produit_view', {'id': produit.id}) }}"><img class="card-img-top product-img img-panier"
+              src="{{ produit.image }}" alt=""></a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a class="product-title" href="#" style="font-weight: normal;">
+                  {{ produit.nom }}
+                </a>
+              </h5>
+            </div>
+          </div>
+      </div>
+
+      &nbsp;&nbsp;<i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <i class="fa fa-star doree"></i>
+      <h2 class = "presentation-titre">Produit du jour le plus vendus</h2>
+    </div>
+    <div class="card col-lg-4">
+    </div>
+  </div>
+
+<br>
 
   {% for flashMessage in app.session.flashbag.get('notice') %}
       {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}

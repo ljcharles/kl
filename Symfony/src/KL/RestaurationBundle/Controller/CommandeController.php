@@ -21,13 +21,6 @@ class CommandeController extends Controller
       $em = $this->getDoctrine()->getManager();
       $commandes = $user->getCommandes();
 
-      foreach ($commandes as $commande) {
-        $etat = $this->verifCommande($commande);
-        $commande->setEtat($etat);
-        $em->persist($commande);
-        $em->flush();
-      }
-
       return $this->render('KLRestaurationBundle:Commande:index.html.twig', array(
           'commandes' => $commandes,
           'user' => $user
@@ -135,24 +128,6 @@ class CommandeController extends Controller
      ));
   }
 
-  public function verifCommande($commande)
-  {
-    if($commande->getEtat()==0)
-    {
-      $listCommandeProduits = $commande->getCommandeProduits();
-
-    	foreach ($listCommandeProduits as $commandeproduit) {
-        if($commandeproduit->getEtat()!=2){
-          if ($commandeproduit->getEtat() == 1) {
-            return 1;
-          }else {
-            return 0;
-          }
-        }
-    	}
-    }
-    return 1;
-  }
 
   public function paymentCompleteAction($id, Request $request)
   {

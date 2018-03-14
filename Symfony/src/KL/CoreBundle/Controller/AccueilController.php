@@ -4,6 +4,7 @@ namespace KL\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccueilController extends Controller
@@ -12,8 +13,25 @@ class AccueilController extends Controller
     {
         $session = $request->getSession();
         $panier = $session->get('panier');
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery( 'SELECT IDENTITY(u.produit) AS prod, SUM(IDENTITY(u.produit)) AS HIDDEN nb
+                                    FROM KLRestaurationBundle:CommandeProduit u
+                                    GROUP BY prod
+                                    ORDER BY nb DESC');
+        $query->setFirstResult(0);
+        $query->setMaxResults(1);
+        $find = $query->getResult();
+        $id = intval($find[0]['prod']);
+
+        $produit = $em
+          ->getRepository('KLRestaurationBundle:Produit')
+          ->find($id)
+        ;
+
         return $this->render('KLCoreBundle:Accueil:index.html.twig',[
           'panier' => $panier,
+          'produit' => $produit
         ]);
     }
 

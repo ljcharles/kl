@@ -97,6 +97,17 @@ class CuisinierController extends Controller
 
   }
 
+  public function verifCommande($commande)
+  {
+      $listcommandeproduit=$commande->getCommandeProduits();
+    	foreach ($listcommandeproduit as $produit) {
+        if($produit->getEtat()!=2){
+          return 1;
+        }
+    	}
+      return 2;
+  }
+
   public function produitTerminerAction($id)
   {
       $em = $this->getDoctrine()->getManager();
@@ -108,10 +119,21 @@ class CuisinierController extends Controller
       $commandeProduit->setEtat(2);
       $em->persist($commandeProduit);
       $em->flush();
+      $commande=$em
+        ->getRepository('KLRestaurationBundle:Commande')
+        ->find($commandeProduit->getCommande()->getId())
+      ;
+        $commande->setEtat(1);
+        $etat = $this->verifCommande($commande);
+        $commande->setEtat($etat);
+        $em->persist($commande);
+        $em->flush();
+
       $listproduit = $em
         ->getRepository('KLRestaurationBundle:CommandeProduit')
         ->findAll()
       ;
+
 
       return $this->redirectToRoute('kl_restauration_cuisinier_homepage',array(
         'listproduit' => $listproduit
