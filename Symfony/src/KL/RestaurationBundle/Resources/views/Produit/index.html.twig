@@ -9,8 +9,8 @@
     <h1 class="presentation-titre">Nos gammes de produits</h1>
 
     <div class="list-group">
-      <a href="{{ path('kl_restauration_produit_homepage') }}"
-      class="list-group-item"><i class="fa fa-list-ul" aria-hidden="true"></i> Tous</a>
+      <div id="tous"
+      class="list-group-item"><i class="fa fa-list-ul" aria-hidden="true"></i> Tous</div>
 
       {% for gammeProduit in listGammeProduits %}
         {% set icon = '' %}
@@ -63,13 +63,21 @@
   {% javascripts '@KLRestaurationBundle/Resources/public/js/jquery.min.js' %}
   <script src="{{ asset_url }}"></script>
   <script>
-    $(document).ready(function() {
+    function chargerProduits() {
       $.ajax({
         url:'{{ path('kl_restauration_produit_charger') }}',
         dataType:'html',
         success: function(Result) {
           $('#result').html(Result);
         }
+      });
+    }
+    $(document).ready(function() {
+
+      chargerProduits();
+
+      $('#tous').click(function() {
+        chargerProduits();
       });
 
       {% for gammeProduit in listGammeProduits %}

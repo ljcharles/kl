@@ -20,13 +20,16 @@
           {% if gammeProduit.nom == item %} {% set icon = value %} {% endif %}
         {% endfor %}
 
-        <a href="{{ path('kl_restauration_gamme_view', {'id': gammeProduit.id}) }}"
-        class="list-group-item"><i class="fa fa-{{ icon }}" aria-hidden="true"></i> {{ gammeProduit.nom }}</a>
+        <div class="list-group-item" id="cat{{gammeProduit.id}}">
+          <i class="fa fa-{{ icon }}" aria-hidden="true"></i> {{ gammeProduit.nom }}
+        </div>
       {% endfor %}
     </div>
   </div>
 
   <div class="col-lg-9">
+    <div id="result">
+
       <div class="row">
         <div class="col-lg-3 col-md-6 mb-4"></div>
         <div class="col-lg-7 col-md-6 mb-4 thumbnail">
@@ -41,12 +44,12 @@
             <span class="product-text">{{ produit.description|raw }}</span>
             <p class="product-text">Catégorie : {{ produit.gammeProduit.nom }}</p>
             {% if not produit.ingredients.empty %}
-              <p class="product-text">
-                Ingrédients :
-                {% for ingredient in produit.ingredients %}
-                  {{ ingredient.nom }}{% if not loop.last %}, {% endif %}
-                {% endfor %}
-              </p>
+            <p class="product-text">
+              Ingrédients :
+              {% for ingredient in produit.ingredients %}
+              {{ ingredient.nom }}{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            </p>
             {% endif %}
           </div>
           <div class="card-footer">
@@ -54,41 +57,72 @@
               <small class="text-muted product-star">
                 {% for i in 1 .. produit.note %} &#9733; {% endfor %}
                 {% if produit.note < 5 %}
-                  {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
+                {% for i in 1 .. (5 - produit.note) %} &#9734; {% endfor %}
                 {% endif %}
               </small>
             </p>
             {% if panier[produit.id] is not defined %}
-              <p>
-                  <a class="btn btn-add-panier"
-                  href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" role="button">
-                  <i class="fa fa-shopping-cart"></i>
-                  Ajouter au panier
-                </a>
-              </p>
-            {% else %}
-                <p style="color:#74bda8; font-size: 12px;">
-                  Ce produit est déjà présent dans votre panier.
-                </p>
-            {% endif %}
+            <p>
+              <a class="btn btn-add-panier"
+              href="{{ path('kl_restauration_panier_add', {'id': produit.id}) }}" role="button">
+              <i class="fa fa-shopping-cart"></i>
+              Ajouter au panier
+            </a>
+          </p>
+          {% else %}
+          <p style="color:#74bda8; font-size: 12px;">
+            Ce produit est déjà présent dans votre panier.
+          </p>
+          {% endif %}
 
-            {% if is_granted('ROLE_ADMIN') %}
-            <p>
-              <a href="{{ path('kl_restauration_produit_edit', {'id': produit.id}) }}" class="btn btn-add-panier">
-                <i class="fa fa-pencil"></i>
-                Modifier ce produit
-              </a>
-            </p>
-            <p>
-              <a href="{{ path('kl_restauration_produit_delete', {'id': produit.id}) }}" class="btn btn-add-panier">
-                <i class="fa fa-trash"></i>
-                Supprimer ce produit
-              </a>
-            </p>
-            {% endif %}      
-          </div>
+          {% if is_granted('ROLE_ADMIN') %}
+          <p>
+            <a href="{{ path('kl_restauration_produit_edit', {'id': produit.id}) }}" class="btn btn-add-panier">
+              <i class="fa fa-pencil"></i>
+              Modifier ce produit
+            </a>
+          </p>
+          <p>
+            <a href="{{ path('kl_restauration_produit_delete', {'id': produit.id}) }}" class="btn btn-add-panier">
+              <i class="fa fa-trash"></i>
+              Supprimer ce produit
+            </a>
+          </p>
+          {% endif %}
         </div>
       </div>
+    </div>
+  </div>
+
   </div>
 </div>
+{% block header %}
+  {% javascripts '@KLRestaurationBundle/Resources/public/js/jquery.min.js' %}
+  <script src="{{ asset_url }}"></script>
+  <script>
+    function chargerProduits() {
+      $.ajax({
+        url:'{{ path('kl_restauration_produit_charger') }}',
+        dataType:'html',
+        success: function(Result) {
+          $('#result').html(Result);
+        }
+      });
+    }
+    $(document).ready(function() {
+      {% for gammeProduit in listGammeProduits %}
+        $('#cat{{gammeProduit.id}}').click(function() {
+          $.ajax({
+            type : 'get',
+            url : '{{ path('kl_restauration_gammes_charger', {'id': gammeProduit.id}) }}',
+            success: function(Result) {
+              $('#result').html(Result);
+            }
+          });
+        });
+      {% endfor %}
+    })
+  </script>
+  {% endjavascripts %}
+{% endblock %}
 {% endblock %}
