@@ -75,6 +75,25 @@
              </a>
            </li>
 
+           <li>
+             <a href="{{ path('kl_restauration_favoris_homepage') }}">
+               <i class="fa fa-heart"></i>
+                  {% if app.session.get('favoris') is defined %}
+                    {% set sumf = 0 %}
+                    {% for value in app.session.get('favoris') %}
+                      {% set sumf = sumf + value %}
+                    {% endfor %}
+                    {% if sumf != 0 %}
+                      Mes favoris <span class="badge badge-default">{{ sumf }}</span>
+                    {% else %}
+                      Mes favoris
+                    {% endif %}
+                  {% else %}
+                      Mes favoris
+                  {% endif %}
+             </a>
+           </li>
+
            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
            <li>
              <a href="{{ path('fos_user_security_login') }}">  <!--path('login')-->

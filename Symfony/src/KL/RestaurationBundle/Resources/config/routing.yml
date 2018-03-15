@@ -85,6 +85,24 @@ kl_restauration_panier_delete:
     requirements:
         id: \d+
 
+kl_restauration_favoris_homepage:
+    path:     /favoris/
+    defaults: { _controller: KLRestaurationBundle:Favoris:index }
+
+kl_restauration_favoris_add:
+    path:     /favoris/{id}/
+    defaults:
+        _controller: KLRestaurationBundle:Favoris:add
+    requirements:
+        id: \d+
+
+kl_restauration_favoris_delete:
+    path:     /favoris/delete/{id}/
+    defaults:
+        _controller: KLRestaurationBundle:Favoris:delete
+    requirements:
+        id: \d+
+
 kl_restauration_produit_homepage:
     path:     /produit/
     defaults: { _controller: KLRestaurationBundle:Produit:index }

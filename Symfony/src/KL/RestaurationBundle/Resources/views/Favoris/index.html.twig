@@ -1,0 +1,71 @@
+{% extends "KLCoreBundle::layout.html.twig" %}
+
+{% block title %}Mes favoris - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div class="container jumbotron bg-tarte">
+    <div class="etapes" style="text-align: center;">
+      <h1>
+        <span style="color: #ffe13f;">
+          <i class="fa fa-heart"></i>
+          Mes favoris
+        </span>
+      </h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12 panier">
+        <div class="row">
+          {% if produits|length  == 0 %}
+            <div style="text-align:center; margin-top: 120px;">
+              <h2 style="color:white;">Aucun produits dans vos favoris</h2>
+            </div>
+            <i class="fa fa-heartbeat fa-5x" style="transform: rotate(60deg); margin-left: 600px; padding-top: 50px;" aria-hidden="true"></i>
+          {% endif %}
+
+          {% for produit in produits %}
+              <div class="col-lg-2 col-md-6 mb-4 thumbnail thumb-panier">
+                <div class="container-img-product">
+                  <a href="#"><img class="card-img-top product-img img-panier"
+                    src="{{ produit.image }}" alt=""></a>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="product-title" href="#" style="font-weight: normal;">
+                        {{ produit.nom }}
+                      </a>
+                    </h5>
+                  <a href="{{ path('kl_restauration_favoris_delete', {'id': produit.id}) }}">
+                    <i class="fa fa-trash-o fa-2x" style="color: gray; margin-bottom: 10px;" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-6">
+          <a href="{{ path('kl_restauration_produit_homepage') }}" class="btn bgdoree">
+            <i class="fa fa-undo"></i> Continuer mes achats
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+      {% javascripts '@KLRestaurationBundle/Resources/public/js/notice/*' %}
+          <script src="{{ asset_url }}"></script>
+          <script> flash_notice("{{ flashMessage }}","success"); </script>
+      {% endjavascripts %}
+  {% endfor %}
+
+{% endblock %}

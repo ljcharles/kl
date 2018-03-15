@@ -54,6 +54,14 @@
           </div>
           <div class="card-footer">
             <p>
+              <a class="btn btn-add-panier"
+              href="{{ path('kl_restauration_favoris_add', {'id': produit.id}) }}"
+              style="border-radius: 100%;" 
+              role="button">
+              <i class="fa fa-heart faa-pulse animated"></i>
+            </a>
+          </p>
+            <p>
               <small class="text-muted product-star">
                 {% for i in 1 .. produit.note %} &#9733; {% endfor %}
                 {% if produit.note < 5 %}

@@ -410,7 +410,14 @@ class ProduitController extends Controller
               <h5 class="product-price"> '.$produit->getPrix().' €</h5>
               <span class="card-text">'.$produit->getDescription().'</span>
             </div>
+            <br>
             <div class="card-footer" style="background-color: white;">
+                <p>
+                  <a class="btn btn-add-panier" style="border-radius: 100%;"
+                  href="'.$this->generateUrl('kl_restauration_favoris_add', ['id' => $produit->getId()]).'" role="button">
+                  <i class="fa fa-heart faa-pulse animated"></i>
+                </a>
+              </p>
               <p style="background-color:white;">
                 <small class="text-muted product-star">';
                   for ($i=0; $i < intval($produit->getNote()); $i++) {
