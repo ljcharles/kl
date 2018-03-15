@@ -254,9 +254,7 @@ class ProduitController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Gamme bien enregistrée.');
 
-            return $this->redirectToRoute('kl_restauration_gamme_view',array(
-              'id' => $gamme->getId()
-            ));
+            return $this->redirectToRoute('kl_restauration_gamme_add');
           }
         }
 

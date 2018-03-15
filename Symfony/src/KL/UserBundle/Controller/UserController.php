@@ -10,6 +10,7 @@ use KL\UserBundle\Form\User2Type;
 use KL\UserBundle\Form\AvatarType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {

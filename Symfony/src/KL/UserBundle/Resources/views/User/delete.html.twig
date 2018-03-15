@@ -12,9 +12,9 @@
   </p>
 
   <form action="{{ path('kl_restauration_user_delete', {'id': user.id}) }}" method="post">
-    <a href="{{ path('kl_restauration_user_view', {'id': user.id}) }}" class="btn btn-default">
+  <a href="{{ path('kl_restauration_gerant_homepage') }}" class="btn btn-default">
       <i class="fa fa-undo"></i>
-      Voir cet utilisateur
+      Retour à la liste des utilisateurs
     </a>
 
     <input type="submit" value="Supprimer" class="btn btn-danger">

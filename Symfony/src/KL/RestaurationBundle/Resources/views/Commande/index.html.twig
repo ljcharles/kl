@@ -97,6 +97,7 @@
                       </p>
                     </div>
                     {% if commande.payer != 1 %}
+                    <p class="jumbotron"  style="color: red;font-size: 12px;">Veuillez procéder au paiement pour lancer la préparation.</p>
                         <p>
                           <a href="{{ path('kl_restauration_commande_view', {'id': commande.id}) }}#paiement"
                           class="btn"
